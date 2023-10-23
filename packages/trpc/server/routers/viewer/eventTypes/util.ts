@@ -38,28 +38,28 @@ export const eventOwnerProcedure = authedProcedure
       throw new TRPCError({ code: "NOT_FOUND" });
     }
 
-    const isAuthorized = (function () {
-      if (event.team) {
+    const isAuthorized = (() => {
+  if (event.team) {
         return event.team.members
           .filter((member) => member.role === MembershipRole.OWNER || member.role === MembershipRole.ADMIN)
           .map((member) => member.userId)
           .includes(ctx.user.id);
       }
       return event.userId === ctx.user.id || event.users.find((user) => user.id === ctx.user.id);
-    })();
+})();
 
     if (!isAuthorized) {
       console.warn(`User ${ctx.user.id} attempted to an access an event ${event.id} they do not own.`);
       throw new TRPCError({ code: "UNAUTHORIZED" });
     }
 
-    const isAllowed = (function () {
-      if (event.team) {
+    const isAllowed = (() => {
+  if (event.team) {
         const allTeamMembers = event.team.members.map((member) => member.userId);
         return input.users.every((userId: number) => allTeamMembers.includes(userId));
       }
       return input.users.every((userId: number) => userId === ctx.user.id);
-    })();
+})();
 
     if (!isAllowed) {
       console.warn(

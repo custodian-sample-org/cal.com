@@ -60,9 +60,7 @@ const customTemplate = (
     .replaceAll("{RESCHEDULE_URL}", rescheduleLink)
     .replaceAll("{MEETING_URL}", variables.meetingUrl || "");
 
-  const customInputvariables = dynamicText.match(/\{(.+?)}/g)?.map((variable) => {
-    return variable.replace("{", "").replace("}", "");
-  });
+  const customInputvariables = dynamicText.match(/\{(.+?)}/g)?.map((variable) => variable.replace("{", "").replace("}", ""));
 
   // event date/time with formatting
   customInputvariables?.forEach((variable) => {

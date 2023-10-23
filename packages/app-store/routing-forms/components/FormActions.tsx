@@ -126,8 +126,7 @@ function NewFormDialog({ appUrl }: { appUrl: string }) {
             {action === "duplicate" && (
               <Controller
                 name="shouldConnect"
-                render={({ field: { value, onChange } }) => {
-                  return (
+                render={({ field: { value, onChange } }) => (
                     <SettingsToggle
                       title={t("keep_me_connected_with_form")}
                       description={t("fields_in_form_duplicated")}
@@ -136,8 +135,7 @@ function NewFormDialog({ appUrl }: { appUrl: string }) {
                         onChange(checked);
                       }}
                     />
-                  );
-                }}
+                  )}
               />
             )}
           </div>
@@ -161,8 +159,7 @@ export const FormActionsDropdown = ({
 }: {
   disabled?: boolean;
   children: React.ReactNode;
-}) => {
-  return (
+}) => (
     <dropdownCtx.Provider value={{ dropdown: true }}>
       <Dropdown>
         <DropdownMenuTrigger disabled={disabled} data-testid="form-dropdown" asChild>
@@ -178,7 +175,6 @@ export const FormActionsDropdown = ({
       </Dropdown>
     </dropdownCtx.Provider>
   );
-};
 
 function Dialogs({
   appUrl,
@@ -383,10 +379,8 @@ type FormActionProps<T> = {
   extraClassNames?: string;
 } & ButtonProps;
 
-export const FormAction = forwardRef(function FormAction<T extends typeof Button>(
-  props: FormActionProps<T>,
-  forwardedRef: React.ForwardedRef<HTMLAnchorElement | HTMLButtonElement>
-) {
+export const FormAction = forwardRef((props: FormActionProps<T>,
+  forwardedRef: React.ForwardedRef<HTMLAnchorElement | HTMLButtonElement>) => {
   const {
     action: actionName,
     routingForm,

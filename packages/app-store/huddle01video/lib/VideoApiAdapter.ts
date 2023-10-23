@@ -7,11 +7,8 @@ import type { VideoApiAdapter, VideoCallData } from "@calcom/types/VideoApiAdapt
 
 const huddle01Schema = z.object({ url: z.string().url(), roomId: z.string() });
 
-const Huddle01VideoApiAdapter = (): VideoApiAdapter => {
-  return {
-    getAvailability: () => {
-      return Promise.resolve([]);
-    },
+const Huddle01VideoApiAdapter = () => {
+    getAvailability: () => Promise.resolve([]),
     createMeeting: async (): Promise<VideoCallData> => {
       const res = await fetch(
         "https://wpss2zlpb9.execute-api.us-east-1.amazonaws.com/new-meeting?utmCampaign=cal.com&utmSource=partner&utmMedium=calendar"
@@ -32,15 +29,12 @@ const Huddle01VideoApiAdapter = (): VideoApiAdapter => {
     deleteMeeting: async (): Promise<void> => {
       Promise.resolve();
     },
-    updateMeeting: (bookingRef: PartialReference): Promise<VideoCallData> => {
-      return Promise.resolve({
+    updateMeeting: (bookingRef: PartialReference) => Promise.resolve({
         type: "huddle01_video",
         id: bookingRef.meetingId as string,
         password: bookingRef.meetingPassword as string,
         url: bookingRef.meetingUrl as string,
-      });
-    },
+      }),
   };
-};
 
 export default Huddle01VideoApiAdapter;

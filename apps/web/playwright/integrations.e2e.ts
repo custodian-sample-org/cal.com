@@ -21,7 +21,7 @@ const requestInterceptor = setupServer(
   })
 );
 
-const addOauthBasedIntegration = async function ({
+const addOauthBasedIntegration = ({
   page,
   slug,
   authorization,
@@ -46,7 +46,7 @@ const addOauthBasedIntegration = async function ({
       body: DefaultBodyType;
     };
   };
-}) {
+}) => {
   const code = uuidv4();
   // Note the difference b/w MSW wildcard and Playwright wildards. Playwright requires query params to be explicitly specified.
   page.route(`${authorization.url}?**`, (route, request) => {
@@ -72,7 +72,7 @@ const addOauthBasedIntegration = async function ({
   await page.click('[data-testid="install-app-button"]');
 };
 
-const addLocationIntegrationToFirstEvent = async function ({ user }: { user: { username: string | null } }) {
+const addLocationIntegrationToFirstEvent = ({ user }: { user: { username: string | null } }) => {
   const eventType = await prisma.eventType.findFirst({
     where: {
       users: {
@@ -117,16 +117,14 @@ async function bookEvent(page: Page, calLink: string) {
   const meetingId = 123456789;
 
   requestInterceptor.use(
-    rest.post("https://api.zoom.us/v2/users/me/meetings", (req, res, ctx) => {
-      return res(
+    rest.post("https://api.zoom.us/v2/users/me/meetings", (req, res, ctx) => res(
         ctx.status(200),
         ctx.json({
           id: meetingId,
           password: "TestPass",
           join_url: `https://zoom.us/j/${meetingId}`,
         })
-      );
-    })
+      ))
   );
   // --- fill form
   await page.fill('[name="name"]', "Integration User");
@@ -167,8 +165,8 @@ test.fixme("Integrations", () => {
   test.beforeEach(() => {
     global.E2E_EMAILS = [];
   });
-  const addZoomIntegration = async function ({ page }: { page: Page }) {
-    await addOauthBasedIntegration({
+  const addZoomIntegration = ({ page }: { page: Page }) => {
+  await addOauthBasedIntegration({
       page,
       slug: "zoom",
       authorization: {
@@ -210,16 +208,14 @@ test.fixme("Integrations", () => {
         },
       },
     });
-  };
+};
   test.describe("Zoom App", () => {
     test("Can add integration", async ({ page, users }) => {
       const user = await users.create();
       await user.apiLogin();
       await addZoomIntegration({ page });
       await page.waitForNavigation({
-        url: (url) => {
-          return url.pathname === "/apps/installed";
-        },
+        url: (url) => url.pathname === "/apps/installed",
       });
       //TODO: Check that disconnect button is now visible
     });
@@ -230,9 +226,7 @@ test.fixme("Integrations", () => {
       const eventType = await addLocationIntegrationToFirstEvent({ user });
       await addZoomIntegration({ page });
       await page.waitForNavigation({
-        url: (url) => {
-          return url.pathname === "/apps/installed";
-        },
+        url: (url) => url.pathname === "/apps/installed",
       });
 
       await bookEvent(page, `${user.username}/${eventType.slug}`);
@@ -273,9 +267,7 @@ test.fixme("Integrations", () => {
       await user.apiLogin();
       await addZoomIntegration({ page });
       await page.waitForNavigation({
-        url: (url) => {
-          return url.pathname === "/apps/installed";
-        },
+        url: (url) => url.pathname === "/apps/installed",
       });
 
       // FIXME: First time reaching /apps/installed throws error in UI.
@@ -283,9 +275,7 @@ test.fixme("Integrations", () => {
       /** HACK STARTS */
       await page.locator('[href="/apps"]').first().click();
       await page.waitForNavigation({
-        url: (url) => {
-          return url.pathname === "/apps";
-        },
+        url: (url) => url.pathname === "/apps",
       });
       await page.locator('[href="/apps/installed"]').first().click();
       /** HACK ENDS */
@@ -339,9 +329,7 @@ test.fixme("Integrations", () => {
         },
       });
       await page.waitForNavigation({
-        url: (url) => {
-          return url.pathname === "/apps/installed";
-        },
+        url: (url) => url.pathname === "/apps/installed",
       });
     });
   });

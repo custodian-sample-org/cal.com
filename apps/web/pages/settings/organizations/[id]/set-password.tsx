@@ -17,13 +17,11 @@ const SetPasswordPage = () => {
     </>
   );
 };
-const LayoutWrapper = (page: React.ReactElement) => {
-  return (
+const LayoutWrapper = (page: React.ReactElement) => (
     <WizardLayout currentStep={2} maxSteps={5}>
       {page}
     </WizardLayout>
   );
-};
 
 SetPasswordPage.getLayout = LayoutWrapper;
 SetPasswordPage.PageWrapper = PageWrapper;

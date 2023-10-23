@@ -64,9 +64,7 @@ const LocationInput = (props: {
         name={eventLocationType.variable}
         control={control}
         defaultValue={defaultValue}
-        render={({ field: { onChange, value } }) => {
-          return <PhoneInput onChange={onChange} value={value} {...rest} />;
-        }}
+        render={({ field: { onChange, value } }) => <PhoneInput onChange={onChange} value={value} {...rest} />}
       />
     );
   }
@@ -311,9 +309,7 @@ export const EditLocationDialog = (props: ISetLocationDialog) => {
                 query={locationsQuery}
                 success={({ data }) => {
                   if (!data.length) return null;
-                  const locationOptions = [...data].filter((option) => {
-                    return !isTeamEvent ? option.label !== "Conferencing" : true;
-                  });
+                  const locationOptions = [...data].filter((option) => !isTeamEvent ? option.label !== "Conferencing" : true);
                   if (booking) {
                     locationOptions.map((location) =>
                       location.options.filter((l) => !["phone", "attendeeInPerson"].includes(l.value))

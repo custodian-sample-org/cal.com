@@ -14,10 +14,7 @@ type TeamInvite = {
   isOrg: boolean;
 };
 
-export const TeamInviteEmail = (
-  props: TeamInvite & Partial<React.ComponentProps<typeof V2BaseEmailHtml>>
-) => {
-  return (
+export const TeamInviteEmail = (props: TeamInvite & Partial<React.ComponentProps<typeof V2BaseEmailHtml>>) => (
     <V2BaseEmailHtml
       subject={props.language("user_invited_you", {
         user: props.from,
@@ -154,10 +151,8 @@ export const TeamInviteEmail = (
       </div>
     </V2BaseEmailHtml>
   );
-};
 
-const EmailStep = (props: { translationString: string; iconsrc: string }) => {
-  return (
+const EmailStep = (props: { translationString: string; iconsrc: string }) => (
     <div style={{ display: "flex", alignItems: "center" }}>
       <div
         style={{
@@ -185,4 +180,3 @@ const EmailStep = (props: { translationString: string; iconsrc: string }) => {
       </p>
     </div>
   );
-};

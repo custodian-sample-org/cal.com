@@ -33,14 +33,10 @@ const LimitedChipsContainer = <Option, IsMulti extends boolean, Group extends Gr
   );
 };
 
-export const MultiDropdownSelect = ({ options = [], value = [], ...props }: Props) => {
-  // const { t } = useLocale();
-
-  return (
+export const MultiDropdownSelect = ({ options = [], value = [], ...props }: Props) => (
     <Select
       styles={{
         multiValue: (styles) => {
-          return {
             ...styles,
             backgroundColor: "#F3F4F6",
             color: "#374151",
@@ -51,8 +47,7 @@ export const MultiDropdownSelect = ({ options = [], value = [], ...props }: Prop
             fontWeight: "500",
             margin: "0px",
             lineHeight: "16px",
-          };
-        },
+          },
         multiValueLabel: (styles) => ({
           ...styles,
           paddingLeft: "0px",
@@ -100,6 +95,5 @@ export const MultiDropdownSelect = ({ options = [], value = [], ...props }: Prop
       {...props}
     />
   );
-};
 
 export default MultiDropdownSelect;

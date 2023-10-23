@@ -211,7 +211,6 @@ const EventTypePage = (props: EventTypeSetupProps) => {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const defaultValues: any = useMemo(() => {
-    return {
       title: eventType.title,
       locations: eventType.locations || [],
       recurringEvent: eventType.recurringEvent || null,
@@ -244,8 +243,7 @@ const EventTypePage = (props: EventTypeSetupProps) => {
               .filter((slug) => slug !== eventType.slug) ?? [],
         },
       })),
-    };
-  }, [eventType, periodDates, metadata]);
+    }, [eventType, periodDates, metadata]);
 
   const formMethods = useForm<FormValues>({
     defaultValues,

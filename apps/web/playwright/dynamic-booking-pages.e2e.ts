@@ -39,18 +39,14 @@ test.skip("dynamic booking", async ({ page, users }) => {
     await selectSecondAvailableTimeSlotNextMonth(page);
     // --- fill form
     await page.locator('[data-testid="confirm-reschedule-button"]').click();
-    await page.waitForURL((url) => {
-      return url.pathname.startsWith("/booking");
-    });
+    await page.waitForURL((url) => url.pathname.startsWith("/booking"));
     await expect(page.locator("[data-testid=success-page]")).toBeVisible();
   });
 
   await test.step("Can cancel the recently created booking", async () => {
     await page.goto("/bookings/upcoming");
     await page.locator('[data-testid="cancel"]').click();
-    await page.waitForURL((url) => {
-      return url.pathname.startsWith("/booking");
-    });
+    await page.waitForURL((url) => url.pathname.startsWith("/booking"));
     await page.locator('[data-testid="confirm_cancel"]').click();
 
     const cancelledHeadline = page.locator('[data-testid="cancelled-headline"]');

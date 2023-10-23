@@ -9,8 +9,7 @@ import PageWrapper from "@components/PageWrapper";
 import DisableTwoFactorModal from "@components/settings/DisableTwoFactorModal";
 import EnableTwoFactorModal from "@components/settings/EnableTwoFactorModal";
 
-const SkeletonLoader = () => {
-  return (
+const SkeletonLoader = () => (
     <SkeletonContainer>
       <div className="mt-6 mb-8 space-y-6">
         <div className="flex items-center">
@@ -20,7 +19,6 @@ const SkeletonLoader = () => {
       </div>
     </SkeletonContainer>
   );
-};
 
 const TwoFactorAuthView = () => {
   const utils = trpc.useContext();

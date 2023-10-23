@@ -78,8 +78,7 @@ const UsernameTextfield = (props: ICustomUsernameProps & Partial<React.Component
     },
   });
 
-  const ActionButtons = () => {
-    return usernameIsAvailable && currentUsername !== inputUsernameValue ? (
+  const ActionButtons = () => usernameIsAvailable && currentUsername !== inputUsernameValue ? (
       <div className="ms-2 me-2 flex flex-row space-x-2">
         <Button
           type="button"
@@ -101,7 +100,6 @@ const UsernameTextfield = (props: ICustomUsernameProps & Partial<React.Component
     ) : (
       <></>
     );
-  };
 
   const updateUsername = async () => {
     updateUsernameMutation.mutate({

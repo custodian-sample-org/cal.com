@@ -112,8 +112,7 @@ export const resizeAnimationConfig: ResizeAnimationConfig = {
   },
 };
 
-export const getBookerSizeClassNames = (layout: BookerLayout, bookerState: BookerState) => {
-  return [
+export const getBookerSizeClassNames = (layout: BookerLayout, bookerState: BookerState) => [
     // Size settings are abstracted on their own lines purely for readbility.
     // General sizes, used always
     "[--booker-timeslots-width:240px] lg:[--booker-timeslots-width:280px]",
@@ -132,7 +131,6 @@ export const getBookerSizeClassNames = (layout: BookerLayout, bookerState: Booke
     layout !== BookerLayouts.MONTH_VIEW &&
       "[--booker-main-width:480px] [--booker-meta-width:340px] lg:[--booker-meta-width:424px]",
   ];
-};
 
 /**
  * This hook returns a ref that should be set on the booker element.

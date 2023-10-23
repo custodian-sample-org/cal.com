@@ -71,17 +71,13 @@ export default class SendgridService extends SyncServiceCore implements ISyncSer
 
   public console = {
     user: {
-      upsert: async (consoleUser: ConsoleUserInfoType) => {
-        return this.upsert(consoleUser);
-      },
+      upsert: (consoleUser: ConsoleUserInfoType) => this.upsert(consoleUser),
     },
   };
 
   public web = {
     user: {
-      upsert: async (webUser: WebUserInfoType) => {
-        return this.upsert(webUser);
-      },
+      upsert: (webUser: WebUserInfoType) => this.upsert(webUser),
       delete: async (webUser: WebUserInfoType) => {
         const [contactId] = await this.service.getSendgridContactId(webUser.email);
         if (contactId) {

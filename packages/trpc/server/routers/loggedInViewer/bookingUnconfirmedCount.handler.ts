@@ -29,9 +29,5 @@ export const bookingUnconfirmedCountHandler = async ({ ctx }: BookingUnconfirmed
       endTime: { gt: new Date() },
     },
   });
-  return recurringGrouping.reduce((prev, current) => {
-    // recurringEventId is the total number of recurring instances for a booking
-    // we need to subtract all but one, to represent a single recurring booking
-    return prev - (current._count?.recurringEventId - 1);
-  }, count);
+  return recurringGrouping.reduce((prev, current) => prev - (current._count?.recurringEventId - 1), count);
 };

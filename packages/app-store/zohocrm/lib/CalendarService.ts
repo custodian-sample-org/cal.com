@@ -39,9 +39,9 @@ export type ZohoContact = {
 const toISO8601String = (date: Date) => {
   const tzo = -date.getTimezoneOffset(),
     dif = tzo >= 0 ? "+" : "-",
-    pad = function (num: number) {
-      return (num < 10 ? "0" : "") + num;
-    };
+    pad = (num: number) => {
+  return (num < 10 ? "0" : "") + num;
+};
 
   return (
     date.getFullYear() +
@@ -110,13 +110,11 @@ export default class ZohoCrmCalendarService implements Calendar {
       .catch((e) => this.log.error(e, e.response?.data));
   };
 
-  private getMeetingBody = (event: CalendarEvent): string => {
-    return `<b>${event.organizer.language.translate("invitee_timezone")}:</b> ${
+  private getMeetingBody = (event: CalendarEvent) => `<b>${event.organizer.language.translate("invitee_timezone")}:</b> ${
       event.attendees[0].timeZone
     }<br><br><b>${event.organizer.language.translate("share_additional_notes")}</b><br>${
       event.additionalNotes || "-"
     }`;
-  };
 
   private createZohoEvent = async (event: CalendarEvent) => {
     const zohoEvent = {
@@ -162,8 +160,7 @@ export default class ZohoCrmCalendarService implements Calendar {
       .catch((e) => this.log.error(e, e.response?.data));
   };
 
-  private deleteMeeting = async (uid: string) => {
-    return axios({
+  private deleteMeeting = (uid: string) => axios({
       method: "delete",
       url: `https://www.zohoapis.com/crm/v3/Events?ids=${uid}`,
       headers: {
@@ -173,7 +170,6 @@ export default class ZohoCrmCalendarService implements Calendar {
     })
       .then((data) => data.data)
       .catch((e) => this.log.error(e, e.response?.data));
-  };
 
   private zohoCrmAuth = async (credential: CredentialPayload) => {
     const appKeys = await getAppKeysFromSlug("zohocrm");

@@ -30,13 +30,11 @@ function Teams() {
   );
 }
 
-export const getStaticProps = async () => {
-  return {
+export const getStaticProps = () => {
     props: {
       ...(await serverSideTranslations("en", ["common"])),
     },
   };
-};
 
 Teams.requiresLicense = false;
 Teams.PageWrapper = PageWrapper;

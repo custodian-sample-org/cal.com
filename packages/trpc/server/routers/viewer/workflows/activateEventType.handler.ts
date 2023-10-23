@@ -97,9 +97,7 @@ export const activateEventTypeHandler = async ({ ctx, input }: ActivateEventType
           userId: ctx.user.id,
         },
         workflowStepId: {
-          in: eventTypeWorkflow.steps.map((step) => {
-            return step.id;
-          }),
+          in: eventTypeWorkflow.steps.map((step) => step.id),
         },
       },
       select: {
@@ -153,13 +151,11 @@ export const activateEventTypeHandler = async ({ ctx, input }: ActivateEventType
       const bookingInfo = {
         uid: booking.uid,
         attendees: booking.attendees.map((attendee) => {
-          return {
             name: attendee.name,
             email: attendee.email,
             timeZone: attendee.timeZone,
             language: { locale: attendee.locale || "" },
-          };
-        }),
+          }),
         organizer: booking.user
           ? {
               name: booking.user.name || "",
@@ -235,13 +231,9 @@ export const activateEventTypeHandler = async ({ ctx, input }: ActivateEventType
     });
 
     if (
-      eventTypeWorkflow.steps.some((step) => {
-        return step.action === WorkflowActions.SMS_ATTENDEE;
-      })
+      eventTypeWorkflow.steps.some((step) => step.action === WorkflowActions.SMS_ATTENDEE)
     ) {
-      const isSmsReminderNumberRequired = eventTypeWorkflow.steps.some((step) => {
-        return step.action === WorkflowActions.SMS_ATTENDEE && step.numberRequired;
-      });
+      const isSmsReminderNumberRequired = eventTypeWorkflow.steps.some((step) => step.action === WorkflowActions.SMS_ATTENDEE && step.numberRequired);
       [eventTypeId].concat(userEventType.children.map((ch) => ch.id)).map(async (evTyId) => {
         await upsertSmsReminderFieldForBooking({
           workflowId,

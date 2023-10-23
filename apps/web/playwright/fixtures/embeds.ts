@@ -1,14 +1,13 @@
 import type { Page } from "@playwright/test";
 
-export const createEmbedsFixture = (page: Page) => {
-  return async (calNamespace: string) => {
+export const createEmbedsFixture = (page: Page) => async (calNamespace: string) => {
     await page.addInitScript(
       ({ calNamespace }: { calNamespace: string }) => {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         //@ts-ignore
         window.eventsFiredStoreForPlaywright = window.eventsFiredStoreForPlaywright || {};
-        document.addEventListener("DOMContentLoaded", function tryAddingListener() {
-          if (parent !== window) {
+        document.addEventListener("DOMContentLoaded", () => {
+  if (parent !== window) {
             // Firefox seems to execute this snippet for iframe as well. Avoid that. It must be executed only for parent frame.
 
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -58,24 +57,17 @@ export const createEmbedsFixture = (page: Page) => {
               eventStore.push(e.detail);
             },
           });
-        });
+});
       },
       { calNamespace }
     );
   };
-};
 
-export const createGetActionFiredDetails = (page: Page) => {
-  return async ({ calNamespace, actionType }: { calNamespace: string; actionType: string }) => {
+export const createGetActionFiredDetails = (page: Page) => async ({ calNamespace, actionType }: { calNamespace: string; actionType: string }) => {
     if (!page.isClosed()) {
       return await page.evaluate(
-        ({ actionType, calNamespace }) => {
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          //@ts-ignore
-          return window.eventsFiredStoreForPlaywright[`${actionType}-${calNamespace}`];
-        },
+        ({ actionType, calNamespace }) => window.eventsFiredStoreForPlaywright[`${actionType}-${calNamespace}`],
         { actionType, calNamespace }
       );
     }
   };
-};

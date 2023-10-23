@@ -11,9 +11,7 @@ export function Message({
   useEffect(() => {
     if (message.showInProgressIndicator) {
       const interval = setInterval(() => {
-        setProgressText((progressText) => {
-          return progressText.length > 3 ? "" : progressText + ".";
-        });
+        setProgressText((progressText) => progressText.length > 3 ? "" : progressText + ".");
       }, 1000);
       return () => {
         clearInterval(interval);

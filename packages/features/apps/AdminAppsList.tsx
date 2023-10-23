@@ -151,8 +151,7 @@ const AdminAppsList = ({
   className?: string;
   useQueryParam?: boolean;
   onSubmit?: () => void;
-} & Omit<JSX.IntrinsicElements["form"], "onSubmit">) => {
-  return (
+} & Omit<JSX.IntrinsicElements["form"], "onSubmit">) => (
     <form
       {...rest}
       className={
@@ -174,7 +173,6 @@ const AdminAppsList = ({
       </AppCategoryNavigation>
     </form>
   );
-};
 
 const EditKeysModal: FC<{
   dirName: string;
@@ -330,8 +328,7 @@ const AdminAppsListContainer = () => {
 
 export default AdminAppsList;
 
-const SkeletonLoader = () => {
-  return (
+const SkeletonLoader = () => (
     <SkeletonContainer className="w-[30rem] pr-10">
       <div className="mt-6 mb-8 space-y-6">
         <SkeletonText className="h-8 w-full" />
@@ -343,4 +340,3 @@ const SkeletonLoader = () => {
       </div>
     </SkeletonContainer>
   );
-};

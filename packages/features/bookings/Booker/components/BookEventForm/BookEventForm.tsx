@@ -86,11 +86,9 @@ export const BookEventForm = ({ onCancel }: BookEventFormProps) => {
       };
 
       const responses = eventType.bookingFields.reduce((responses, field) => {
-        return {
           ...responses,
           [field.name]: parsedQuery[field.name] || undefined,
-        };
-      }, {});
+        }, {});
 
       defaults.responses = {
         ...responses,
@@ -114,11 +112,9 @@ export const BookEventForm = ({ onCancel }: BookEventFormProps) => {
     };
 
     const responses = eventType.bookingFields.reduce((responses, field) => {
-      return {
         ...responses,
         [field.name]: rescheduleBooking.responses[field.name],
-      };
-    }, {});
+      }, {});
     defaults.responses = {
       ...responses,
       name: defaultUserValues.name,

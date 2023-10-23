@@ -15,7 +15,7 @@ export type AvatarGroupProps = {
   truncateAfter?: number;
 };
 
-export const AvatarGroup = function AvatarGroup(props: AvatarGroupProps) {
+export const AvatarGroup = (props: AvatarGroupProps) => {
   const LENGTH = props.items.length;
   const truncateAfter = props.truncateAfter || 4;
   /**

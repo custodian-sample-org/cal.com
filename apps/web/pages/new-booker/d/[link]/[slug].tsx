@@ -122,6 +122,4 @@ const paramsSchema = z.object({ link: z.string(), slug: z.string() });
 
 // Booker page fetches a tiny bit of data server side, to determine early
 // whether the page should show an away state or dynamic booking not allowed.
-export const getServerSideProps = async (context: GetServerSidePropsContext) => {
-  return await getUserPageProps(context);
-};
+export const getServerSideProps = (context: GetServerSidePropsContext) => await getUserPageProps(context);

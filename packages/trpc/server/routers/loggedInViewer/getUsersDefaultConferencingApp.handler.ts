@@ -7,8 +7,6 @@ type GetUsersDefaultConferencingAppOptions = {
   };
 };
 
-export const getUsersDefaultConferencingAppHandler = async ({
+export const getUsersDefaultConferencingAppHandler = ({
   ctx,
-}: GetUsersDefaultConferencingAppOptions) => {
-  return userMetadata.parse(ctx.user.metadata)?.defaultConferencingApp;
-};
+}: GetUsersDefaultConferencingAppOptions) => userMetadata.parse(ctx.user.metadata)?.defaultConferencingApp;

@@ -5,8 +5,7 @@ import { Meta, SkeletonText, SkeletonContainer } from "@calcom/ui";
 
 import { FlagAdminList } from "../components/FlagAdminList";
 
-const SkeletonLoader = () => {
-  return (
+const SkeletonLoader = () => (
     <SkeletonContainer>
       <div className="divide-subtle mt-6 mb-8 space-y-6">
         <SkeletonText className="h-8 w-full" />
@@ -14,10 +13,8 @@ const SkeletonLoader = () => {
       </div>
     </SkeletonContainer>
   );
-};
 
-export const FlagListingView = () => {
-  return (
+export const FlagListingView = () => (
     <>
       <Meta title="Feature Flags" description="Here you can toggle your Cal.com instance features." />
       <NoSSR>
@@ -27,4 +24,3 @@ export const FlagListingView = () => {
       </NoSSR>
     </>
   );
-};

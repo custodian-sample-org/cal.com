@@ -78,7 +78,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   };
 
   const eventTypeObject = [eventType].map((e) => {
-    return {
       ...e,
       periodStartDate: e.periodStartDate?.toString() ?? null,
       periodEndDate: e.periodEndDate?.toString() ?? null,
@@ -97,8 +96,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
         darkBrandColor: u.darkBrandColor,
       })),
       descriptionAsSafeHTML: markdownToSafeHTML(eventType.description),
-    };
-  })[0];
+    })[0];
 
   const profile = {
     name: user.name || user.username,

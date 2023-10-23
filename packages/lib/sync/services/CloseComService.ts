@@ -71,10 +71,8 @@ export default class CloseComService extends SyncServiceCore implements ISyncSer
         contactId,
       },
       ...allFields.map((fieldId: string, index: number) => {
-        return {
           [`custom.${fieldId}`]: allFieldsValues[index],
-        };
-      })
+        })
     );
     // Create Custom Activity type instance
     return await this.service.contact.update(person);
@@ -82,17 +80,13 @@ export default class CloseComService extends SyncServiceCore implements ISyncSer
 
   public console = {
     user: {
-      upsert: async (consoleUser: ConsoleUserInfoType) => {
-        return this.upsertAnyUser(consoleUser);
-      },
+      upsert: (consoleUser: ConsoleUserInfoType) => this.upsertAnyUser(consoleUser),
     },
   };
 
   public web = {
     user: {
-      upsert: async (webUser: WebUserInfoType) => {
-        return this.upsertAnyUser(webUser);
-      },
+      upsert: (webUser: WebUserInfoType) => this.upsertAnyUser(webUser),
       delete: async (webUser: WebUserInfoType) => {
         this.log.debug("sync:closecom:web:user:delete", { webUser });
         const [contactId] = await getCloseComContactIds([webUser], this.service);
@@ -105,15 +99,13 @@ export default class CloseComService extends SyncServiceCore implements ISyncSer
       },
     },
     team: {
-      create: async (team: TeamInfoType, webUser: WebUserInfoType, role: MembershipRole) => {
-        return this.upsertAnyUser(
+      create: (team: TeamInfoType, webUser: WebUserInfoType, role: MembershipRole) => this.upsertAnyUser(
           webUser,
           {
             companyName: team.name,
           },
           role
-        );
-      },
+        ),
       delete: async (team: TeamInfoType) => {
         this.log.debug("sync:closecom:web:team:delete", { team });
         const leadId = await getCloseComLeadId(this.service, { companyName: team.name });

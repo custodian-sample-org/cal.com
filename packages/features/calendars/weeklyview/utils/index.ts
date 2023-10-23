@@ -64,9 +64,7 @@ export function getHoursToDisplay(startHour: number, endHour: number) {
 
 export function mergeOverlappingDateRanges(dateRanges: TimeRange[]) {
   //Sort the date ranges by start date
-  dateRanges.sort((a, b) => {
-    return a.start.getTime() - b.start.getTime();
-  });
+  dateRanges.sort((a, b) => a.start.getTime() - b.start.getTime());
   //Create a new array to hold the merged date ranges
   const mergedDateRanges = [];
   //Loop through the date ranges

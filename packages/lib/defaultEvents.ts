@@ -137,9 +137,7 @@ const min60Event = {
 
 const defaultEvents = [min15Event, min30Event, min60Event];
 
-export const getDynamicEventDescription = (dynamicUsernames: string[], slug: string): string => {
-  return `Book a ${slug} min event with ${dynamicUsernames.join(", ")}`;
-};
+export const getDynamicEventDescription = (dynamicUsernames: string[], slug: string) => `Book a ${slug} min event with ${dynamicUsernames.join(", ")}`;
 
 export const getDynamicEventName = (dynamicNames: string[], slug: string): string => {
   const lastUser = dynamicNames.pop();
@@ -147,15 +145,11 @@ export const getDynamicEventName = (dynamicNames: string[], slug: string): strin
 };
 
 export const getDefaultEvent = (slug: string) => {
-  const event = defaultEvents.find((obj) => {
-    return obj.slug === slug;
-  });
+  const event = defaultEvents.find((obj) => obj.slug === slug);
   return event || min15Event;
 };
 
-export const getGroupName = (usernameList: string[]): string => {
-  return usernameList.join(", ");
-};
+export const getGroupName = (usernameList: string[]) => usernameList.join(", ");
 
 export const getUsernameSlugLink = ({ users, slug }: UsernameSlugLinkProps): string => {
   let slugLink = ``;
@@ -168,9 +162,7 @@ export const getUsernameSlugLink = ({ users, slug }: UsernameSlugLinkProps): str
   return slugLink;
 };
 
-const arrayCast = (value: unknown | unknown[]) => {
-  return Array.isArray(value) ? value : value ? [value] : [];
-};
+const arrayCast = (value: unknown | unknown[]) => Array.isArray(value) ? value : value ? [value] : [];
 
 export const getUsernameList = (users: string | string[] | undefined): string[] => {
   // Multiple users can come in case of a team round-robin booking and in that case dynamic link won't be a user.

@@ -78,22 +78,18 @@ export default function MemberInvitationModal(props: MemberInvitationModalProps)
     showToast(t("invite_link_copied"), "success");
   };
 
-  const options: MembershipRoleOption[] = useMemo(() => {
-    return [
+  const options: MembershipRoleOption[] = useMemo(() => [
       { value: MembershipRole.MEMBER, label: t("member") },
       { value: MembershipRole.ADMIN, label: t("admin") },
       { value: MembershipRole.OWNER, label: t("owner") },
-    ];
-  }, [t]);
+    ], [t]);
 
   const newMemberFormMethods = useForm<NewMemberForm>();
 
-  const validateUniqueInvite = (value: string) => {
-    return !(
+  const validateUniqueInvite = (value: string) => !(
       props.members.some((member) => member?.username === value) ||
       props.members.some((member) => member?.email === value)
     );
-  };
 
   const handleFileUpload = (e: FileEvent<HTMLInputElement>) => {
     if (!e.target.files?.length) {

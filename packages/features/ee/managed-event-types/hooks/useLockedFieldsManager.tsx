@@ -43,14 +43,12 @@ const useLockedFieldsManager = (
   };
 
   const shouldLockDisableProps = (fieldName: string) => {
-    return {
       disabled:
         !isManagedEventType &&
         eventType.metadata?.managedEventConfig !== undefined &&
         unlockedFields[fieldName as keyof Omit<Prisma.EventTypeSelect, "id">] === undefined,
       LockedIcon: shouldLockIndicator(fieldName),
     };
-  };
 
   return { shouldLockIndicator, shouldLockDisableProps, isManagedEventType, isChildrenManagedEventType };
 };

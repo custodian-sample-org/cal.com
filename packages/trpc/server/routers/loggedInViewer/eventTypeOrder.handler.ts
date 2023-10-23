@@ -53,15 +53,13 @@ export const eventTypeOrderHandler = async ({ ctx, input }: EventTypeOrderOption
     });
   }
   await Promise.all(
-    input.ids.reverse().map((id, position) => {
-      return prisma.eventType.update({
+    input.ids.reverse().map((id, position) => prisma.eventType.update({
         where: {
           id,
         },
         data: {
           position,
         },
-      });
-    })
+      }))
   );
 };

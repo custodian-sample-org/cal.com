@@ -226,8 +226,7 @@ const EventTypeSchedule = ({ eventType }: { eventType: EventTypeSetup }) => {
         {!isLoading && (
           <Controller
             name="schedule"
-            render={({ field }) => {
-              return (
+            render={({ field }) => (
                 <Select
                   placeholder={t("select")}
                   options={options}
@@ -241,8 +240,7 @@ const EventTypeSchedule = ({ eventType }: { eventType: EventTypeSetup }) => {
                   components={{ Option, SingleValue }}
                   isMulti={false}
                 />
-              );
-            }}
+              )}
           />
         )}
       </div>
@@ -292,10 +290,8 @@ export const EventAvailabilityTab = ({
 }: {
   eventType: EventTypeSetup;
   isTeamEvent: boolean;
-}) => {
-  return isTeamEvent && eventType.schedulingType !== SchedulingType.MANAGED ? (
+}) => isTeamEvent && eventType.schedulingType !== SchedulingType.MANAGED ? (
     <UseCommonScheduleSettingsToggle eventType={eventType} />
   ) : (
     <EventTypeSchedule eventType={eventType} />
   );
-};

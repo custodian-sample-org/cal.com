@@ -53,15 +53,13 @@ export function AvailableCellsForDay({ availableSlots, day, startHour }: Availab
 
   return (
     <>
-      {slots?.map((slot) => {
-        return (
+      {slots?.map((slot) => (
           <Cell
             key={slot.slot.start.toISOString()}
             timeSlot={dayjs(slot.slot.start)}
             topOffsetMinutes={slot.topOffsetMinutes}
           />
-        );
-      })}
+        ))}
     </>
   );
 }

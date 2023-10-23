@@ -32,9 +32,8 @@ const PaymentPage: FC<PaymentPageProps> = (props) => {
     setDate(date.tz(_timezone));
     setIs24h(!!getIs24hClockFromLocalStorage());
     if (isEmbed) {
-      requestAnimationFrame(function fixStripeIframe() {
-        // HACK: Look for stripe iframe and center position it just above the embed content
-        const stripeIframeWrapper = document.querySelector(
+      requestAnimationFrame(() => {
+  const stripeIframeWrapper = document.querySelector(
           'iframe[src*="https://js.stripe.com/v3/authorize-with-url-inner"]'
         )?.parentElement;
         if (stripeIframeWrapper) {
@@ -42,7 +41,7 @@ const PaymentPage: FC<PaymentPageProps> = (props) => {
           stripeIframeWrapper.style.width = embedIframeWidth + "px";
         }
         requestAnimationFrame(fixStripeIframe);
-      });
+});
       sdkActionManager?.on("__dimensionChanged", (e) => {
         embedIframeWidth = e.detail.data.iframeWidth as number;
       });
