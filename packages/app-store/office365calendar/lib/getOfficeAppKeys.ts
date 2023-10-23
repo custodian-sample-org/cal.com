@@ -7,6 +7,4 @@ const officeAppKeysSchema = z.object({
   client_secret: z.string(),
 });
 
-export const getOfficeAppKeys = async () => {
-  return getParsedAppKeysFromSlug("office365-calendar", officeAppKeysSchema);
-};
+export const getOfficeAppKeys = () => getParsedAppKeysFromSlug("office365-calendar", officeAppKeysSchema);

@@ -38,7 +38,7 @@ type RhfFormField = RhfFormFields[number];
  * It works with a react-hook-form only.
  * `formProp` specifies the name of the property in the react-hook-form that has the fields. This is where fields would be updated.
  */
-export const FormBuilder = function FormBuilder({
+export const FormBuilder = ({
   title,
   description,
   addFieldLabel,
@@ -59,7 +59,7 @@ export const FormBuilder = function FormBuilder({
   dataStore: {
     options: Record<string, { label: string; value: string; inputPlaceholder?: string }[]>;
   };
-}) {
+}) => {
   const FieldTypesMap: Record<
     string,
     {
@@ -185,8 +185,7 @@ export const FormBuilder = function FormBuilder({
       ]);
     }
 
-    const crossButton = (index: number) => {
-      return (
+    const crossButton = (index: number) => (
         <Button
           type="button"
           className="ml-3 p-0 hover:!bg-transparent focus:!bg-transparent focus:!outline-none focus:!ring-0"
@@ -203,7 +202,6 @@ export const FormBuilder = function FormBuilder({
           }}
         />
       );
-    };
 
     return (
       <div className={className}>
@@ -510,9 +508,7 @@ export const FormBuilder = function FormBuilder({
               {fieldType?.needsOptions && !fieldForm.getValues("getOptionsAt") ? (
                 <Controller
                   name="options"
-                  render={({ field: { value, onChange } }) => {
-                    return <OptionsField onChange={onChange} value={value} className="mt-6" />;
-                  }}
+                  render={({ field: { value, onChange } }) => <OptionsField onChange={onChange} value={value} className="mt-6" />}
                 />
               ) : null}
               {/* TODO: Maybe we should show location options in readOnly mode in Booking Questions. Right now options are not shown in Manage Booking Questions UI for location Booking Question */}
@@ -526,8 +522,7 @@ export const FormBuilder = function FormBuilder({
               <Controller
                 name="required"
                 control={fieldForm.control}
-                render={({ field: { value, onChange } }) => {
-                  return (
+                render={({ field: { value, onChange } }) => (
                     <BooleanToggleGroupField
                       data-testid="field-required"
                       disabled={fieldForm.getValues("editable") === "system"}
@@ -537,8 +532,7 @@ export const FormBuilder = function FormBuilder({
                       }}
                       label={t("required")}
                     />
-                  );
-                }}
+                  )}
               />
             </Form>
           </div>
@@ -564,8 +558,7 @@ const WithLabel = ({
   field: Partial<RhfFormField>;
   readOnly: boolean;
   children: React.ReactNode;
-}) => {
-  return (
+}) => (
     <div>
       {/* multiemail doesnt show label initially. It is shown on clicking CTA */}
       {/* boolean type doesn't have a label overall, the radio has it's own label */}
@@ -583,7 +576,6 @@ const WithLabel = ({
       {children}
     </div>
   );
-};
 
 type ValueProps =
   | {
@@ -766,8 +758,7 @@ export const FormBuilderField = ({
         control={control}
         // Make it a variable
         name={`responses.${field.name}`}
-        render={({ field: { value, onChange }, fieldState: { error } }) => {
-          return (
+        render={({ field: { value, onChange }, fieldState: { error } }) => (
             <div>
               <ComponentForField
                 field={field}
@@ -805,8 +796,7 @@ export const FormBuilderField = ({
                 }}
               />
             </div>
-          );
-        }}
+          )}
       />
     </div>
   );

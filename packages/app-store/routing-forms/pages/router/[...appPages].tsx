@@ -35,10 +35,8 @@ const querySchema = z
   })
   .catchall(z.string());
 
-export const getServerSideProps = async function getServerSideProps(
-  context: AppGetServerSidePropsContext,
-  prisma: AppPrisma
-) {
+export const getServerSideProps = (context: AppGetServerSidePropsContext,
+  prisma: AppPrisma) => {
   const queryParsed = querySchema.safeParse(context.query);
   if (!queryParsed.success) {
     return {

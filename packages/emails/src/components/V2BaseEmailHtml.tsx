@@ -22,8 +22,7 @@ export const V2BaseEmailHtml = (props: {
   title?: string;
   subtitle?: React.ReactNode;
   headerType?: BodyHeadType;
-}) => {
-  return (
+}) => (
     <Html>
       <EmailHead title={props.subject} />
       <body style={{ wordSpacing: "normal", backgroundColor: "#F3F4F6" }}>
@@ -188,4 +187,3 @@ export const V2BaseEmailHtml = (props: {
       </body>
     </Html>
   );
-};

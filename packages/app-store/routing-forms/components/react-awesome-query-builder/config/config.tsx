@@ -22,7 +22,7 @@ const {
   Provider,
 } = widgetsComponents;
 
-const renderComponent = function <T1>(props: T1 | undefined, Component: React.FC<T1>) {
+const renderComponent = (props: T1 | undefined, Component: React.FC<T1>) => {
   if (!props) {
     return <div />;
   }

@@ -13,13 +13,11 @@ const CreateNewOrganizationPage = () => {
     </>
   );
 };
-const LayoutWrapper = (page: React.ReactElement) => {
-  return (
+const LayoutWrapper = (page: React.ReactElement) => (
     <WizardLayout currentStep={1} maxSteps={5}>
       {page}
     </WizardLayout>
   );
-};
 
 CreateNewOrganizationPage.getLayout = LayoutWrapper;
 CreateNewOrganizationPage.PageWrapper = PageWrapper;

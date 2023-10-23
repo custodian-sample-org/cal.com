@@ -280,18 +280,14 @@ const Route = ({
   );
 };
 
-const deserializeRoute = (
-  route: Exclude<SerializableRoute, GlobalRoute>,
-  config: QueryBuilderUpdatedConfig
-): Route => {
-  return {
+const deserializeRoute = (route: Exclude<SerializableRoute, GlobalRoute>,
+  config: QueryBuilderUpdatedConfig) => {
     ...route,
     state: {
       tree: QbUtils.checkTree(QbUtils.loadTree(route.queryValue), config),
       config: config,
     },
   };
-};
 
 const Routes = ({
   form,
@@ -345,14 +341,12 @@ const Routes = ({
         return router.id !== form.id && routerValidInContext;
       })
       .map(({ form: router }) => {
-        return {
           value: router.id,
           label: router.name,
           name: router.name,
           description: router.description,
           isDisabled: false,
-        };
-      }) || [];
+        }) || [];
 
   const isConnectedForm = (id: string) => form.connectedForms.map((f) => f.id).includes(id);
 
@@ -402,19 +396,11 @@ const Routes = ({
 
   if (!fallbackRoute) {
     fallbackRoute = deserializeRoute(createFallbackRoute(), config);
-    setRoutes((routes) => {
-      // Even though it's obvious that fallbackRoute is defined here but TypeScript just can't figure it out.
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      return [...routes, fallbackRoute!];
-    });
+    setRoutes((routes) => [...routes, fallbackRoute!]);
     return null;
   } else if (routes.indexOf(fallbackRoute) !== routes.length - 1) {
     // Ensure fallback is last
-    setRoutes((routes) => {
-      // Even though it's obvious that fallbackRoute is defined here but TypeScript just can't figure it out.
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      return [...routes.filter((route) => route.id !== fallbackRoute!.id), fallbackRoute!];
-    });
+    setRoutes((routes) => [...routes.filter((route) => route.id !== fallbackRoute!.id), fallbackRoute!]);
   }
 
   const setRoute = (id: string, route: Partial<Route>) => {
@@ -451,8 +437,7 @@ const Routes = ({
   return (
     <div className="bg-default border-subtle flex flex-col-reverse rounded-md border p-8 md:flex-row">
       <div ref={animationRef} className="w-full ltr:mr-2 rtl:ml-2">
-        {mainRoutes.map((route, key) => {
-          return (
+        {mainRoutes.map((route, key) => (
             <Route
               form={form}
               appUrl={appUrl}
@@ -476,8 +461,7 @@ const Routes = ({
               setRoute={setRoute}
               setRoutes={setRoutes}
             />
-          );
-        })}
+          ))}
         <SelectField
           placeholder={t("select_a_router")}
           containerClassName="mb-6 data-testid-select-router"
@@ -555,10 +539,8 @@ export default function RouteBuilder({
   );
 }
 
-RouteBuilder.getLayout = (page: React.ReactElement) => {
-  return (
+RouteBuilder.getLayout = (page: React.ReactElement) => (
     <Shell backPath="/apps/routing-forms/forms" withoutMain={true}>
       {page}
     </Shell>
   );
-};

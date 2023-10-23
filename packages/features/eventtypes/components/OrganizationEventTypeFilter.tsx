@@ -92,8 +92,7 @@ type Props = InputHTMLAttributes<HTMLInputElement> & {
   icon: ReactNode;
 };
 
-const CheckboxField = forwardRef<HTMLInputElement, Props>(({ label, icon, ...rest }, ref) => {
-  return (
+const CheckboxField = forwardRef<HTMLInputElement, Props>(({ label, icon, ...rest }, ref) => (
     <label className="flex w-full items-center justify-between">
       <div className="flex items-center">
         <div className="text-default flex h-6 w-6 items-center justify-center ltr:mr-2 rtl:ml-2">{icon}</div>
@@ -108,11 +107,8 @@ const CheckboxField = forwardRef<HTMLInputElement, Props>(({ label, icon, ...res
         />
       </div>
     </label>
-  );
-});
+  ));
 
-const CheckboxFieldContainer = ({ children }: { children: ReactNode }) => {
-  return <div className="flex items-center px-3 py-2">{children}</div>;
-};
+const CheckboxFieldContainer = ({ children }: { children: ReactNode }) => <div className="flex items-center px-3 py-2">{children}</div>;
 
 CheckboxField.displayName = "CheckboxField";

@@ -15,7 +15,7 @@ export interface NavTabProps {
   iconClassName?: string;
 }
 
-const NavTabs = function ({
+const NavTabs = ({
   tabs,
   className = "",
   sticky,
@@ -23,7 +23,7 @@ const NavTabs = function ({
   itemClassname,
   iconClassName,
   ...props
-}: NavTabProps) {
+}: NavTabProps) => {
   return (
     <nav
       className={classNames(

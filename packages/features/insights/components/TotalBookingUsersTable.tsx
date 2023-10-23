@@ -9,8 +9,7 @@ export const TotalBookingUsersTable = ({
   data:
     | { userId: number | null; user: User; emailMd5?: string; count: number; Username?: string }[]
     | undefined;
-}) => {
-  return (
+}) => (
     <Table>
       <TableBody>
         <>
@@ -46,4 +45,3 @@ export const TotalBookingUsersTable = ({
       </TableBody>
     </Table>
   );
-};

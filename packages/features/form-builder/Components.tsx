@@ -115,22 +115,20 @@ export const Components: Record<BookingFieldType, Component> = {
   },
   address: {
     propsType: "text",
-    factory: (props) => {
-      return (
+    factory: (props) => (
         <AddressInput
           onChange={(val) => {
             props.setValue(val);
           }}
           {...props}
         />
-      );
-    },
+      ),
   },
   multiemail: {
     propsType: "textList",
     //TODO: Make it a ui component
-    factory: function MultiEmail({ value, readOnly, label, setValue, ...props }) {
-      const placeholder = props.placeholder;
+    factory: ({ value, readOnly, label, setValue, ...props }) => {
+  const placeholder = props.placeholder;
       const { t } = useLocale();
       value = value || [];
       const inputClassName =
@@ -210,7 +208,7 @@ export const Components: Record<BookingFieldType, Component> = {
           )}
         </>
       );
-    },
+},
   },
   multiselect: {
     propsType: "multiselect",
@@ -238,8 +236,7 @@ export const Components: Record<BookingFieldType, Component> = {
       value = value || [];
       return (
         <div>
-          {options.map((option, i) => {
-            return (
+          {options.map((option, i) => (
               <label key={i} className="block">
                 <input
                   type="checkbox"
@@ -257,16 +254,14 @@ export const Components: Record<BookingFieldType, Component> = {
                 />
                 <span className="text-emphasis ms-2 me-2 text-sm">{option.label ?? ""}</span>
               </label>
-            );
-          })}
+            ))}
         </div>
       );
     },
   },
   radio: {
     propsType: "select",
-    factory: ({ setValue, name, value, options }) => {
-      return (
+    factory: ({ setValue, name, value, options }) => (
         <Group
           value={value}
           onValueChange={(e) => {
@@ -283,13 +278,12 @@ export const Components: Record<BookingFieldType, Component> = {
             ))}
           </>
         </Group>
-      );
-    },
+      ),
   },
   radioInput: {
     propsType: "objectiveWithInput",
-    factory: function RadioInputWithLabel({ name, options, optionsInputs, value, setValue, readOnly }) {
-      useEffect(() => {
+    factory: ({ name, options, optionsInputs, value, setValue, readOnly }) => {
+  useEffect(() => {
         if (!value) {
           setValue({
             value: options[0]?.value,
@@ -303,8 +297,7 @@ export const Components: Record<BookingFieldType, Component> = {
           <div>
             <div className="mb-2">
               {options.length > 1 ? (
-                options.map((option, i) => {
-                  return (
+                options.map((option, i) => (
                     <label key={i} className="block">
                       <input
                         type="radio"
@@ -322,8 +315,7 @@ export const Components: Record<BookingFieldType, Component> = {
                       />
                       <span className="text-emphasis ms-2 me-2 text-sm">{option.label ?? ""}</span>
                     </label>
-                  );
-                })
+                  ))
               ) : (
                 // Show option itself as label because there is just one option
                 <>
@@ -363,12 +355,11 @@ export const Components: Record<BookingFieldType, Component> = {
           })()}
         </div>
       );
-    },
+},
   },
   boolean: {
     propsType: "boolean",
-    factory: ({ readOnly, label, value, setValue }) => {
-      return (
+    factory: ({ readOnly, label, value, setValue }) => (
         <div className="flex">
           <Checkbox
             onChange={(e) => {
@@ -384,8 +375,7 @@ export const Components: Record<BookingFieldType, Component> = {
             description={label ?? ""}
           />
         </div>
-      );
-    },
+      ),
   },
 } as const;
 // Should use `statisfies` to check if the `type` is from supported types. But satisfies doesn't work with Next.js config

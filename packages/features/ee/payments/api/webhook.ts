@@ -83,8 +83,7 @@ async function getBooking(bookingId: number) {
   if (!user) throw new HttpCode({ statusCode: 204, message: "No user found" });
 
   const t = await getTranslation(user.locale ?? "en", "common");
-  const attendeesListPromises = booking.attendees.map(async (attendee) => {
-    return {
+  const attendeesListPromises = booking.attendees.map((attendee) => {
       name: attendee.name,
       email: attendee.email,
       timeZone: attendee.timeZone,
@@ -92,8 +91,7 @@ async function getBooking(bookingId: number) {
         translate: await getTranslation(attendee.locale ?? "en", "common"),
         locale: attendee.locale ?? "en",
       },
-    };
-  });
+    });
 
   const attendeesList = await Promise.all(attendeesListPromises);
 
@@ -187,8 +185,7 @@ async function handlePaymentSuccess(event: Stripe.Event) {
   const { credentials, ...user } = userWithCredentials;
 
   const t = await getTranslation(user.locale ?? "en", "common");
-  const attendeesListPromises = booking.attendees.map(async (attendee) => {
-    return {
+  const attendeesListPromises = booking.attendees.map((attendee) => {
       name: attendee.name,
       email: attendee.email,
       timeZone: attendee.timeZone,
@@ -196,8 +193,7 @@ async function handlePaymentSuccess(event: Stripe.Event) {
         translate: await getTranslation(attendee.locale ?? "en", "common"),
         locale: attendee.locale ?? "en",
       },
-    };
-  });
+    });
 
   const attendeesList = await Promise.all(attendeesListPromises);
 

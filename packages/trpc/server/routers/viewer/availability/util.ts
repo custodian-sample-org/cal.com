@@ -44,10 +44,7 @@ export const hasDefaultSchedule = async (user: Partial<User>, prisma: PrismaClie
   return !!user.defaultScheduleId || !!defaultSchedule;
 };
 
-export const convertScheduleToAvailability = (
-  schedule: Partial<ScheduleModel> & { availability: AvailabilityModel[] }
-) => {
-  return schedule.availability.reduce(
+export const convertScheduleToAvailability = (schedule: Partial<ScheduleModel> & { availability: AvailabilityModel[] }) => schedule.availability.reduce(
     (schedule: Schedule, availability) => {
       availability.days.forEach((day) => {
         schedule[day].push({
@@ -75,10 +72,8 @@ export const convertScheduleToAvailability = (
     },
     Array.from([...Array(7)]).map(() => [])
   );
-};
 
-export const setupDefaultSchedule = async (userId: number, scheduleId: number, prisma: PrismaClient) => {
-  return prisma.user.update({
+export const setupDefaultSchedule = (userId: number, scheduleId: number, prisma: PrismaClient) => prisma.user.update({
     where: {
       id: userId,
     },
@@ -86,4 +81,3 @@ export const setupDefaultSchedule = async (userId: number, scheduleId: number, p
       defaultScheduleId: scheduleId,
     },
   });
-};

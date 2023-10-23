@@ -72,15 +72,13 @@ export default class ExchangeCalendarService implements Calendar {
     return appointment
       .Save(SendInvitationsMode.SendToAllAndSaveCopy)
       .then(() => {
-        return {
           uid: appointment.Id.UniqueId,
           id: appointment.Id.UniqueId,
           password: "",
           type: "",
           url: "",
           additionalInfo: {},
-        };
-      })
+        })
       .catch((reason) => {
         this.log.error(reason);
         throw reason;
@@ -111,15 +109,13 @@ export default class ExchangeCalendarService implements Calendar {
         SendInvitationsOrCancellationsMode.SendToChangedAndSaveCopy
       )
       .then(() => {
-        return {
           uid: appointment.Id.UniqueId,
           id: appointment.Id.UniqueId,
           password: "",
           type: "",
           url: "",
           additionalInfo: {},
-        };
-      })
+        })
       .catch((reason) => {
         this.log.error(reason);
         throw reason;
@@ -142,27 +138,19 @@ export default class ExchangeCalendarService implements Calendar {
     const calendars: IntegrationCalendar[] = await this.listCalendars();
     const promises: Promise<EventBusyDate[]>[] = calendars
       .filter((lcal) => selectedCalendars.some((rcal) => lcal.externalId == rcal.externalId))
-      .map(async (calendar) => {
-        return this.getExchangeService()
+      .map((calendar) => this.getExchangeService()
           .FindAppointments(
             new FolderId(calendar.externalId),
             new CalendarView(DateTime.Parse(dateFrom), DateTime.Parse(dateTo))
           )
-          .then((results: FindItemsResults<Appointment>) => {
-            return results.Items.filter((appointment: Appointment) => {
-              return appointment.LegacyFreeBusyStatus != LegacyFreeBusyStatus.Free;
-            }).map((appointment: Appointment) => {
-              return {
+          .then((results: FindItemsResults<Appointment>) => results.Items.filter((appointment: Appointment) => appointment.LegacyFreeBusyStatus != LegacyFreeBusyStatus.Free).map((appointment: Appointment) => {
                 start: new Date(appointment.Start.ToISOString()),
                 end: new Date(appointment.End.ToISOString()),
-              };
-            });
-          })
+              }))
           .catch((reason) => {
             this.log.error(reason);
             throw reason;
-          });
-      });
+          }));
     return Promise.all(promises).then((x) => x.flat());
   }
 
@@ -179,18 +167,12 @@ export default class ExchangeCalendarService implements Calendar {
     searchFilterCollection.Add(new SearchFilter.IsEqualTo(FolderSchema.FolderClass, "IPF.Appointment"));
     return service
       .FindFolders(WellKnownFolderName.MsgFolderRoot, searchFilterCollection, view)
-      .then((res: FindFoldersResults) => {
-        return res.Folders.filter((folder: Folder) => {
-          return folder.ParentFolderId.UniqueId != deletedItemsFolder.Id.UniqueId;
-        }).map((folder: Folder) => {
-          return {
+      .then((res: FindFoldersResults) => res.Folders.filter((folder: Folder) => folder.ParentFolderId.UniqueId != deletedItemsFolder.Id.UniqueId).map((folder: Folder) => {
             externalId: folder.Id.UniqueId,
             name: folder.DisplayName ?? "",
             primary: folder.ChildFolderCount > 0,
             integration: this.integrationName,
-          };
-        });
-      })
+          }))
       .catch((reason) => {
         this.log.error(reason);
         throw reason;

@@ -123,8 +123,7 @@ function FloatingLinkEditor({ editor }: { editor: LexicalEditor }) {
     return true;
   }, [editor]);
 
-  useEffect(() => {
-    return mergeRegister(
+  useEffect(() => mergeRegister(
       editor.registerUpdateListener(({ editorState }: { editorState: EditorState }) => {
         editorState.read(() => {
           updateLinkEditor();
@@ -139,8 +138,7 @@ function FloatingLinkEditor({ editor }: { editor: LexicalEditor }) {
         },
         LowPriority
       )
-    );
-  }, [editor, updateLinkEditor]);
+    ), [editor, updateLinkEditor]);
 
   useEffect(() => {
     editor.getEditorState().read(() => {
@@ -385,8 +383,7 @@ export default function ToolbarPlugin(props: TextEditorProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    return mergeRegister(
+  useEffect(() => mergeRegister(
       editor.registerUpdateListener(({ editorState }) => {
         editorState.read(() => {
           updateToolbar();
@@ -400,8 +397,7 @@ export default function ToolbarPlugin(props: TextEditorProps) {
         },
         LowPriority
       )
-    );
-  }, [editor, updateToolbar]);
+    ), [editor, updateToolbar]);
 
   const insertLink = useCallback(() => {
     if (!isLink) {
@@ -428,8 +424,7 @@ export default function ToolbarPlugin(props: TextEditorProps) {
                 </>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="start">
-                {Object.keys(blockTypeToBlockName).map((key) => {
-                  return (
+                {Object.keys(blockTypeToBlockName).map((key) => (
                     <DropdownMenuItem key={key} className="outline-none hover:ring-0 focus:ring-0">
                       <Button
                         color="minimal"
@@ -445,8 +440,7 @@ export default function ToolbarPlugin(props: TextEditorProps) {
                         </>
                       </Button>
                     </DropdownMenuItem>
-                  );
-                })}
+                  ))}
               </DropdownMenuContent>
             </Dropdown>
           </>

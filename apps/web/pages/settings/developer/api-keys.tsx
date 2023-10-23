@@ -30,8 +30,7 @@ const ApiKeysView = () => {
     undefined
   );
 
-  const NewApiKeyButton = () => {
-    return (
+  const NewApiKeyButton = () => (
       <Button
         color="secondary"
         StartIcon={Plus}
@@ -42,7 +41,6 @@ const ApiKeysView = () => {
         {t("new_api_key")}
       </Button>
     );
-  };
 
   return (
     <>

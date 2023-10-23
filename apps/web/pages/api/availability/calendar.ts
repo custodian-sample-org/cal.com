@@ -84,9 +84,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // get all the connected integrations' calendars (from third party)
     const { connectedCalendars } = await getConnectedCalendars(calendarCredentials, user.selectedCalendars);
     const calendars = connectedCalendars.flatMap((c) => c.calendars).filter(notEmpty);
-    const selectableCalendars = calendars.map((cal) => {
-      return { selected: selectedCalendarIds.findIndex((s) => s.externalId === cal.externalId) > -1, ...cal };
-    });
+    const selectableCalendars = calendars.map((cal) => { selected: selectedCalendarIds.findIndex((s) => s.externalId === cal.externalId) > -1, ...cal });
     res.status(200).json(selectableCalendars);
   }
 }

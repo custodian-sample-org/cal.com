@@ -153,8 +153,7 @@ export function availabilityAsString(
       .join(", ");
   };
 
-  const timeSpan = (availability: Availability) => {
-    return (
+  const timeSpan = (availability: Availability) => (
       new Intl.DateTimeFormat(locale, { hour: "numeric", minute: "numeric", hour12 }).format(
         new Date(availability.startTime.toISOString().slice(0, -1))
       ) +
@@ -163,7 +162,6 @@ export function availabilityAsString(
         new Date(availability.endTime.toISOString().slice(0, -1))
       )
     );
-  };
 
   return weekSpan(availability) + ", " + timeSpan(availability);
 }

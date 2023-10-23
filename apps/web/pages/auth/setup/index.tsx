@@ -51,8 +51,7 @@ export function Setup(props: inferSSRProps<typeof getServerSideProps>) {
     {
       title: t("choose_a_license"),
       description: t("choose_license_description"),
-      content: (setIsLoading) => {
-        return (
+      content: (setIsLoading) => (
           <ChooseLicense
             id="wizard-step-2"
             name="wizard-step-2"
@@ -63,8 +62,7 @@ export function Setup(props: inferSSRProps<typeof getServerSideProps>) {
               setStep(3);
             }}
           />
-        );
-      },
+        ),
     },
   ];
 

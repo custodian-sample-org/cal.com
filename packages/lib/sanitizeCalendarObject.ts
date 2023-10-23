@@ -15,8 +15,7 @@ import type { DAVObject } from "tsdav";
  * and might still cause issues with specific inputs.
  */
 
-export const sanitizeCalendarObject = (obj: DAVObject) => {
-  return obj.data
+export const sanitizeCalendarObject = (obj: DAVObject) => obj.data
     .replaceAll("\r\n", "\n")
     .replaceAll("\r", "\n")
     .replaceAll("\n ", "")
@@ -25,6 +24,5 @@ export const sanitizeCalendarObject = (obj: DAVObject) => {
     .replaceAll(/(:[ \t]*\r\n[ \t]*:)/gm, ":")
     .replaceAll(/(;[ \t]*\r\n[ \t]*;)/gm, ";")
     .replaceAll(/(=[ \t]*\r\n[ \t]*=)/gm, "=");
-};
 
 export default sanitizeCalendarObject;

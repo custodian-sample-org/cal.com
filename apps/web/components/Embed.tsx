@@ -124,9 +124,7 @@ const getInstructionString = ({
   apiName: string;
   instructionName: string;
   instructionArg: Record<string, unknown>;
-}) => {
-  return `${apiName}("${instructionName}", ${JSON.stringify(instructionArg)});`;
-};
+}) => `${apiName}("${instructionName}", ${JSON.stringify(instructionArg)});`;
 
 const getEmbedUIInstructionString = ({
   apiName,
@@ -191,8 +189,7 @@ function MyComponent() {
     }: {
       floatingButtonArg: string;
       uiInstructionCode: string;
-    }) => {
-      return code`
+    }) => code`
 import Cal, { getCalApi } from "@calcom/embed-react";
 import { useEffect } from "react";
 function MyComponent() {
@@ -203,10 +200,8 @@ function MyComponent() {
       ${uiInstructionCode}
     })();
   }, [])
-};`;
-    },
-    "element-click": ({ calLink, uiInstructionCode }: { calLink: string; uiInstructionCode: string }) => {
-      return code`
+};`,
+    "element-click": ({ calLink, uiInstructionCode }: { calLink: string; uiInstructionCode: string }) => code`
 import Cal, { getCalApi } from "@calcom/embed-react";
 import { useEffect } from "react";
 function MyComponent() {
@@ -217,18 +212,15 @@ function MyComponent() {
     })();
   }, [])
   return <button data-cal-link="${calLink}" />;
-};`;
-    },
+};`,
   },
   HTML: {
-    inline: ({ calLink, uiInstructionCode }: { calLink: string; uiInstructionCode: string }) => {
-      return code`Cal("inline", {
+    inline: ({ calLink, uiInstructionCode }: { calLink: string; uiInstructionCode: string }) => code`Cal("inline", {
   elementOrSelector:"#my-cal-inline",
   calLink: "${calLink}"
 });
 
-${uiInstructionCode}`;
-    },
+${uiInstructionCode}`,
 
     "floating-popup": ({
       floatingButtonArg,
@@ -236,14 +228,10 @@ ${uiInstructionCode}`;
     }: {
       floatingButtonArg: string;
       uiInstructionCode: string;
-    }) => {
-      return code`Cal("floatingButton", ${floatingButtonArg});
-${uiInstructionCode}`;
-    },
-    "element-click": ({ calLink, uiInstructionCode }: { calLink: string; uiInstructionCode: string }) => {
-      return code`// Important: Make sure to add \`data-cal-link="${calLink}"\` attribute to the element you want to open Cal on click
-${uiInstructionCode}`;
-    },
+    }) => code`Cal("floatingButton", ${floatingButtonArg});
+${uiInstructionCode}`,
+    "element-click": ({ calLink, uiInstructionCode }: { calLink: string; uiInstructionCode: string }) => code`// Important: Make sure to add \`data-cal-link="${calLink}"\` attribute to the element you want to open Cal on click
+${uiInstructionCode}`,
   },
 };
 
@@ -316,8 +304,7 @@ const getEmbedTypeSpecificString = ({
 };
 
 const embeds = (t: TFunction) =>
-  (() => {
-    return [
+  (() => [
       {
         title: t("inline_embed"),
         subtitle: t("load_inline_content"),
@@ -495,8 +482,7 @@ const embeds = (t: TFunction) =>
           </svg>
         ),
       },
-    ];
-  })();
+    ])();
 
 const tabs = [
   {
@@ -507,8 +493,8 @@ const tabs = [
     Component: forwardRef<
       HTMLTextAreaElement | HTMLIFrameElement | null,
       { embedType: EmbedType; calLink: string; previewState: PreviewState }
-    >(function EmbedHtml({ embedType, calLink, previewState }, ref) {
-      const { t } = useLocale();
+    >(({ embedType, calLink, previewState }, ref) => {
+  const { t } = useLocale();
       if (ref instanceof Function || !ref) {
         return null;
       }
@@ -546,7 +532,7 @@ ${getEmbedTypeSpecificString({ embedFramework: "HTML", embedType, calLink, previ
           <p className="text-subtle hidden text-sm">{t("need_help_embedding")}</p>
         </>
       );
-    }),
+}),
   },
   {
     name: "React",
@@ -556,8 +542,8 @@ ${getEmbedTypeSpecificString({ embedFramework: "HTML", embedType, calLink, previ
     Component: forwardRef<
       HTMLTextAreaElement | HTMLIFrameElement | null,
       { embedType: EmbedType; calLink: string; previewState: PreviewState }
-    >(function EmbedReact({ embedType, calLink, previewState }, ref) {
-      const { t } = useLocale();
+    >(({ embedType, calLink, previewState }, ref) => {
+  const { t } = useLocale();
       if (ref instanceof Function || !ref) {
         return null;
       }
@@ -586,7 +572,7 @@ ${getEmbedTypeSpecificString({ embedFramework: "react", embedType, calLink, prev
           />
         </>
       );
-    }),
+}),
   },
   {
     name: "Preview",
@@ -596,8 +582,8 @@ ${getEmbedTypeSpecificString({ embedFramework: "react", embedType, calLink, prev
     Component: forwardRef<
       HTMLIFrameElement | HTMLTextAreaElement | null,
       { calLink: string; embedType: EmbedType; previewState: PreviewState }
-    >(function Preview({ calLink, embedType }, ref) {
-      if (ref instanceof Function || !ref) {
+    >(({ calLink, embedType }, ref) => {
+  if (ref instanceof Function || !ref) {
         return null;
       }
       if (ref.current && !(ref.current instanceof HTMLIFrameElement)) {
@@ -613,7 +599,7 @@ ${getEmbedTypeSpecificString({ embedFramework: "react", embedType, calLink, prev
           src={`${WEBAPP_URL}/embed/preview.html?embedType=${embedType}&calLink=${calLink}`}
         />
       );
-    }),
+}),
   },
 ];
 
@@ -624,14 +610,12 @@ Cal("init", {origin:"${WEBAPP_URL}"});
 `;
 }
 
-const ThemeSelectControl = ({ children, ...props }: ControlProps<{ value: Theme; label: string }, false>) => {
-  return (
+const ThemeSelectControl = ({ children, ...props }: ControlProps<{ value: Theme; label: string }, false>) => (
     <components.Control {...props}>
       <Sun className="text-subtle mr-2 h-4 w-4" />
       {children}
     </components.Control>
   );
-};
 
 const ChooseEmbedTypesDialogContent = () => {
   const { t } = useLocale();
@@ -739,14 +723,12 @@ const EmbedTypeCodeAndPreviewDialogContent = ({
 
   const addToPalette = (update: (typeof previewState)["palette"]) => {
     setPreviewState((previewState) => {
-      return {
         ...previewState,
         palette: {
           ...previewState.palette,
           ...update,
         },
-      };
-    });
+      });
   };
 
   const previewInstruction = (instruction: { name: string; arg: unknown }) => {
@@ -893,14 +875,12 @@ const EmbedTypeCodeAndPreviewDialogContent = ({
                           const height = e.target.value || "100%";
 
                           setPreviewState((previewState) => {
-                            return {
                               ...previewState,
                               inline: {
                                 ...previewState.inline,
                                 height,
                               },
-                            };
-                          });
+                            });
                         }}
                         addOnLeading={<>H</>}
                       />
@@ -917,14 +897,12 @@ const EmbedTypeCodeAndPreviewDialogContent = ({
                       labelProps={{ className: "hidden" }}
                       onChange={(e) => {
                         setPreviewState((previewState) => {
-                          return {
                             ...previewState,
                             floatingPopup: {
                               ...previewState.floatingPopup,
                               buttonText: e.target.value,
                             },
-                          };
-                        });
+                          });
                       }}
                       defaultValue={t("book_my_cal")}
                       required
@@ -941,14 +919,12 @@ const EmbedTypeCodeAndPreviewDialogContent = ({
                       defaultChecked={true}
                       onCheckedChange={(checked) => {
                         setPreviewState((previewState) => {
-                          return {
                             ...previewState,
                             floatingPopup: {
                               ...previewState.floatingPopup,
                               hideButtonIcon: !checked,
                             },
-                          };
-                        });
+                          });
                       }}
                     />
                     <div className="text-default my-2 text-sm">Display calendar icon</div>
@@ -962,14 +938,12 @@ const EmbedTypeCodeAndPreviewDialogContent = ({
                     <Select
                       onChange={(position) => {
                         setPreviewState((previewState) => {
-                          return {
                             ...previewState,
                             floatingPopup: {
                               ...previewState.floatingPopup,
                               buttonPosition: position?.value,
                             },
-                          };
-                        });
+                          });
                       }}
                       defaultValue={FloatingPopupPositionOptions[0]}
                       options={FloatingPopupPositionOptions}
@@ -986,14 +960,12 @@ const EmbedTypeCodeAndPreviewDialogContent = ({
                           defaultValue="#000000"
                           onChange={(color) => {
                             setPreviewState((previewState) => {
-                              return {
                                 ...previewState,
                                 floatingPopup: {
                                   ...previewState.floatingPopup,
                                   buttonColor: color,
                                 },
-                              };
-                            });
+                              });
                           }}
                         />
                       </div>
@@ -1008,14 +980,12 @@ const EmbedTypeCodeAndPreviewDialogContent = ({
                           defaultValue="#000000"
                           onChange={(color) => {
                             setPreviewState((previewState) => {
-                              return {
                                 ...previewState,
                                 floatingPopup: {
                                   ...previewState.floatingPopup,
                                   buttonTextColor: color,
                                 },
-                              };
-                            });
+                              });
                           }}
                         />
                       </div>
@@ -1044,11 +1014,9 @@ const EmbedTypeCodeAndPreviewDialogContent = ({
                             return;
                           }
                           setPreviewState((previewState) => {
-                            return {
                               ...previewState,
                               theme: option.value,
-                            };
-                          });
+                            });
                         }}
                         options={ThemeOptions}
                       />
@@ -1058,11 +1026,9 @@ const EmbedTypeCodeAndPreviewDialogContent = ({
                         checked={previewState.hideEventTypeDetails}
                         onCheckedChange={(checked) => {
                           setPreviewState((previewState) => {
-                            return {
                               ...previewState,
                               hideEventTypeDetails: checked,
-                            };
-                          });
+                            });
                         }}
                       />
                       <div className="text-default text-sm">{t("hide_eventtype_details")}</div>
@@ -1102,11 +1068,9 @@ const EmbedTypeCodeAndPreviewDialogContent = ({
                               return;
                             }
                             setPreviewState((previewState) => {
-                              return {
                                 ...previewState,
                                 layout: option.value,
-                              };
-                            });
+                              });
                           }}
                           options={layoutOptions}
                         />
@@ -1120,8 +1084,7 @@ const EmbedTypeCodeAndPreviewDialogContent = ({
         </div>
         <div className="flex w-2/3 flex-col p-8">
           <HorizontalTabs data-testid="embed-tabs" tabs={parsedTabs} linkProps={{ shallow: true }} />
-          {tabs.map((tab) => {
-            return (
+          {tabs.map((tab) => (
               <div
                 key={tab.href}
                 className={classNames(
@@ -1163,8 +1126,7 @@ const EmbedTypeCodeAndPreviewDialogContent = ({
                   <DialogClose />
                 </div>
               </div>
-            );
-          })}
+            ))}
         </div>
       </div>
     </DialogContent>

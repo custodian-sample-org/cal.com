@@ -28,7 +28,7 @@ const getVariantStyles = (variant: string) => {
   return variants[variant];
 };
 
-export const BooleanToggleGroup = function BooleanToggleGroup({
+export const BooleanToggleGroup = ({
   defaultValue = true,
   value,
   disabled = false,
@@ -42,9 +42,7 @@ export const BooleanToggleGroup = function BooleanToggleGroup({
   onValueChange?: (value?: boolean) => void;
   disabled?: boolean;
   variant?: "default" | "small";
-}) {
-  // Maintain a state because it is not necessary that onValueChange the parent component would re-render. Think react-hook-form
-  // Also maintain a string as boolean isn't accepted as ToggleGroupPrimitive value
+}) => {
   const [yesNoValue, setYesNoValue] = useState<"yes" | "no" | undefined>(yesNo(value));
 
   if (!yesNoValue) {
@@ -91,16 +89,14 @@ export const BooleanToggleGroup = function BooleanToggleGroup({
   );
 };
 
-export const BooleanToggleGroupField = function BooleanToggleGroupField(
-  props: Parameters<typeof BooleanToggleGroup>[0] & {
+export const BooleanToggleGroupField = (props: Parameters<typeof BooleanToggleGroup>[0] & {
     label?: string;
     containerClassName?: string;
     name?: string;
     labelProps?: React.ComponentProps<typeof Label>;
     className?: string;
     error?: string;
-  }
-) {
+  }) => {
   const { t } = useLocale();
   const { label = t(props.name || ""), containerClassName, labelProps, className, ...passThrough } = props;
   const id = useId();

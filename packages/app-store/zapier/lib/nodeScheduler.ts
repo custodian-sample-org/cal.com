@@ -12,17 +12,15 @@ export async function scheduleTrigger(
     const job = schedule.scheduleJob(
       `${subscriber.appId}_${subscriber.id}`,
       booking.endTime,
-      async function () {
-        const body = JSON.stringify(booking);
+      () => {
+  const body = JSON.stringify(booking);
         await fetch(subscriberUrl, {
           method: "POST",
           body,
         });
 
         //remove scheduled job from bookings once triggered
-        const updatedScheduledJobs = booking.scheduledJobs.filter((scheduledJob) => {
-          return scheduledJob !== `${subscriber.appId}_${subscriber.id}`;
-        });
+        const updatedScheduledJobs = booking.scheduledJobs.filter((scheduledJob) => scheduledJob !== `${subscriber.appId}_${subscriber.id}`);
 
         await prisma.booking.update({
           where: {
@@ -32,7 +30,7 @@ export async function scheduleTrigger(
             scheduledJobs: updatedScheduledJobs,
           },
         });
-      }
+}
     );
 
     //add scheduled job name to booking

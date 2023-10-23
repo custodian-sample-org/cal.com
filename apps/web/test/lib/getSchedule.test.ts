@@ -52,9 +52,7 @@ expect.extend({
     if (
       !schedule.slots[`${dateString}`]
         .map((slot) => slot.time)
-        .every((actualSlotTime, index) => {
-          return `${dateString}T${expectedSlots[index]}` === actualSlotTime;
-        })
+        .every((actualSlotTime, index) => `${dateString}T${expectedSlots[index]}` === actualSlotTime)
     ) {
       return {
         pass: false,
@@ -1211,9 +1209,7 @@ function addEventTypes(eventTypes: InputEventType[], usersStore: InputUser[]) {
     }
     foundEvents[eventType.id] = true;
     const users =
-      eventType.users?.map((userWithJustId) => {
-        return usersStore.find((user) => user.id === userWithJustId.id);
-      }) || [];
+      eventType.users?.map((userWithJustId) => usersStore.find((user) => user.id === userWithJustId.id)) || [];
     return {
       ...baseEventType,
       ...eventType,
@@ -1224,14 +1220,12 @@ function addEventTypes(eventTypes: InputEventType[], usersStore: InputUser[]) {
   logger.silly("TestData: Creating EventType", eventTypes);
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  prismaMock.eventType.findUnique.mockImplementation(({ where }) => {
-    return new Promise((resolve) => {
+  prismaMock.eventType.findUnique.mockImplementation(({ where }) => new Promise((resolve) => {
       const eventType = eventTypesWithUsers.find((e) => e.id === where.id) as unknown as PrismaEventType & {
         users: PrismaUser[];
       };
       resolve(eventType);
-    });
-  });
+    }));
 }
 
 async function addBookings(bookings: InputBooking[], eventTypes: InputEventType[]) {
@@ -1280,22 +1274,18 @@ async function addBookings(bookings: InputBooking[], eventTypes: InputEventType[
 function addUsers(users: InputUser[]) {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  prismaMock.user.findUniqueOrThrow.mockImplementation((findUniqueArgs) => {
-    return new Promise((resolve) => {
+  prismaMock.user.findUniqueOrThrow.mockImplementation((findUniqueArgs) => new Promise((resolve) => {
       resolve({
         email: `IntegrationTestUser${findUniqueArgs?.where.id}@example.com`,
       } as unknown as PrismaUser);
-    });
-  });
+    }));
 
   prismaMock.user.findMany.mockResolvedValue(
     users.map((user) => {
-      return {
         ...user,
         username: `IntegrationTestUser${user.id}`,
         email: `IntegrationTestUser${user.id}@example.com`,
-      };
-    }) as unknown as PrismaUser[]
+      }) as unknown as PrismaUser[]
   );
 }
 type ScenarioData = {
@@ -1324,15 +1314,13 @@ function createBookingScenario(data: ScenarioData) {
     // FIXME: How do we know which app to return?
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    prismaMock.app.findUnique.mockImplementation(({ where: { slug: whereSlug } }) => {
-      return new Promise((resolve) => {
+    prismaMock.app.findUnique.mockImplementation(({ where: { slug: whereSlug } }) => new Promise((resolve) => {
         if (!data.apps) {
           resolve(null);
           return;
         }
         resolve((data.apps.find(({ slug }) => slug == whereSlug) as PrismaApp) || null);
-      });
-    });
+      }));
   }
   data.bookings = data.bookings || [];
   addBookings(data.bookings, data.eventTypes);

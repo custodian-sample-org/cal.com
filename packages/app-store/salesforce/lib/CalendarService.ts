@@ -103,13 +103,11 @@ export default class SalesforceCalendarService implements Calendar {
     return search;
   };
 
-  private getSalesforceEventBody = (event: CalendarEvent): string => {
-    return `${event.organizer.language.translate("invitee_timezone")}: ${
+  private getSalesforceEventBody = (event: CalendarEvent) => `${event.organizer.language.translate("invitee_timezone")}: ${
       event.attendees[0].timeZone
     } \r\n\r\n ${event.organizer.language.translate("share_additional_notes")}\r\n${
       event.additionalNotes || "-"
     }`;
-  };
 
   private salesforceCreateEventApiCall = async (
     event: CalendarEvent,

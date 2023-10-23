@@ -13,8 +13,6 @@ export const AppSetupMap = {
   sendgrid: dynamic(() => import("../../sendgrid/pages/setup")),
 };
 
-export const AppSetupPage = (props: { slug: string }) => {
-  return <DynamicComponent<typeof AppSetupMap> componentMap={AppSetupMap} {...props} />;
-};
+export const AppSetupPage = (props: { slug: string }) => <DynamicComponent<typeof AppSetupMap> componentMap={AppSetupMap} {...props} />;
 
 export default AppSetupPage;

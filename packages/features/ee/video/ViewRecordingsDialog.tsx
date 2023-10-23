@@ -113,8 +113,7 @@ const ViewRecordingsList = ({ roomName, hasTeamPlan }: { roomName: string; hasTe
     <>
       {recordings && "data" in recordings && recordings?.data?.length > 0 ? (
         <div className="flex flex-col gap-3">
-          {recordings.data.map((recording: RecordingItemSchema, index: number) => {
-            return (
+          {recordings.data.map((recording: RecordingItemSchema, index: number) => (
               <div
                 className="border-subtle flex w-full items-center justify-between rounded-md border px-4 py-2"
                 key={recording.id}>
@@ -141,8 +140,7 @@ const ViewRecordingsList = ({ roomName, hasTeamPlan }: { roomName: string; hasTe
                   </Button>
                 )}
               </div>
-            );
-          })}
+            ))}
         </div>
       ) : (
         (!recordings || (recordings && "total_count" in recordings && recordings?.total_count === 0)) && (

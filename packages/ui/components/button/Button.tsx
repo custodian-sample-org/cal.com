@@ -152,10 +152,8 @@ const buttonClasses = cva(
   }
 );
 
-export const Button = forwardRef<HTMLAnchorElement | HTMLButtonElement, ButtonProps>(function Button(
-  props: ButtonProps,
-  forwardedRef
-) {
+export const Button = forwardRef<HTMLAnchorElement | HTMLButtonElement, ButtonProps>((props: ButtonProps,
+  forwardedRef) => {
   const {
     loading = false,
     color = "primary",

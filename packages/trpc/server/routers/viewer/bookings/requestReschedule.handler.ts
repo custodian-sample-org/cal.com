@@ -141,20 +141,14 @@ export const requestRescheduleHandler = async ({ ctx, input }: RequestReschedule
     const [mainAttendee] = bookingToReschedule.attendees;
     // @NOTE: Should we assume attendees language?
     const tAttendees = await getTranslation(mainAttendee.locale ?? "en", "common");
-    const usersToPeopleType = (
-      users: PersonAttendeeCommonFields[],
-      selectedLanguage: TFunction
-    ): Person[] => {
-      return users?.map((user) => {
-        return {
+    const usersToPeopleType = (users: PersonAttendeeCommonFields[],
+      selectedLanguage: TFunction) => users?.map((user) => {
           email: user.email || "",
           name: user.name || "",
           username: user?.username || "",
           language: { translate: selectedLanguage, locale: user.locale || "en" },
           timeZone: user?.timeZone,
-        };
-      });
-    };
+        });
 
     const userTranslation = await getTranslation(user.locale ?? "en", "common");
     const [userAsPeopleType] = usersToPeopleType([user], userTranslation);

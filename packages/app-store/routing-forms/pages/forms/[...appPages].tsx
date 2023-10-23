@@ -290,20 +290,16 @@ export default function RoutingForms({
   );
 }
 
-RoutingForms.getLayout = (page: React.ReactElement) => {
-  return (
+RoutingForms.getLayout = (page: React.ReactElement) => (
     <Shell withoutMain={true} hideHeadingOnMobile>
       {page}
     </Shell>
   );
-};
 
-export const getServerSideProps = async function getServerSideProps(
-  context: AppGetServerSidePropsContext,
+export const getServerSideProps = (context: AppGetServerSidePropsContext,
   prisma: AppPrisma,
   user: AppUser,
-  ssrInit: AppSsrInit
-) {
+  ssrInit: AppSsrInit) => {
   if (!user) {
     return {
       redirect: {

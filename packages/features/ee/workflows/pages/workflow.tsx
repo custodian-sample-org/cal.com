@@ -235,9 +235,7 @@ function WorkflowPage() {
 
         if (!isEmpty && isVerified) {
           if (values.activeOn) {
-            activeOnEventTypeIds = values.activeOn.map((option) => {
-              return parseInt(option.value, 10);
-            });
+            activeOnEventTypeIds = values.activeOn.map((option) => parseInt(option.value, 10));
           }
           updateMutation.mutate({
             id: parseInt(router.query.workflow as string, 10),

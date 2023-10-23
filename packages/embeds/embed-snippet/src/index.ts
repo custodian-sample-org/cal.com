@@ -13,10 +13,10 @@ const WEBAPP_URL =
 const EMBED_LIB_URL = import.meta.env.EMBED_PUBLIC_EMBED_LIB_URL || `${WEBAPP_URL}/embed/embed.js`;
 
 export default function EmbedSnippet(url = EMBED_LIB_URL) {
-  (function (C, A, L) {
-    let p = function (a: GlobalCalWithoutNs, ar: IArguments) {
-      a.q.push(ar);
-    };
+  ((C, A, L) => {
+  let p = (a: GlobalCalWithoutNs, ar: IArguments) => {
+  a.q.push(ar);
+};
     let d = C.document;
     C.Cal =
       C.Cal ||
@@ -47,7 +47,7 @@ export default function EmbedSnippet(url = EMBED_LIB_URL) {
         }
         p(cal as GlobalCal, ar);
       };
-  })(
+})(
     window as Omit<Window, "Cal"> & {
       // Make 'ns' and 'q' optional as they are set through the snippet above
       Cal: Optional<GlobalCal, "ns" | "q">;

@@ -40,8 +40,7 @@ import SlugReplacementEmail from "./templates/slug-replacement-email";
 import type { TeamInvite } from "./templates/team-invite-email";
 import TeamInviteEmail from "./templates/team-invite-email";
 
-const sendEmail = (prepare: () => BaseEmail) => {
-  return new Promise((resolve, reject) => {
+const sendEmail = (prepare: () => BaseEmail) => new Promise((resolve, reject) => {
     try {
       const email = prepare();
       resolve(email.sendEmail());
@@ -49,7 +48,6 @@ const sendEmail = (prepare: () => BaseEmail) => {
       reject(console.error(`${prepare.constructor.name}.sendEmail failed`, e));
     }
   });
-};
 
 export const sendScheduledEmails = async (
   calEvent: CalendarEvent,
@@ -71,8 +69,7 @@ export const sendScheduledEmails = async (
 
   if (!attendeeEmailDisabled) {
     emailsToSend.push(
-      ...calEvent.attendees.map((attendee) => {
-        return sendEmail(
+      ...calEvent.attendees.map((attendee) => sendEmail(
           () =>
             new AttendeeScheduledEmail(
               {
@@ -83,8 +80,7 @@ export const sendScheduledEmails = async (
               },
               attendee
             )
-        );
-      })
+        ))
     );
   }
 
@@ -103,9 +99,7 @@ export const sendRescheduledEmails = async (calEvent: CalendarEvent) => {
   }
 
   emailsToSend.push(
-    ...calEvent.attendees.map((attendee) => {
-      return sendEmail(() => new AttendeeRescheduledEmail(calEvent, attendee));
-    })
+    ...calEvent.attendees.map((attendee) => sendEmail(() => new AttendeeRescheduledEmail(calEvent, attendee)))
   );
 
   await Promise.all(emailsToSend);
@@ -172,9 +166,7 @@ export const sendDeclinedEmails = async (calEvent: CalendarEvent) => {
   const emailsToSend: Promise<unknown>[] = [];
 
   emailsToSend.push(
-    ...calEvent.attendees.map((attendee) => {
-      return sendEmail(() => new AttendeeDeclinedEmail(calEvent, attendee));
-    })
+    ...calEvent.attendees.map((attendee) => sendEmail(() => new AttendeeDeclinedEmail(calEvent, attendee)))
   );
 
   await Promise.all(emailsToSend);
@@ -195,8 +187,7 @@ export const sendCancelledEmails = async (
   }
 
   emailsToSend.push(
-    ...calEvent.attendees.map((attendee) => {
-      return sendEmail(
+    ...calEvent.attendees.map((attendee) => sendEmail(
         () =>
           new AttendeeCancelledEmail(
             {
@@ -213,8 +204,7 @@ export const sendCancelledEmails = async (
             },
             attendee
           )
-      );
-    })
+      ))
   );
 
   await Promise.all(emailsToSend);
@@ -236,9 +226,7 @@ export const sendAwaitingPaymentEmail = async (calEvent: CalendarEvent) => {
   const emailsToSend: Promise<unknown>[] = [];
 
   emailsToSend.push(
-    ...calEvent.attendees.map((attendee) => {
-      return sendEmail(() => new AttendeeAwaitingPaymentEmail(calEvent, attendee));
-    })
+    ...calEvent.attendees.map((attendee) => sendEmail(() => new AttendeeAwaitingPaymentEmail(calEvent, attendee)))
   );
   await Promise.all(emailsToSend);
 };
@@ -293,9 +281,7 @@ export const sendLocationChangeEmails = async (calEvent: CalendarEvent) => {
   }
 
   emailsToSend.push(
-    ...calEvent.attendees.map((attendee) => {
-      return sendEmail(() => new AttendeeLocationChangeEmail(calEvent, attendee));
-    })
+    ...calEvent.attendees.map((attendee) => sendEmail(() => new AttendeeLocationChangeEmail(calEvent, attendee)))
   );
 
   await Promise.all(emailsToSend);

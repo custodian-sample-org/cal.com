@@ -31,20 +31,16 @@ export const EventAppsTab = ({ eventType }: { eventType: EventType }) => {
     });
   };
 
-  const getAppDataGetter = (appId: EventTypeAppsList): GetAppData => {
-    return function (key) {
-      const appData = allAppsData[appId as keyof typeof allAppsData] || {};
+  const getAppDataGetter = (appId: EventTypeAppsList) => (key) => {
+  const appData = allAppsData[appId as keyof typeof allAppsData] || {};
       if (key) {
         return appData[key as keyof typeof appData];
       }
       return appData;
-    };
-  };
+};
 
-  const getAppDataSetter = (appId: EventTypeAppsList): SetAppData => {
-    return function (key, value) {
-      // Always get latest data available in Form because consequent calls to setData would update the Form but not allAppsData(it would update during next render)
-      const allAppsDataFromForm = methods.getValues("metadata")?.apps || {};
+  const getAppDataSetter = (appId: EventTypeAppsList) => (key, value) => {
+  const allAppsDataFromForm = methods.getValues("metadata")?.apps || {};
       const appData = allAppsDataFromForm[appId];
       setAllAppsData({
         ...allAppsDataFromForm,
@@ -53,8 +49,7 @@ export const EventAppsTab = ({ eventType }: { eventType: EventType }) => {
           [key]: value,
         },
       });
-    };
-  };
+};
 
   const { shouldLockDisableProps, isManagedEventType, isChildrenManagedEventType } = useLockedFieldsManager(
     eventType,

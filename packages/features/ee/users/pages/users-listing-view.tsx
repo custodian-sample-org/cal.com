@@ -5,8 +5,7 @@ import { getLayout } from "../../../settings/layouts/SettingsLayout";
 import LicenseRequired from "../../common/components/LicenseRequired";
 import { UsersTable } from "../components/UsersTable";
 
-const DeploymentUsersListPage = () => {
-  return (
+const DeploymentUsersListPage = () => (
     <LicenseRequired>
       <Meta
         title="Users"
@@ -24,7 +23,6 @@ const DeploymentUsersListPage = () => {
       </NoSSR>
     </LicenseRequired>
   );
-};
 
 DeploymentUsersListPage.getLayout = getLayout;
 

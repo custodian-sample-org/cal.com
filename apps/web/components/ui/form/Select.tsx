@@ -11,18 +11,16 @@ export type SelectProps<
   Group extends GroupBase<Option> = GroupBase<Option>
 > = Props<Option, IsMulti, Group>;
 
-export const InputComponent = <Option, IsMulti extends boolean, Group extends GroupBase<Option>>({
+export const InputComponent = ({
   inputClassName,
   ...props
-}: InputProps<Option, IsMulti, Group>) => {
-  return (
+}: InputProps<Option, IsMulti, Group>) => (
     <components.Input
       // disables our default form focus hightlight on the react-select input element
       inputClassName={classNames("focus:ring-0 focus:ring-offset-0", inputClassName)}
       {...props}
     />
   );
-};
 
 function Select<
   Option,

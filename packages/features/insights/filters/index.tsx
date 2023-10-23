@@ -32,8 +32,7 @@ const ClearFilters = () => {
   );
 };
 
-export const Filters = () => {
-  return (
+export const Filters = () => (
     <div className="mt-2 flex flex-col flex-wrap gap-2 md:flex-row lg:flex-nowrap">
       <TeamAndSelfList />
 
@@ -72,4 +71,3 @@ export const Filters = () => {
       </ButtonGroup> */}
     </div>
   );
-};

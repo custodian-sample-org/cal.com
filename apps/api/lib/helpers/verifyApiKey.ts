@@ -6,7 +6,7 @@ import checkLicense from "@calcom/features/ee/common/server/checkLicense";
 import { isAdminGuard } from "~/lib/utils/isAdmin";
 
 // Used to check if the apiKey is not expired, could be extracted if reused. but not for now.
-export const dateNotInPast = function (date: Date) {
+export const dateNotInPast = (date: Date) => {
   const now = new Date();
   if (now.setHours(0, 0, 0, 0) > date.setHours(0, 0, 0, 0)) {
     return true;

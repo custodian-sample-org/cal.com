@@ -31,9 +31,7 @@ function getResponsesFromOldBooking(
     // It is possible to have no attendees in a booking when the booking is cancelled.
     name: rawBooking.attendees[0]?.name || "Nameless",
     email: rawBooking.attendees[0]?.email || "",
-    guests: rawBooking.attendees.slice(1).map((attendee) => {
-      return attendee.email;
-    }),
+    guests: rawBooking.attendees.slice(1).map((attendee) => attendee.email),
     notes: rawBooking.description || "",
     location: {
       value: rawBooking.location || "",
@@ -89,19 +87,9 @@ async function getBooking(prisma: PrismaClient, uid: string) {
 
 export type GetBookingType = Prisma.PromiseReturnType<typeof getBooking>;
 
-export const getBookingWithResponses = <
-  T extends Prisma.BookingGetPayload<{
-    select: BookingSelect & {
-      responses: true;
-    };
-  }>
->(
-  booking: T
-) => {
-  return {
+export const getBookingWithResponses = (booking: T) => {
     ...booking,
     responses: bookingResponsesDbSchema.parse(booking.responses || getResponsesFromOldBooking(booking)),
   } as Omit<T, "responses"> & { responses: z.infer<typeof bookingResponsesDbSchema> };
-};
 
 export default getBooking;

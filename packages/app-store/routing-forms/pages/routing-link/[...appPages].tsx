@@ -230,10 +230,8 @@ export default function RoutingLink(props: inferSSRProps<typeof getServerSidePro
 
 RoutingLink.isBookingPage = true;
 
-export const getServerSideProps = async function getServerSideProps(
-  context: AppGetServerSidePropsContext,
-  prisma: AppPrisma
-) {
+export const getServerSideProps = (context: AppGetServerSidePropsContext,
+  prisma: AppPrisma) => {
   const { params } = context;
   if (!params) {
     return {

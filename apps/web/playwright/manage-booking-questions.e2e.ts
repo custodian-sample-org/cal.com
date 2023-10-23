@@ -151,8 +151,7 @@ async function runTestStepsCommonForTeamAndUserEventType(
   });
 
   const previewTabPage =
-    await test.step("Do a booking and notice that we can book without giving a value for rescheduleReason", async () => {
-      return await doOnFreshPreview(
+    await test.step("Do a booking and notice that we can book without giving a value for rescheduleReason", () => await doOnFreshPreview(
         page,
         context,
         bookerVariant,
@@ -209,8 +208,7 @@ async function runTestStepsCommonForTeamAndUserEventType(
           });
         },
         true
-      );
-    });
+      ));
 
   await test.step("Do a reschedule and notice that we can't book without giving a value for rescheduleReason", async () => {
     const page = previewTabPage;
@@ -242,8 +240,7 @@ async function expectSystemFieldsToBeThere(page: Page) {
 // Verify webhook is sent with the correct data, DB is correct (including metadata)
 
 //TODO: Verify that prefill works
-async function bookTimeSlot({ page, name, email }: { page: Page; name: string; email: string }) {
-  // --- fill form
+({ page, name, email }: { page: Page; name: string; email: string }) => {
   await page.fill('[name="name"]', name);
   await page.fill('[name="email"]', email);
   await page.press('[name="email"]', "Enter");
@@ -266,7 +263,7 @@ async function selectOption({
   await locatorForSelect.locator(`text="${optionText}"`).click();
 }
 
-async function addQuestionAndSave({
+({
   page,
   question,
 }: {
@@ -278,7 +275,7 @@ async function addQuestionAndSave({
     placeholder?: string;
     required?: boolean;
   };
-}) {
+}) => {
   await page.click('[data-testid="add-field"]');
 
   if (question.type !== undefined) {
@@ -321,13 +318,11 @@ async function expectErrorToBeThereFor({ page, name }: { page: Page; name: strin
 /**
  * Opens a fresh preview window and runs the callback on it giving it the preview tab's `page`
  */
-async function doOnFreshPreview(
-  page: Page,
+(page: Page,
   context: PlaywrightTestArgs["context"],
   bookerVariant: BookerVariants,
   callback: (page: Page) => Promise<void>,
-  persistTab = false
-) {
+  persistTab = false) => {
   const previewTabPage = await openBookingFormInPreviewTab(context, page, bookerVariant);
   await callback(previewTabPage);
   if (!persistTab) {
@@ -341,7 +336,7 @@ async function toggleQuestionAndSave({ name, page }: { name: string; page: Page 
   await saveEventType(page);
 }
 
-async function toggleQuestionRequireStatusAndSave({
+({
   required,
   name,
   page,
@@ -349,7 +344,7 @@ async function toggleQuestionRequireStatusAndSave({
   required: boolean;
   name: string;
   page: Page;
-}) {
+}) => {
   await page.locator(`[data-testid="field-${name}"]`).locator('[data-testid="edit-field-action"]').click();
   await page
     .locator('[data-testid="edit-field-dialog"]')
@@ -377,20 +372,18 @@ async function createAndLoginUserWithEventTypes({
   return user;
 }
 
-async function rescheduleFromTheLinkOnPage({
+({
   page,
   bookerVariant,
 }: {
   page: Page;
   bookerVariant?: BookerVariants;
-}) {
+}) => {
   await page.locator('[data-testid="reschedule-link"]').click();
   await page.waitForLoadState();
   await selectFirstAvailableTimeSlotNextMonth(page);
   if (bookerVariant === "old-booker") {
-    await page.waitForURL((url) => {
-      return url.pathname.endsWith("/book");
-    });
+    await page.waitForURL((url) => url.pathname.endsWith("/book"));
   }
   await page.click('[data-testid="confirm-reschedule-button"]');
 }
@@ -406,21 +399,17 @@ async function openBookingFormInPreviewTab(
   await previewTabPage.waitForLoadState();
   await selectFirstAvailableTimeSlotNextMonth(previewTabPage);
   if (bookerVariant === "old-booker") {
-    await previewTabPage.waitForURL((url) => {
-      return url.pathname.endsWith("/book");
-    });
+    await previewTabPage.waitForURL((url) => url.pathname.endsWith("/book"));
   }
   return previewTabPage;
 }
 
-async function saveEventType(page: Page) {
+(page: Page) => {
   await page.locator("[data-testid=update-eventtype]").click();
 }
 
-async function addWebhook(
-  user?: Awaited<ReturnType<typeof createAndLoginUserWithEventTypes>>,
-  teamId?: number | null
-) {
+async (user?: Awaited<ReturnType<typeof createAndLoginUserWithEventTypes>>,
+  teamId?: number | null) => {
   const webhookReceiver = createHttpServer();
 
   const data: {

@@ -171,8 +171,7 @@ export const AddNewTeamMembersForm = ({
 
 export default AddNewTeamMembers;
 
-const AddNewTeamMemberSkeleton = () => {
-  return (
+const AddNewTeamMemberSkeleton = () => (
     <SkeletonContainer className="border-subtle rounded-md border">
       <div className="flex w-full justify-between p-4">
         <div>
@@ -186,7 +185,6 @@ const AddNewTeamMemberSkeleton = () => {
       </div>
     </SkeletonContainer>
   );
-};
 
 const PendingMemberItem = (props: { member: TeamMember; index: number; teamId: number }) => {
   const { member, index, teamId } = props;

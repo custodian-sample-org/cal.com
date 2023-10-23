@@ -136,8 +136,8 @@ export default class GoogleCalendarService implements Calendar {
           conferenceDataVersion: 1,
           sendUpdates: "none",
         },
-        function (error, event) {
-          if (error || !event?.data) {
+        (error, event) => {
+  if (error || !event?.data) {
             console.error("There was an error contacting google calendar service: ", error);
             return reject(error);
           }
@@ -168,7 +168,7 @@ export default class GoogleCalendarService implements Calendar {
             url: "",
             iCalUID: event.data.iCalUID,
           });
-        }
+}
       );
     });
   }
@@ -243,8 +243,8 @@ export default class GoogleCalendarService implements Calendar {
           requestBody: payload,
           conferenceDataVersion: 1,
         },
-        function (err, evt) {
-          if (err) {
+        (err, evt) => {
+  if (err) {
             console.error("There was an error contacting google calendar service: ", err);
             return reject(err);
           }
@@ -276,7 +276,7 @@ export default class GoogleCalendarService implements Calendar {
             });
           }
           return resolve(evt?.data);
-        }
+}
       );
     });
   }
@@ -300,8 +300,8 @@ export default class GoogleCalendarService implements Calendar {
           sendNotifications: false,
           sendUpdates: "none",
         },
-        function (err: GoogleCalError | null, event) {
-          if (err) {
+        (err: GoogleCalError | null, event) => {
+  if (err) {
             /**
              *  410 is when an event is already deleted on the Google cal before on cal.com
              *  404 is when the event is on a different calendar
@@ -312,7 +312,7 @@ export default class GoogleCalendarService implements Calendar {
             return reject(err);
           }
           return resolve(event?.data);
-        }
+}
       );
     });
   }

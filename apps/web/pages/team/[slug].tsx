@@ -290,9 +290,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
 
   const safeBio = markdownToSafeHTML(team.bio) || "";
 
-  const members = team.members.map((member) => {
-    return { ...member, safeBio: markdownToSafeHTML(member.bio || "") };
-  });
+  const members = team.members.map((member) => { ...member, safeBio: markdownToSafeHTML(member.bio || "") });
 
   const markdownStrippedBio = stripMarkdown(team?.bio || "");
 

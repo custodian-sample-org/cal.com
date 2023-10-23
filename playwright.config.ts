@@ -221,7 +221,6 @@ expect.extend({
       background: backgroundBefore,
       initialValuesSet,
     } = await iframe.evaluate(() => {
-      return {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         //@ts-ignore
         visibility: window.initialBodyVisibility,
@@ -231,18 +230,15 @@ expect.extend({
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         //@ts-ignore
         initialValuesSet: window.initialValuesSet,
-      };
-    });
+      });
     expect(initialValuesSet).toBe(true);
     expect(visibilityBefore).toBe("hidden");
     expect(backgroundBefore).toBe("transparent");
 
     const { visibility: visibilityAfter, background: backgroundAfter } = await iframe.evaluate(() => {
-      return {
         visibility: document.body.style.visibility,
         background: document.body.style.background,
-      };
-    });
+      });
 
     expect(visibilityAfter).toBe("visible");
     expect(backgroundAfter).toBe("transparent");

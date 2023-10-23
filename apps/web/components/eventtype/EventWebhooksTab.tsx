@@ -116,8 +116,7 @@ export const EventWebhooksTab = ({ eventType }: Pick<EventTypeSetupProps, "event
                 {webhooks.length ? (
                   <>
                     <div className="mb-2 rounded-md border">
-                      {webhooks.map((webhook, index) => {
-                        return (
+                      {webhooks.map((webhook, index) => (
                           <WebhookListItem
                             key={webhook.id}
                             webhook={webhook}
@@ -128,8 +127,7 @@ export const EventWebhooksTab = ({ eventType }: Pick<EventTypeSetupProps, "event
                               setWebhookToEdit(webhook);
                             }}
                           />
-                        );
-                      })}
+                        ))}
                     </div>
                     <NewWebhookButton />
                   </>

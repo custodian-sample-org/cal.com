@@ -28,11 +28,9 @@ export function TimezoneSelect({
     if (data) setCities(filterByCities(tz, data));
   };
 
-  const reactSelectProps = useMemo(() => {
-    return getReactSelectProps({
+  const reactSelectProps = useMemo(() => getReactSelectProps({
       components: components || {},
-    });
-  }, [components]);
+    }), [components]);
 
   // We use modifiedTimezones in place of the allTimezones object replacing any underscores in the curly braces
   // with spaces and removing the America/Detroit timezone, adding the America/New_York timezone instead.

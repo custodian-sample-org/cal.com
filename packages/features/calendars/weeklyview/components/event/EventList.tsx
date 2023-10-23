@@ -22,9 +22,7 @@ export function EventList({ day }: Props) {
   return (
     <>
       {events
-        .filter((event) => {
-          return dayjs(event.start).isSame(day, "day") && !event.allDay; // Filter all events that are not allDay and that are on the current day
-        })
+        .filter((event) => dayjs(event.start).isSame(day, "day") && !event.allDay)
         .map((event, idx, eventsArray) => {
           let width = 90;
           let marginLeft: string | number = 0;
