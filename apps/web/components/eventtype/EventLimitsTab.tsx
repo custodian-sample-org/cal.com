@@ -21,7 +21,7 @@ import { Plus, Trash } from "@calcom/ui/components/icon";
 const MinimumBookingNoticeInput = React.forwardRef<
   HTMLInputElement,
   Omit<UseFormRegisterReturn<"minimumBookingNotice">, "ref">
->(function MinimumBookingNoticeInput({ ...passThroughProps }, ref) {
+>(({ ...passThroughProps }, ref) => {
   const { t } = useLocale();
   const { setValue, getValues } = useFormContext<FormValues>();
   const durationTypeOptions: {
@@ -509,8 +509,7 @@ const IntervalLimitItem = ({
   onDelete,
   onLimitChange,
   onIntervalSelect,
-}: IntervalLimitItemProps) => {
-  return (
+}: IntervalLimitItemProps) => (
     <div className="mb-2 flex items-center space-x-2 text-sm rtl:space-x-reverse" key={limitKey}>
       <TextField
         required
@@ -537,7 +536,6 @@ const IntervalLimitItem = ({
       )}
     </div>
   );
-};
 
 type IntervalLimitsManagerProps<K extends "durationLimits" | "bookingLimits"> = {
   propertyName: K;
@@ -588,12 +586,10 @@ const IntervalLimitsManager = <K extends "durationLimits" | "bookingLimits">({
             {currentIntervalLimits &&
               watchIntervalLimits &&
               Object.entries(currentIntervalLimits)
-                .sort(([limitKeyA], [limitKeyB]) => {
-                  return (
+                .sort(([limitKeyA], [limitKeyB]) => (
                     intervalOrderKeys.indexOf(limitKeyA as IntervalLimitsKey) -
                     intervalOrderKeys.indexOf(limitKeyB as IntervalLimitsKey)
-                  );
-                })
+                  ))
                 .map(([key, value]) => {
                   const limitKey = key as IntervalLimitsKey;
                   return (

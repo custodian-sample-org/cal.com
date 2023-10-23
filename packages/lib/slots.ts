@@ -137,9 +137,9 @@ function buildSlots({
 }
 
 function fromIndex<T>(cb: (val: T, i: number, a: T[]) => boolean, index: number) {
-  return function (e: T, i: number, a: T[]) {
-    return i >= index && cb(e, i, a);
-  };
+  return (e: T, i: number, a: T[]) => {
+  return i >= index && cb(e, i, a);
+};
 }
 
 const getSlots = ({
@@ -214,9 +214,7 @@ const getSlots = ({
     }
   });
   // an override precedes all the local working hour availability logic.
-  const activeOverrides = dateOverrides.filter((override) => {
-    return dayjs.utc(override.start).isBetween(startOfInviteeDay, startOfInviteeDay.endOf("day"), null, "[)");
-  });
+  const activeOverrides = dateOverrides.filter((override) => dayjs.utc(override.start).isBetween(startOfInviteeDay, startOfInviteeDay.endOf("day"), null, "[)"));
 
   if (!!activeOverrides.length) {
     const overrides = activeOverrides.flatMap((override) => ({

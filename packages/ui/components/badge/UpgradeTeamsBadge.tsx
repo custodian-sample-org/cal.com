@@ -6,7 +6,7 @@ import { useLocale } from "@calcom/lib/hooks/useLocale";
 import { Tooltip } from "../tooltip";
 import { Badge } from "./Badge";
 
-export const UpgradeTeamsBadge = function UpgradeTeamsBadge() {
+export const UpgradeTeamsBadge = () => {
   const { t } = useLocale();
   const { hasPaidPlan } = useHasPaidPlan();
 

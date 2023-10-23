@@ -80,9 +80,7 @@ export default function WorkflowDetailsPage(props: Props) {
     const steps = form.getValues("steps");
     const id =
       steps?.length > 0
-        ? steps.sort((a, b) => {
-            return a.id - b.id;
-          })[0].id - 1
+        ? steps.sort((a, b) => a.id - b.id)[0].id - 1
         : 0;
 
     const step = {
@@ -90,9 +88,7 @@ export default function WorkflowDetailsPage(props: Props) {
       action,
       stepNumber:
         steps && steps.length > 0
-          ? steps.sort((a, b) => {
-              return a.stepNumber - b.stepNumber;
-            })[steps.length - 1].stepNumber + 1
+          ? steps.sort((a, b) => a.stepNumber - b.stepNumber)[steps.length - 1].stepNumber + 1
           : 1,
       sendTo: sendTo || null,
       workflowId: workflowId,
@@ -124,8 +120,7 @@ export default function WorkflowDetailsPage(props: Props) {
           <Controller
             name="activeOn"
             control={form.control}
-            render={() => {
-              return (
+            render={() => (
                 <MultiSelectCheckboxes
                   options={allEventTypeOptions}
                   isDisabled={props.readOnly}
@@ -137,8 +132,7 @@ export default function WorkflowDetailsPage(props: Props) {
                     form.setValue("activeOn", s);
                   }}
                 />
-              );
-            }}
+              )}
           />
           <div className="md:border-subtle my-7 border-transparent md:border-t" />
           {!props.readOnly && (
@@ -163,8 +157,7 @@ export default function WorkflowDetailsPage(props: Props) {
           )}
           {form.getValues("steps") && (
             <>
-              {form.getValues("steps")?.map((step) => {
-                return (
+              {form.getValues("steps")?.map((step) => (
                   <WorkflowStepContainer
                     key={step.id}
                     form={form}
@@ -174,8 +167,7 @@ export default function WorkflowDetailsPage(props: Props) {
                     teamId={teamId}
                     readOnly={props.readOnly}
                   />
-                );
-              })}
+                ))}
             </>
           )}
           {!props.readOnly && (

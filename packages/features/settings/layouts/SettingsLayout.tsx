@@ -171,8 +171,7 @@ const useTabs = () => {
   });
 };
 
-const BackButtonInSidebar = ({ name }: { name: string }) => {
-  return (
+const BackButtonInSidebar = ({ name }: { name: string }) => (
     <Link
       href="/"
       className="hover:bg-subtle [&[aria-current='page']]:bg-emphasis [&[aria-current='page']]:text-emphasis group-hover:text-default text-emphasis group my-6 flex h-6 max-h-6 w-full flex-row items-center rounded-md py-2 px-3 text-sm font-medium leading-4"
@@ -183,7 +182,6 @@ const BackButtonInSidebar = ({ name }: { name: string }) => {
       </Skeleton>
     </Link>
   );
-};
 
 interface SettingsSidebarContainerProps {
   className?: string;
@@ -230,8 +228,7 @@ const SettingsSidebarContainer = ({
       aria-label="Tabs">
       <>
         <BackButtonInSidebar name={t("back")} />
-        {tabsWithPermissions.map((tab) => {
-          return tab.name !== "teams" ? (
+        {tabsWithPermissions.map((tab) => tab.name !== "teams" ? (
             <React.Fragment key={tab.href}>
               <div className={`${!tab.children?.length ? "!mb-3" : ""}`}>
                 <div className="[&[aria-current='page']]:bg-emphasis [&[aria-current='page']]:text-emphasis text-default group flex h-9 w-full flex-row items-center rounded-md px-2 text-sm font-medium leading-none">
@@ -390,8 +387,7 @@ const SettingsSidebarContainer = ({
                 />
               </div>
             </React.Fragment>
-          );
-        })}
+          ))}
       </>
     </nav>
   );

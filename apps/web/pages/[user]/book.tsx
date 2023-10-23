@@ -247,9 +247,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   }
 
   if (rescheduleEventTypeHasSeats && booking?.attendees && booking?.attendees.length > 0) {
-    const currentAttendee = booking?.attendees.find((attendee) => {
-      return attendee.email === attendeeEmail;
-    });
+    const currentAttendee = booking?.attendees.find((attendee) => attendee.email === attendeeEmail);
     if (currentAttendee) {
       booking.attendees = [currentAttendee] || [];
     }

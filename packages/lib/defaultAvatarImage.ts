@@ -4,7 +4,7 @@ import md5Parser from "md5";
  * Provided either an email or an MD5 hash, return the URL for the Gravatar
  * image aborting early if neither is provided.
  */
-export const defaultAvatarSrc = function ({ email, md5 }: { md5?: string; email?: string }) {
+export const defaultAvatarSrc = ({ email, md5 }: { md5?: string; email?: string }) => {
   if (!email && !md5) return "";
 
   if (email && !md5) {

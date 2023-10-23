@@ -12,8 +12,7 @@ type Props = {
   onDatesChange?: ((arg: { startDate: Date; endDate: Date }) => void) | undefined;
 };
 
-const DateRangePicker = ({ disabled, startDate, endDate, onDatesChange }: Props) => {
-  return (
+const DateRangePicker = ({ disabled, startDate, endDate, onDatesChange }: Props) => (
     <>
       <PrimitiveDateRangePicker
         disabled={disabled || false}
@@ -30,6 +29,5 @@ const DateRangePicker = ({ disabled, startDate, endDate, onDatesChange }: Props)
       />
     </>
   );
-};
 
 export default DateRangePicker;

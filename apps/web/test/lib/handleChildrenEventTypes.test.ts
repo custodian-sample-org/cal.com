@@ -15,16 +15,12 @@ const mockFindFirstEventType = (data?: Partial<CompleteEventType>) => {
 };
 
 vi.mock("@calcom/emails/email-manager", () => {
-  return {
     sendSlugReplacementEmail: () => ({}),
-  };
-});
+  });
 
 vi.mock("@calcom/lib/server/i18n", () => {
-  return {
     getTranslation: (key: string) => key,
-  };
-});
+  });
 
 describe("handleChildrenEventTypes", () => {
   describe("Shortcircuits", () => {
@@ -69,11 +65,9 @@ describe("handleChildrenEventTypes", () => {
     it("Returns message 'Missing event type'", async () => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      prismaMock.eventType.findFirst.mockImplementation(() => {
-        return new Promise((resolve) => {
+      prismaMock.eventType.findFirst.mockImplementation(() => new Promise((resolve) => {
           resolve(null);
-        });
-      });
+        }));
       const result = await updateChildrenEventTypes({
         eventTypeId: 1,
         oldEventType: { children: [], team: { name: "" } },

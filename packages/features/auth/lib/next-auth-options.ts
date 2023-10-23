@@ -219,15 +219,13 @@ if (isSAMLLoginEnabled) {
     },
     userinfo: `${WEBAPP_URL}/api/auth/saml/userinfo`,
     profile: (profile) => {
-      return {
         id: profile.id || "",
         firstName: profile.firstName || "",
         lastName: profile.lastName || "",
         email: profile.email || "",
         name: `${profile.firstName || ""} ${profile.lastName || ""}`.trim(),
         email_verified: true,
-      };
-    },
+      },
     options: {
       clientId: "dummy",
       clientSecret: clientSecretVerifier,

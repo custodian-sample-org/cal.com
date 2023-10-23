@@ -12,7 +12,7 @@ import { Alert, showToast } from "../";
 
 type InputProps = Omit<JSX.IntrinsicElements["input"], "name"> & { name: string };
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(props, ref) {
+export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   return (
     <input
       {...props}
@@ -49,7 +49,7 @@ type InputFieldProps = {
     labelProps?: React.ComponentProps<typeof Label>;
   };
 
-const InputField = forwardRef<HTMLInputElement, InputFieldProps>(function InputField(props, ref) {
+const InputField = forwardRef<HTMLInputElement, InputFieldProps>((props, ref) => {
   const id = useId();
   const { t } = useLocale();
   const methods = useFormContext();
@@ -97,20 +97,18 @@ const InputField = forwardRef<HTMLInputElement, InputFieldProps>(function InputF
   );
 });
 
-export const TextField = forwardRef<HTMLInputElement, InputFieldProps>(function TextField(props, ref) {
+export const TextField = forwardRef<HTMLInputElement, InputFieldProps>((props, ref) => {
   return <InputField ref={ref} {...props} />;
 });
 
-export const PasswordField = forwardRef<HTMLInputElement, InputFieldProps>(function PasswordField(
-  props,
-  ref
-) {
+export const PasswordField = forwardRef<HTMLInputElement, InputFieldProps>((props,
+  ref) => {
   return (
     <InputField data-testid="password" type="password" placeholder="•••••••••••••" ref={ref} {...props} />
   );
 });
 
-export const EmailInput = forwardRef<HTMLInputElement, InputFieldProps>(function EmailInput(props, ref) {
+export const EmailInput = forwardRef<HTMLInputElement, InputFieldProps>((props, ref) => {
   return (
     <Input
       ref={ref}
@@ -124,7 +122,7 @@ export const EmailInput = forwardRef<HTMLInputElement, InputFieldProps>(function
   );
 });
 
-export const EmailField = forwardRef<HTMLInputElement, InputFieldProps>(function EmailField(props, ref) {
+export const EmailField = forwardRef<HTMLInputElement, InputFieldProps>((props, ref) => {
   return (
     <InputField
       ref={ref}
@@ -140,7 +138,7 @@ export const EmailField = forwardRef<HTMLInputElement, InputFieldProps>(function
 
 type TextAreaProps = Omit<JSX.IntrinsicElements["textarea"], "name"> & { name: string };
 
-export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(function TextAreaInput(props, ref) {
+export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, ref) => {
   return (
     <textarea
       ref={ref}
@@ -159,10 +157,8 @@ type TextAreaFieldProps = {
     labelProps?: React.ComponentProps<typeof Label>;
   };
 
-export const TextAreaField = forwardRef<HTMLTextAreaElement, TextAreaFieldProps>(function TextField(
-  props,
-  ref
-) {
+export const TextAreaField = forwardRef<HTMLTextAreaElement, TextAreaFieldProps>((props,
+  ref) => {
   const id = useId();
   const { t } = useLocale();
   const methods = useFormContext();
@@ -218,8 +214,7 @@ const PlainForm = <T extends FieldValues>(props: FormProps<T>, ref: Ref<HTMLForm
         {...passThrough}>
         {
           /* @see https://react-hook-form.com/advanced-usage/#SmartFormComponent */
-          React.Children.map(props.children, (child) => {
-            return typeof child !== "string" &&
+          React.Children.map(props.children, (child) => typeof child !== "string" &&
               typeof child !== "number" &&
               typeof child !== "boolean" &&
               child &&
@@ -232,8 +227,7 @@ const PlainForm = <T extends FieldValues>(props: FormProps<T>, ref: Ref<HTMLForm
                     key: child.props.name,
                   },
                 })
-              : child;
-          })
+              : child)
         }
       </form>
     </FormProvider>

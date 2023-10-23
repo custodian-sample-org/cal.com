@@ -145,9 +145,7 @@ const DailyVideoApiAdapter = (): VideoApiAdapter => {
 
   return {
     /** Daily doesn't need to return busy times, so we return empty */
-    getAvailability: () => {
-      return Promise.resolve([]);
-    },
+    getAvailability: () => Promise.resolve([]),
     createMeeting: async (event: CalendarEvent): Promise<VideoCallData> =>
       createOrUpdateMeeting("/rooms", event),
     deleteMeeting: async (uid: string): Promise<void> => {

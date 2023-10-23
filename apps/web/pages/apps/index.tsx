@@ -118,9 +118,9 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
           name: name as AppCategories,
           count,
         }))
-        .sort(function (a, b) {
-          return b.count - a.count;
-        }),
+        .sort((a, b) => {
+  return b.count - a.count;
+}),
       appStore,
       trpcState: ssr.dehydrate(),
     },

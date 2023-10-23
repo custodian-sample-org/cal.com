@@ -23,12 +23,11 @@ const formatOutput = (source: string) =>
     ...prettierConfig,
   });
 
-const getVariableName = function (appName: string) {
+const getVariableName = (appName: string) => {
   return appName.replace(/[-.]/g, "_");
 };
 
-const getAppId = function (app: { name: string }) {
-  // Handle stripe separately as it's an old app with different dirName than slug/appId
+const getAppId = (app: { name: string }) => {
   return app.name === "stripepayment" ? "stripe" : app.name;
 };
 
@@ -44,10 +43,10 @@ function generateFiles() {
   const serverOutput = [];
   const appDirs: { name: string; path: string }[] = [];
 
-  fs.readdirSync(`${APP_STORE_PATH}`).forEach(function (dir) {
-    if (dir === "ee" || dir === "templates") {
-      fs.readdirSync(path.join(APP_STORE_PATH, dir)).forEach(function (subDir) {
-        if (fs.statSync(path.join(APP_STORE_PATH, dir, subDir)).isDirectory()) {
+  fs.readdirSync(`${APP_STORE_PATH}`).forEach((dir) => {
+  if (dir === "ee" || dir === "templates") {
+      fs.readdirSync(path.join(APP_STORE_PATH, dir)).forEach((subDir) => {
+  if (fs.statSync(path.join(APP_STORE_PATH, dir, subDir)).isDirectory()) {
           if (getAppName(subDir)) {
             appDirs.push({
               name: subDir,
@@ -55,7 +54,7 @@ function generateFiles() {
             });
           }
         }
-      });
+});
     } else {
       if (fs.statSync(path.join(APP_STORE_PATH, dir)).isDirectory()) {
         if (!getAppName(dir)) {
@@ -67,7 +66,7 @@ function generateFiles() {
         });
       }
     }
-  });
+});
 
   function forEachAppDir(callback: (arg: App) => void) {
     for (let i = 0; i < appDirs.length; i++) {

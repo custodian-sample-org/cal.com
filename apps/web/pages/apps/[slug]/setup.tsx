@@ -37,11 +37,9 @@ export default function SetupInformation(props: InferGetStaticPropsType<typeof g
 
 SetupInformation.PageWrapper = PageWrapper;
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
+export const getStaticPaths: GetStaticPaths = () => {
     paths: [],
     fallback: "blocking",
   };
-};
 
 export { getStaticProps };

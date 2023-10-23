@@ -56,7 +56,7 @@ function getRoute(appName: string, pages: string[]) {
   return { notFound: false, Component: appPage.default, ...appPage } as Found;
 }
 
-const AppPage: AppPageType["default"] = function AppPage(props) {
+const AppPage: AppPageType["default"] = (props) => {
   const appName = props.appName;
   const router = useRouter();
   const pages = router.query.pages as string[];

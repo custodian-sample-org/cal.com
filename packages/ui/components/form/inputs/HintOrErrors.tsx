@@ -23,13 +23,11 @@ export function HintsOrErrors<T extends FieldValues = FieldValues>(props: {
     return (
       <div className="text-gray text-default mt-2 flex items-center text-sm">
         <ul className="ml-2">
-          {Object.keys(fieldErrors).map((key: string) => {
-            return (
+          {Object.keys(fieldErrors).map((key: string) => (
               <li key={key} className="text-blue-700">
                 {t(`${fieldName}_hint_${key}`)}
               </li>
-            );
-          })}
+            ))}
         </ul>
       </div>
     );

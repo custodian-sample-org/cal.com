@@ -40,10 +40,8 @@ const gridAreaClassNameMap: { [key in BookerAreas]: string } = {
 /**
  * Small helper compnent that renders a booker section in a specific grid area.
  */
-export const BookerSection = forwardRef<HTMLDivElement, BookerSectionProps>(function BookerSection(
-  { children, area, visible, className, ...props },
-  ref
-) {
+export const BookerSection = forwardRef<HTMLDivElement, BookerSectionProps>(({ children, area, visible, className, ...props },
+  ref) => {
   const layout = useBookerStore((state) => state.layout);
   let gridClassName: string;
 

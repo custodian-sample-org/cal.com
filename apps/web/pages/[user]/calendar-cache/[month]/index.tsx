@@ -57,11 +57,9 @@ export const getStaticProps: GetStaticProps<
 };
 
 export const getStaticPaths: GetStaticPaths = () => {
-  return {
     paths: [],
     fallback: "blocking",
   };
-};
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 const CalendarCache = (props: Props) =>
   process.env.NODE_ENV === "development" ? <pre>{JSON.stringify(props, null, "  ")}</pre> : <div />;

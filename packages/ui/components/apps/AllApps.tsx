@@ -158,11 +158,11 @@ export function AllApps({ apps, searchText, categories }: AllAppsPropsType) {
         : true
     )
     .filter((app) => (searchText ? app.name.toLowerCase().includes(searchText.toLowerCase()) : true))
-    .sort(function (a, b) {
-      if (a.name < b.name) return -1;
+    .sort((a, b) => {
+  if (a.name < b.name) return -1;
       else if (a.name > b.name) return 1;
       return 0;
-    });
+});
 
   return (
     <div>

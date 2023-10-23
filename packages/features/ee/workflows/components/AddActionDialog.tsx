@@ -144,8 +144,7 @@ export const AddActionDialog = (props: IAddActionDialog) => {
                 <Controller
                   name="action"
                   control={form.control}
-                  render={() => {
-                    return (
+                  render={() => (
                       <Select
                         isSearchable={false}
                         className="text-sm"
@@ -158,8 +157,7 @@ export const AddActionDialog = (props: IAddActionDialog) => {
                           needsUpgrade: boolean;
                         }) => option.needsUpgrade}
                       />
-                    );
-                  }}
+                    )}
                 />
                 {form.formState.errors.action && (
                   <p className="mt-1 text-sm text-red-500">{form.formState.errors.action.message}</p>

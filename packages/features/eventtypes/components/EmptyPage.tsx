@@ -1,7 +1,6 @@
 import { useLocale } from "@calcom/lib/hooks/useLocale";
 
-const SkeletonEventType = () => {
-  return (
+const SkeletonEventType = () => (
     <div className="dark:bg-darkgray-100 bg-default h-24 w-full">
       <div className="p-5">
         <div className="flex space-x-2 rtl:space-x-reverse">
@@ -20,7 +19,6 @@ const SkeletonEventType = () => {
       </div>
     </div>
   );
-};
 
 function EmptyPage({ name }: { name: string }) {
   const { t } = useLocale();

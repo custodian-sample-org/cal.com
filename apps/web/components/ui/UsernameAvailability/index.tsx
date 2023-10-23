@@ -55,8 +55,7 @@ export const UsernameAvailabilityField = ({
     <Controller
       control={formMethods.control}
       name="username"
-      render={({ field: { ref, onChange, value } }) => {
-        return (
+      render={({ field: { ref, onChange, value } }) => (
           <UsernameAvailability
             currentUsername={currentUsername}
             setCurrentUsername={setCurrentUsername}
@@ -67,8 +66,7 @@ export const UsernameAvailabilityField = ({
             onErrorMutation={onErrorMutation}
             addOnLeading={usernamePrefix}
           />
-        );
-      }}
+        )}
     />
   );
 };

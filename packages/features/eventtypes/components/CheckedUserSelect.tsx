@@ -40,8 +40,7 @@ export const CheckedUserSelect = ({
           <Label>{t("assigned_to")}</Label>
           <div className="flex overflow-hidden rounded-md border border-gray-200 bg-white">
             <ul className="w-full" data-testid="managed-event-types" ref={animationRef}>
-              {value.map((option, index) => {
-                return (
+              {value.map((option, index) => (
                   <li
                     key={option.value}
                     className={`flex py-2 px-3 ${index === value.length - 1 ? "" : "border-b"}`}>
@@ -52,8 +51,7 @@ export const CheckedUserSelect = ({
                       className="my-auto ml-auto"
                     />
                   </li>
-                );
-              })}
+                ))}
             </ul>
           </div>
         </div>

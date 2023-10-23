@@ -84,25 +84,15 @@ export function QueryCell<TData, TError extends ErrorLike>(
 
 type TError = TRPCClientErrorLike<AppRouter>;
 
-const withQuery = <
-  TQuery extends AnyQueryProcedure,
-  TInput = inferProcedureInput<TQuery>,
-  TOutput = inferProcedureOutput<TQuery>
->(
-  queryProcedure: DecorateProcedure<TQuery, inferProcedureInput<TQuery>, inferProcedureOutput<TQuery>>,
+const withQuery = (queryProcedure: DecorateProcedure<TQuery, inferProcedureInput<TQuery>, inferProcedureOutput<TQuery>>,
 
   input?: TInput,
-  params?: UseTRPCQueryOptions<TQuery, TInput, TOutput, TOutput, TError>
-) => {
-  return function WithQuery(
-    opts: Omit<
+  params?: UseTRPCQueryOptions<TQuery, TInput, TOutput, TOutput, TError>) => (opts: Omit<
       Partial<QueryCellOptionsWithEmpty<TOutput, TError>> & QueryCellOptionsNoEmpty<TOutput, TError>,
       "query"
-    >
-  ) {
-    const query = queryProcedure.useQuery(input, params);
+    >) => {
+  const query = queryProcedure.useQuery(input, params);
     return <QueryCell query={query} {...opts} />;
-  };
 };
 
 export { withQuery };

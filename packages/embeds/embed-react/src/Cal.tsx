@@ -17,7 +17,7 @@ type CalProps = {
   embedJsUrl?: string;
 } & React.HTMLAttributes<HTMLDivElement>;
 
-const Cal = function Cal(props: CalProps) {
+const Cal = (props: CalProps) => {
   const { calLink, calOrigin, config, initConfig = {}, embedJsUrl, ...restProps } = props;
   if (!calLink) {
     throw new Error("calLink is required");

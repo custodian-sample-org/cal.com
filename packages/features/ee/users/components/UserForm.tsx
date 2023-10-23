@@ -41,12 +41,10 @@ export const UserForm = ({
   const router = useRouter();
   const { t } = useLocale();
 
-  const localeOptions = useMemo(() => {
-    return (router.locales || []).map((locale) => ({
+  const localeOptions = useMemo(() => (router.locales || []).map((locale) => ({
       value: locale,
       label: new Intl.DisplayNames(locale, { type: "language" }).of(locale) || "",
-    }));
-  }, [router.locales]);
+    })), [router.locales]);
 
   const timeFormatOptions = [
     { value: 12, label: t("12_hour") },

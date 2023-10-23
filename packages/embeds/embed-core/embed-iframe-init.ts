@@ -24,10 +24,7 @@ export default function EmbedInitIframe() {
       ? defaultNamespace // If query param is not there but /embed is used then assume default namespace.
       : null;
 
-  window.isEmbed = () => {
-    // By default namespace is "". That would also work if we just check the type of variable
-    return typeof embedNamespace == "string";
-  };
+  window.isEmbed = () => typeof embedNamespace == "string";
 
   window.getEmbedTheme = () => {
     // Note that embedStore.theme is lost if hard navigation occurs.(Though, it isn't something that we expect to happen normally)
@@ -39,9 +36,7 @@ export default function EmbedInitIframe() {
     return url.searchParams.get("theme") as EmbedThemeConfig | null;
   };
 
-  window.getEmbedNamespace = () => {
-    return embedNamespace;
-  };
+  window.getEmbedNamespace = () => embedNamespace;
 
   window.CalEmbed = window.CalEmbed || {};
 

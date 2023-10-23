@@ -46,9 +46,7 @@ export function getEventName(eventNameObj: EventNameObjectType, forAttendeeView 
     .replaceAll("{HOST}", eventNameObj.host)
     .replaceAll("{HOST/ATTENDEE}", forAttendeeView ? eventNameObj.host : eventNameObj.attendeeName);
 
-  const customInputvariables = dynamicEventName.match(/\{(.+?)}/g)?.map((variable) => {
-    return variable.replace("{", "").replace("}", "");
-  });
+  const customInputvariables = dynamicEventName.match(/\{(.+?)}/g)?.map((variable) => variable.replace("{", "").replace("}", ""));
 
   customInputvariables?.forEach((variable) => {
     if (eventNameObj.bookingFields) {
@@ -75,9 +73,7 @@ export const validateCustomEventName = (
 ) => {
   let customInputVariables: string[] = [];
   if (bookingFields) {
-    customInputVariables = Object.keys(bookingFields).map((customInput) => {
-      return `{${customInput}}`;
-    });
+    customInputVariables = Object.keys(bookingFields).map((customInput) => `{${customInput}}`);
   }
 
   const validVariables = customInputVariables.concat([

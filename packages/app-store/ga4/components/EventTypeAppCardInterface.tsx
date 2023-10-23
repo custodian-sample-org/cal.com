@@ -7,7 +7,7 @@ import { TextField } from "@calcom/ui";
 
 import type { appDataSchema } from "../zod";
 
-const EventTypeAppCard: EventTypeAppCardComponent = function EventTypeAppCard({ app }) {
+const EventTypeAppCard: EventTypeAppCardComponent = ({ app }) => {
   const [getAppData, setAppData] = useAppContextWithSchema<typeof appDataSchema>();
   const trackingId = getAppData("trackingId");
   const [enabled, setEnabled] = useState(getAppData("enabled"));

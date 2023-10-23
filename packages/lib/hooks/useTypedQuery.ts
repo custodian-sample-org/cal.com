@@ -35,22 +35,19 @@ export function useTypedQuery<T extends z.AnyZodObject>(schema: T) {
   const { query: unparsedQuery, ...router } = useRouter();
   const parsedQuerySchema = schema.safeParse(unparsedQuery);
 
-  let parsedQuery: Output = useMemo(() => {
-    return {} as Output;
-  }, []);
+  let parsedQuery: Output = useMemo(() => {} as Output, []);
 
   if (parsedQuerySchema.success) parsedQuery = parsedQuerySchema.data;
   else if (!parsedQuerySchema.success) console.error(parsedQuerySchema.error);
 
   // Set the query based on schema values
   const setQuery = useCallback(
-    function setQuery<J extends OutputKeys>(key: J, value: Output[J]) {
-      // Remove old value by key so we can merge new value
-      const { [key]: _, ...newQuery } = parsedQuery;
+    (key: J, value: Output[J]) => {
+  const { [key]: _, ...newQuery } = parsedQuery;
       const newValue = { ...newQuery, [key]: value };
       const search = new URLSearchParams(newValue).toString();
       router.replace({ query: search }, undefined, { shallow: true });
-    },
+},
     [parsedQuery, router]
   );
 

@@ -140,14 +140,12 @@ const DestinationCalendarSelector = ({
           placeholder: (styles) => ({ ...styles, ...content(hidePlaceholder) }),
           singleValue: (styles) => ({ ...styles, ...content(hidePlaceholder) }),
           control: (defaultStyles) => {
-            return {
               ...defaultStyles,
               "@media only screen and (min-width: 640px)": {
                 ...(defaultStyles["@media only screen and (min-width: 640px)"] as object),
                 maxWidth,
               },
-            };
-          },
+            },
         }}
         isSearchable={false}
         className={classNames(

@@ -80,13 +80,11 @@ test.describe("Popup Tests", () => {
   });
 
   test("should be able to reschedule", async ({ page, addEmbedListeners, getActionFiredDetails }) => {
-    const booking = await test.step("Create a booking", async () => {
-      return await bookFirstFreeUserEventThroughEmbed({
+    const booking = await test.step("Create a booking", () => await bookFirstFreeUserEventThroughEmbed({
         page,
         addEmbedListeners,
         getActionFiredDetails,
-      });
-    });
+      }));
 
     await test.step("Reschedule the booking", async () => {
       await addEmbedListeners("popupReschedule");

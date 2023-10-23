@@ -17,13 +17,11 @@ const AboutOrganizationPage = () => {
     </>
   );
 };
-const LayoutWrapper = (page: React.ReactElement) => {
-  return (
+const LayoutWrapper = (page: React.ReactElement) => (
     <WizardLayout currentStep={3} maxSteps={5}>
       {page}
     </WizardLayout>
   );
-};
 
 AboutOrganizationPage.getLayout = LayoutWrapper;
 AboutOrganizationPage.PageWrapper = PageWrapper;

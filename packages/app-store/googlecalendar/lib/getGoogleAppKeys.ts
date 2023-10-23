@@ -8,6 +8,4 @@ const googleAppKeysSchema = z.object({
   redirect_uris: z.array(z.string()),
 });
 
-export const getGoogleAppKeys = async () => {
-  return getParsedAppKeysFromSlug("google-calendar", googleAppKeysSchema);
-};
+export const getGoogleAppKeys = () => getParsedAppKeysFromSlug("google-calendar", googleAppKeysSchema);

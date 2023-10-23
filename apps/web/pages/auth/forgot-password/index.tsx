@@ -74,8 +74,7 @@ export default function ForgotPassword({ csrfToken }: { csrfToken: string }) {
     await debouncedHandleSubmitPasswordRequest({ email });
   };
 
-  const Success = () => {
-    return (
+  const Success = () => (
       <div className="space-y-6 text-sm leading-normal ">
         <p className="">{t("password_reset_email", { email })}</p>
         <p className="">{t("password_reset_leading")}</p>
@@ -85,7 +84,6 @@ export default function ForgotPassword({ csrfToken }: { csrfToken: string }) {
         </Button>
       </div>
     );
-  };
 
   return (
     <AuthContainer

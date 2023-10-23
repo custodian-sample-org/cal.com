@@ -150,15 +150,13 @@ export default async function handleChildrenEventTypes({
   const currentWorkflowIds = eventType.workflows?.map((wf) => wf.workflowId);
 
   // Define hashedLink query input
-  const hashedLinkQuery = (userId: number) => {
-    return hashedLink
+  const hashedLinkQuery = (userId: number) => hashedLink
       ? !connectedLink
         ? { create: { link: generateHashedLink(userId) } }
         : undefined
       : connectedLink
       ? { delete: true }
       : undefined;
-  };
 
   // Store result for existent event types deletion process
   let deletedExistentEventTypes = undefined;
@@ -176,8 +174,7 @@ export default async function handleChildrenEventTypes({
 
     // Create event types for new users added
     await prisma.$transaction(
-      newUserIds.map((userId) => {
-        return prisma.eventType.create({
+      newUserIds.map((userId) => prisma.eventType.create({
           data: {
             ...managedEventTypeValues,
             ...unlockedEventTypeValues,
@@ -206,8 +203,7 @@ export default async function handleChildrenEventTypes({
             },*/
             hashedLink: hashedLinkQuery(userId),
           },
-        });
-      })
+        }))
     );
   }
 
@@ -224,8 +220,7 @@ export default async function handleChildrenEventTypes({
 
     // Update event types for old users
     const oldEventTypes = await prisma.$transaction(
-      oldUserIds.map((userId) => {
-        return prisma.eventType.update({
+      oldUserIds.map((userId) => prisma.eventType.update({
           where: {
             userId_parentId: {
               userId,
@@ -244,15 +239,12 @@ export default async function handleChildrenEventTypes({
             durationLimits: (managedEventTypeValues.durationLimits as Prisma.InputJsonValue) ?? undefined,
             hashedLink: hashedLinkQuery(userId),
           },
-        });
-      })
+        }))
     );
 
     if (currentWorkflowIds?.length) {
       await prisma.$transaction(
-        currentWorkflowIds.flatMap((wfId) => {
-          return oldEventTypes.map((oEvTy) => {
-            return prisma.workflowsOnEventTypes.upsert({
+        currentWorkflowIds.flatMap((wfId) => oldEventTypes.map((oEvTy) => prisma.workflowsOnEventTypes.upsert({
               create: {
                 eventTypeId: oEvTy.id,
                 workflowId: wfId,
@@ -264,9 +256,7 @@ export default async function handleChildrenEventTypes({
                   workflowId: wfId,
                 },
               },
-            });
-          });
-        })
+            })))
       );
     }
 

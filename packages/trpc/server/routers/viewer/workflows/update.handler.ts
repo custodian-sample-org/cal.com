@@ -119,9 +119,7 @@ export const updateHandler = async ({ ctx, input }: UpdateOptions) => {
     if (
       !oldActiveOnEventTypes ||
       !oldActiveOnEventTypes
-        .map((oldEventType) => {
-          return oldEventType.eventTypeId;
-        })
+        .map((oldEventType) => oldEventType.eventTypeId)
         .includes(eventType)
     ) {
       return eventType;
@@ -185,9 +183,7 @@ export const updateHandler = async ({ ctx, input }: UpdateOptions) => {
           userId: ctx.user.id,
         },
         workflowStepId: {
-          in: userWorkflow.steps.map((step) => {
-            return step.id;
-          }),
+          in: userWorkflow.steps.map((step) => step.id),
         },
       },
       select: {
@@ -257,13 +253,11 @@ export const updateHandler = async ({ ctx, input }: UpdateOptions) => {
             const bookingInfo = {
               uid: booking.uid,
               attendees: booking.attendees.map((attendee) => {
-                return {
                   name: attendee.name,
                   email: attendee.email,
                   timeZone: attendee.timeZone,
                   language: { locale: attendee.locale || "" },
-                };
-              }),
+                }),
               organizer: booking.user
                 ? {
                     language: { locale: booking.user.locale || "" },
@@ -460,13 +454,11 @@ export const updateHandler = async ({ ctx, input }: UpdateOptions) => {
           const bookingInfo = {
             uid: booking.uid,
             attendees: booking.attendees.map((attendee) => {
-              return {
                 name: attendee.name,
                 email: attendee.email,
                 timeZone: attendee.timeZone,
                 language: { locale: attendee.locale || "" },
-              };
-            }),
+              }),
             organizer: booking.user
               ? {
                   language: { locale: booking.user.locale || "" },
@@ -589,13 +581,11 @@ export const updateHandler = async ({ ctx, input }: UpdateOptions) => {
             const bookingInfo = {
               uid: booking.uid,
               attendees: booking.attendees.map((attendee) => {
-                return {
                   name: attendee.name,
                   email: attendee.email,
                   timeZone: attendee.timeZone,
                   language: { locale: attendee.locale || "" },
-                };
-              }),
+                }),
               organizer: booking.user
                 ? {
                     name: booking.user.name || "",
