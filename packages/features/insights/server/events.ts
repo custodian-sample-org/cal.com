@@ -86,8 +86,7 @@ class EventsInsights {
     return baseBookings;
   };
 
-  static getTotalRescheduledEvents = async (bookingIds: number[]) => {
-    return await prisma.bookingTimeStatus.count({
+  static getTotalRescheduledEvents = (bookingIds: number[]) => await prisma.bookingTimeStatus.count({
       where: {
         id: {
           in: bookingIds,
@@ -95,10 +94,8 @@ class EventsInsights {
         timeStatus: "rescheduled",
       },
     });
-  };
 
-  static getTotalCancelledEvents = async (bookingIds: number[]) => {
-    return await prisma.bookingTimeStatus.count({
+  static getTotalCancelledEvents = (bookingIds: number[]) => await prisma.bookingTimeStatus.count({
       where: {
         id: {
           in: bookingIds,
@@ -106,7 +103,6 @@ class EventsInsights {
         timeStatus: "cancelled",
       },
     });
-  };
 
   static getTimeLine = async (timeView: TimeViewType, startDate: Dayjs, endDate: Dayjs) => {
     let resultTimeLine: string[] = [];

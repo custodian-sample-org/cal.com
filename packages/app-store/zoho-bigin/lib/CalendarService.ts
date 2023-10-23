@@ -288,9 +288,9 @@ export default class BiginCalendarService implements Calendar {
 const toISO8601String = (date: Date) => {
   const tzo = -date.getTimezoneOffset(),
     dif = tzo >= 0 ? "+" : "-",
-    pad = function (num: number) {
-      return (num < 10 ? "0" : "") + num;
-    };
+    pad = (num: number) => {
+  return (num < 10 ? "0" : "") + num;
+};
 
   return (
     date.getFullYear() +

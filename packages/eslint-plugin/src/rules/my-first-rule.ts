@@ -7,7 +7,6 @@ const rule: Rule.RuleModule = {
     },
   },
   create: (context) => {
-    return {
       VariableDeclarator: (node) => {
         if (node.id.type === "Identifier" && node.id.name !== "bla") {
           context.report({
@@ -16,8 +15,7 @@ const rule: Rule.RuleModule = {
           });
         }
       },
-    };
-  },
+    },
 };
 
 export default rule;

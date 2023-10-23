@@ -57,19 +57,15 @@ const Members = ({ members, teamName }: { members: MemberType[]; teamName: strin
 
   return (
     <section className="lg:min-w-lg mx-auto flex min-w-full max-w-5xl flex-wrap justify-center gap-x-6 gap-y-6">
-      {members.map((member) => {
-        return member.username !== null && <Member key={member.id} member={member} teamName={teamName} />;
-      })}
+      {members.map((member) => member.username !== null && <Member key={member.id} member={member} teamName={teamName} />)}
     </section>
   );
 };
 
-const Team = ({ team }: { team: TeamTypeWithSafeHtml }) => {
-  return (
+const Team = ({ team }: { team: TeamTypeWithSafeHtml }) => (
     <div>
       <Members members={team.members} teamName={team.name} />
     </div>
   );
-};
 
 export default Team;

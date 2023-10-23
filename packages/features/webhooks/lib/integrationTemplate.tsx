@@ -5,16 +5,12 @@ type WebhookIntegrationProps = {
 };
 
 export const hasTemplateIntegration = (props: WebhookIntegrationProps) => {
-  const ind = supportedWebhookIntegrationList.findIndex((integration) => {
-    return props.url.includes(integration);
-  });
+  const ind = supportedWebhookIntegrationList.findIndex((integration) => props.url.includes(integration));
   return ind > -1;
 };
 
 const customTemplate = (props: WebhookIntegrationProps) => {
-  const ind = supportedWebhookIntegrationList.findIndex((integration) => {
-    return props.url.includes(integration);
-  });
+  const ind = supportedWebhookIntegrationList.findIndex((integration) => props.url.includes(integration));
   return integrationTemplate(supportedWebhookIntegrationList[ind]) || "";
 };
 

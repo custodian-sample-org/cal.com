@@ -1,8 +1,7 @@
 /* eslint-disable @next/next/no-head-element */
 import RawHtml from "./RawHtml";
 
-const EmailHead = ({ title = "" }) => {
-  return (
+const EmailHead = ({ title = "" }) => (
     <head>
       <title>{title}</title>
       <RawHtml
@@ -86,6 +85,5 @@ const EmailHead = ({ title = "" }) => {
       </style>
     </head>
   );
-};
 
 export default EmailHead;

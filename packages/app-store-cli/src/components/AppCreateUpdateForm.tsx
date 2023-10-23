@@ -297,17 +297,13 @@ export const AppForm = ({
                   return;
                 }
                 setSlugFinalized(true);
-                setInputIndex((index) => {
-                  return index + 1;
-                });
+                setInputIndex((index) => index + 1);
               }}
               onChange={(value) => {
                 setAppInputData((appInputData) => {
-                  return {
                     ...appInputData,
                     [fieldName]: value,
-                  };
-                });
+                  });
               }}
             />
           ) : (
@@ -328,14 +324,10 @@ export const AppForm = ({
               initialIndex={selectedOptionIndex === -1 ? 0 : selectedOptionIndex}
               onSelect={(item) => {
                 setAppInputData((appInputData) => {
-                  return {
                     ...appInputData,
                     [fieldName]: item.value,
-                  };
-                });
-                setInputIndex((index) => {
-                  return index + 1;
-                });
+                  });
+                setInputIndex((index) => index + 1);
               }}
             />
           )}

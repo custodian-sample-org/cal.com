@@ -363,9 +363,7 @@ export const EventTypeList = ({ group, groupIndex, readOnly, types }: EventTypeL
 
   const firstItem = types[0];
   const lastItem = types[types.length - 1];
-  const isManagedEventPrefix = () => {
-    return deleteDialogTypeSchedulingType === SchedulingType.MANAGED ? "_managed" : "";
-  };
+  const isManagedEventPrefix = () => deleteDialogTypeSchedulingType === SchedulingType.MANAGED ? "_managed" : "";
   return (
     <div className="bg-default border-subtle mb-16 flex overflow-hidden rounded-md border">
       <ul ref={parent} className="divide-subtle !static w-full divide-y" data-testid="event-types">
@@ -778,14 +776,12 @@ const CTA = () => {
   const profileOptions = query.data.profiles
     .filter((profile) => !profile.readOnly)
     .map((profile) => {
-      return {
         teamId: profile.teamId,
         label: profile.name || profile.slug,
         image: profile.image,
         membershipRole: profile.membershipRole,
         slug: profile.slug,
-      };
-    });
+      });
 
   return (
     <CreateButton
@@ -797,14 +793,12 @@ const CTA = () => {
   );
 };
 
-const Actions = () => {
-  return (
+const Actions = () => (
     <div className="hidden items-center md:flex">
       <OrganizationEventTypeFilter />
       <VerticalDivider />
     </div>
   );
-};
 
 const SetupProfileBanner = ({ closeAction }: { closeAction: () => void }) => {
   const { t } = useLocale();

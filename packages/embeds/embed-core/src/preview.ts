@@ -3,11 +3,10 @@ const WEBAPP_URL =
 const EMBED_LIB_URL = import.meta.env.EMBED_PUBLIC_EMBED_LIB_URL || `${WEBAPP_URL}/embed/embed.js`;
 
 // Install Cal Embed Code Snippet
-(function (C, A, L) {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const p = function (a: any, ar: any) {
-    a.q.push(ar);
-  };
+((C, A, L) => {
+  const p = (a: any, ar: any) => {
+  a.q.push(ar);
+};
   const d = C.document;
   C.Cal =
     C.Cal ||

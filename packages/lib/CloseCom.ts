@@ -198,146 +198,88 @@ export default class CloseCom {
     this.apiKey = providedApiKey || environmentApiKey;
   }
 
-  public me = async () => {
-    return this._get({ urlPath: "/me/" });
-  };
+  public me = () => this._get({ urlPath: "/me/" });
 
   public contact = {
-    search: async ({ emails }: { emails: string[] }): Promise<CloseComContactSearch> => {
-      return this._post({
+    search: ({ emails }: { emails: string[] }) => this._post({
         urlPath: "/data/search/",
         data: closeComQueries.contact.search(emails),
-      });
-    },
-    create: async (data: {
+      }),
+    create: (data: {
       person: { name: string | null; email: string };
       leadId: string;
-    }): Promise<CloseComContactSearch["data"][number]> => {
-      return this._post({ urlPath: "/contact/", data: closeComQueries.contact.create(data) });
-    },
-    update: async ({
+    }) => this._post({ urlPath: "/contact/", data: closeComQueries.contact.create(data) }),
+    update: ({
       contactId,
       ...data
     }: {
       person: { name: string; email: string };
       contactId: string;
       leadId?: string;
-    }): Promise<CloseComContactSearch["data"][number]> => {
-      return this._put({
+    }) => this._put({
         urlPath: `/contact/${contactId}/`,
         data: closeComQueries.contact.update(data),
-      });
-    },
-    delete: async (contactId: string) => {
-      return this._delete({
+      }),
+    delete: (contactId: string) => this._delete({
         urlPath: `/contact/${contactId}/`,
-      });
-    },
+      }),
   };
 
   public lead = {
-    list: async ({
+    list: ({
       query,
     }: {
       query: CloseComQuery;
-    }): Promise<{ data: { [key: string]: CloseComQuery }[] }> => {
-      return this._get({ urlPath: "/lead", query });
-    },
-    status: async () => {
-      return this._get({ urlPath: `/status/lead/` });
-    },
-    update: async (leadId: string, data: CloseComLead): Promise<CloseComLeadCreateResult> => {
-      return this._put({
+    }) => this._get({ urlPath: "/lead", query }),
+    status: () => this._get({ urlPath: `/status/lead/` }),
+    update: (leadId: string, data: CloseComLead) => this._put({
         urlPath: `/lead/${leadId}`,
         data,
-      });
-    },
-    create: async (data: CloseComLead): Promise<CloseComLeadCreateResult> => {
-      return this._post({
+      }),
+    create: (data: CloseComLead) => this._post({
         urlPath: "/lead/",
         data: closeComQueries.lead.create(data),
-      });
-    },
-    delete: async (leadId: string) => {
-      return this._delete({ urlPath: `/lead/${leadId}/` });
-    },
+      }),
+    delete: (leadId: string) => this._delete({ urlPath: `/lead/${leadId}/` }),
   };
 
   public customActivity = {
     type: {
-      create: async (
-        data: CloseComCustomActivityTypeCreate
-      ): Promise<CloseComCustomActivityTypeGet["data"][number]> => {
-        return this._post({
+      create: (data: CloseComCustomActivityTypeCreate) => this._post({
           urlPath: "/custom_activity",
           data: closeComQueries.customActivity.type.create(data),
-        });
-      },
-      get: async (): Promise<CloseComCustomActivityTypeGet> => {
-        return this._get({ urlPath: "/custom_activity" });
-      },
+        }),
+      get: () => this._get({ urlPath: "/custom_activity" }),
     },
   };
 
   public customField = {
     activity: {
-      create: async (
-        data: CloseComCustomActivityFieldCreate
-      ): Promise<CloseComCustomActivityFieldGet["data"][number]> => {
-        return this._post({ urlPath: "/custom_field/activity/", data });
-      },
-      get: async ({ query }: { query: CloseComQuery }): Promise<CloseComCustomActivityFieldGet> => {
-        return this._get({ urlPath: "/custom_field/activity/", query });
-      },
+      create: (data: CloseComCustomActivityFieldCreate) => this._post({ urlPath: "/custom_field/activity/", data }),
+      get: ({ query }: { query: CloseComQuery }) => this._get({ urlPath: "/custom_field/activity/", query }),
     },
     contact: {
-      create: async (
-        data: CloseComCustomContactFieldCreate
-      ): Promise<CloseComCustomContactFieldGet["data"][number]> => {
-        return this._post({ urlPath: "/custom_field/contact/", data });
-      },
-      get: async ({ query }: { query: CloseComQuery }): Promise<CloseComCustomContactFieldGet> => {
-        return this._get({ urlPath: "/custom_field/contact/", query });
-      },
+      create: (data: CloseComCustomContactFieldCreate) => this._post({ urlPath: "/custom_field/contact/", data }),
+      get: ({ query }: { query: CloseComQuery }) => this._get({ urlPath: "/custom_field/contact/", query }),
     },
     shared: {
-      get: async ({ query }: { query: CloseComQuery }): Promise<CloseComCustomContactFieldGet> => {
-        return this._get({ urlPath: "/custom_field/shared/", query });
-      },
+      get: ({ query }: { query: CloseComQuery }) => this._get({ urlPath: "/custom_field/shared/", query }),
     },
   };
 
   public activity = {
     custom: {
-      create: async (
-        data: CloseComCustomActivityCreate
-      ): Promise<CloseComCustomActivityTypeGet["data"][number]> => {
-        return this._post({ urlPath: "/activity/custom/", data });
-      },
-      delete: async (uuid: string) => {
-        return this._delete({ urlPath: `/activity/custom/${uuid}/` });
-      },
-      update: async (
-        uuid: string,
-        data: Partial<CloseComCustomActivityCreate>
-      ): Promise<CloseComCustomActivityTypeGet["data"][number]> => {
-        return this._put({ urlPath: `/activity/custom/${uuid}/`, data });
-      },
+      create: (data: CloseComCustomActivityCreate) => this._post({ urlPath: "/activity/custom/", data }),
+      delete: (uuid: string) => this._delete({ urlPath: `/activity/custom/${uuid}/` }),
+      update: (uuid: string,
+        data: Partial<CloseComCustomActivityCreate>) => this._put({ urlPath: `/activity/custom/${uuid}/`, data }),
     },
   };
 
-  private _get = async ({ urlPath, query }: { urlPath: string; query?: CloseComQuery }) => {
-    return await this._request({ urlPath, method: "get", query });
-  };
-  private _post = async ({ urlPath, data }: { urlPath: string; data: Record<string, unknown> }) => {
-    return this._request({ urlPath, method: "post", data });
-  };
-  private _put = async ({ urlPath, data }: { urlPath: string; data: Record<string, unknown> }) => {
-    return this._request({ urlPath, method: "put", data });
-  };
-  private _delete = async ({ urlPath }: { urlPath: string }) => {
-    return this._request({ urlPath, method: "delete" });
-  };
+  private _get = ({ urlPath, query }: { urlPath: string; query?: CloseComQuery }) => await this._request({ urlPath, method: "get", query });
+  private _post = ({ urlPath, data }: { urlPath: string; data: Record<string, unknown> }) => this._request({ urlPath, method: "post", data });
+  private _put = ({ urlPath, data }: { urlPath: string; data: Record<string, unknown> }) => this._request({ urlPath, method: "put", data });
+  private _delete = ({ urlPath }: { urlPath: string }) => this._request({ urlPath, method: "delete" });
   private _request = async ({
     urlPath,
     data,

@@ -17,18 +17,13 @@ export const daysInMonth = (date: Date | Dayjs) => {
  * Expects timeFormat to be either 12 or 24, if null or undefined
  * is passed in, we always default back to 24 hour notation.
  */
-export const formatTime = (
-  date: string | Date | Dayjs,
+export const formatTime = (date: string | Date | Dayjs,
   timeFormat?: number | null,
-  timeZone?: string | null
-) => {
-  // console.log(timeZone, date);
-  return timeZone
+  timeZone?: string | null) => timeZone
     ? dayjs(date)
         .tz(timeZone)
         .format(timeFormat === 12 ? "h:mma" : "HH:mm")
     : dayjs(date).format(timeFormat === 12 ? "h:mma" : "HH:mm");
-};
 
 /**
  * Returns a localized and translated date or time, based on the native

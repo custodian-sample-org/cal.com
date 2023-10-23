@@ -2,18 +2,13 @@ import type { GroupBase, SelectComponentsConfig, MenuPlacement } from "react-sel
 
 import { InputComponent, OptionComponent } from "./components";
 
-export const getReactSelectProps = <
-  Option,
-  IsMulti extends boolean = false,
-  Group extends GroupBase<Option> = GroupBase<Option>
->({
+export const getReactSelectProps = ({
   components,
   menuPlacement = "auto",
 }: {
   components: SelectComponentsConfig<Option, IsMulti, Group>;
   menuPlacement?: MenuPlacement;
 }) => {
-  return {
     menuPlacement,
     components: {
       Input: InputComponent,
@@ -22,4 +17,3 @@ export const getReactSelectProps = <
     },
     unstyled: true,
   };
-};

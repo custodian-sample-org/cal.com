@@ -100,14 +100,12 @@ export async function getTeamWithMembers(id?: number, slug?: string, userId?: nu
 
   if (!team) return null;
   const members = team.members.map((obj) => {
-    return {
       ...obj.user,
       role: obj.role,
       accepted: obj.accepted,
       disableImpersonation: obj.disableImpersonation,
       avatar: `${WEBAPP_URL}/${obj.user.username}/avatar.png`,
-    };
-  });
+    });
 
   const eventTypes = team.eventTypes.map((eventType) => ({
     ...eventType,

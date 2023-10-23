@@ -307,12 +307,10 @@ export const ensureBookingInputsHaveSystemFields = ({
         required: input.required,
         options: input.options
           ? input.options.map((o) => {
-              return {
                 ...o,
                 // Send the label as the value without any trimming or lowercase as this is what customInput are doing. It maintains backward compatibility
                 value: o.label,
-              };
-            })
+              })
           : [],
       });
     });

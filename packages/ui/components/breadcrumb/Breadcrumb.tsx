@@ -35,13 +35,11 @@ type BreadcrumbItemProps = {
   listProps?: JSX.IntrinsicElements["li"];
 };
 
-export const BreadcrumbItem = ({ children, href, listProps }: BreadcrumbItemProps) => {
-  return (
+export const BreadcrumbItem = ({ children, href, listProps }: BreadcrumbItemProps) => (
     <li {...listProps}>
       <Link href={href}>{children}</Link>
     </li>
   );
-};
 
 export const BreadcrumbContainer = () => {
   const router = useRouter();

@@ -4,9 +4,7 @@ const validationOrderKeys = ["PER_DAY", "PER_WEEK", "PER_MONTH", "PER_YEAR"];
 export const validateIntervalLimitOrder = (input: IntervalLimit) => {
   // Sort limits by validationOrder
   const sorted = Object.entries(input)
-    .sort(([, value], [, valuetwo]) => {
-      return value - valuetwo;
-    })
+    .sort(([, value], [, valuetwo]) => value - valuetwo)
     .map(([key]) => key);
 
   const validationOrderWithoutMissing = validationOrderKeys.filter((key) => sorted.includes(key));

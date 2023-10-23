@@ -7,7 +7,7 @@ export interface NavTabProps {
   actions?: JSX.Element;
 }
 
-const HorizontalTabs = function ({ tabs, linkProps, actions, ...props }: NavTabProps) {
+const HorizontalTabs = ({ tabs, linkProps, actions, ...props }: NavTabProps) => {
   return (
     <div className="mb-4 h-9 max-w-[calc(100%+40px)] lg:mb-5">
       <nav

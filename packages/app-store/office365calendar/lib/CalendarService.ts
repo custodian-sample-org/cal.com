@@ -275,7 +275,6 @@ export default class Office365CalendarService implements Calendar {
   };
 
   private translateEvent = (event: CalendarEvent) => {
-    return {
       subject: event.title,
       body: {
         contentType: "HTML",
@@ -309,7 +308,6 @@ export default class Office365CalendarService implements Calendar {
       ],
       location: event.location ? { displayName: getLocation(event) } : undefined,
     };
-  };
 
   private fetcher = async (endpoint: string, init?: RequestInit | undefined) => {
     this.accessToken = await this.auth.getToken();
@@ -444,8 +442,7 @@ export default class Office365CalendarService implements Calendar {
     return !!foundRetry;
   };
 
-  private processBusyTimes = (responses: ISettledResponse[]) => {
-    return responses.reduce(
+  private processBusyTimes = (responses: ISettledResponse[]) => responses.reduce(
       (acc: BufferedBusyTime[], subResponse: { body: { value?: BodyValue[]; error?: Error[] } }) => {
         if (!subResponse.body?.value) return acc;
         return acc.concat(
@@ -459,7 +456,6 @@ export default class Office365CalendarService implements Calendar {
       },
       []
     );
-  };
 
   private handleErrorJsonOffice365Calendar = <Type>(response: Response): Promise<Type | string> => {
     if (response.headers.get("content-encoding") === "gzip") {

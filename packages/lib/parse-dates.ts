@@ -92,14 +92,8 @@ export const parseRecurringDates = (
 
   const startUtcOffset = dayjs(startDate).utcOffset();
   // UTC still need to have DST applied, rrule does not do this.
-  const times = rule.all().map((t) => {
-    // applying the DST offset.
-    return dayjs.utc(t).add(startUtcOffset - dayjs(t).utcOffset(), "minute");
-  });
-  const dateStrings = times.map((t) => {
-    // finally; show in local timeZone again
-    return processDate(t.tz(timeZone), language, { selectedTimeFormat, withDefaultTimeFormat });
-  });
+  const times = rule.all().map((t) => dayjs.utc(t).add(startUtcOffset - dayjs(t).utcOffset(), "minute"));
+  const dateStrings = times.map((t) => processDate(t.tz(timeZone), language, { selectedTimeFormat, withDefaultTimeFormat }));
 
   return [dateStrings, times.map((t) => t.toDate())];
 };

@@ -117,9 +117,7 @@ export const EventSetupTab = (
   const [selectedLocation, setSelectedLocation] = useState<LocationOption | undefined>(undefined);
   const [multipleDuration, setMultipleDuration] = useState(eventType.metadata?.multipleDuration);
 
-  const locationOptions = props.locationOptions.filter((option) => {
-    return !team ? option.label !== "Conferencing" : true;
-  });
+  const locationOptions = props.locationOptions.filter((option) => !team ? option.label !== "Conferencing" : true);
 
   const multipleDurationOptions = [5, 10, 15, 20, 25, 30, 45, 50, 60, 75, 80, 90, 120, 180].map((mins) => ({
     value: mins,
@@ -430,9 +428,7 @@ export const EventSetupTab = (
                 value={selectedMultipleDuration}
                 onChange={(options) => {
                   let newOptions = [...options];
-                  newOptions = newOptions.sort((a, b) => {
-                    return a?.value - b?.value;
-                  });
+                  newOptions = newOptions.sort((a, b) => a?.value - b?.value);
                   const values = newOptions.map((opt) => opt.value);
                   setMultipleDuration(values);
                   setSelectedMultipleDuration(newOptions);

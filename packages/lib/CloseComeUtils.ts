@@ -80,10 +80,8 @@ export async function getCustomActivityTypeInstanceData(
       lead_id: leadFromCalComId,
     }, // This is to add each field as `"custom.FIELD_ID": "value"` in the object
     ...customActivityTypeAndFieldsIds.fields.map((fieldId: string, index: number) => {
-      return {
         [`custom.${fieldId}`]: customActivityFieldsValues[index],
-      };
-    })
+      })
   );
 }
 

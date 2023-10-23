@@ -80,8 +80,7 @@ const Result = ({ formId, jsonLogicQuery }: { formId: string; jsonLogicQuery: Js
           ))}
         </tr>
         {!isLoading &&
-          data?.pages.map((page) => {
-            return page.responses?.map((responses, rowIndex) => {
+          data?.pages.map((page) => page.responses?.map((responses, rowIndex) => {
               const isLastRow = page.responses.length - 1 === rowIndex;
               return (
                 <tr
@@ -108,8 +107,7 @@ const Result = ({ formId, jsonLogicQuery }: { formId: string; jsonLogicQuery: Js
                   })}
                 </tr>
               );
-            });
-          })}
+            }))}
       </table>
       {isLoading ? <div className="text-default p-2">{t("loading")}</div> : ""}
       {hasNextPage && (
@@ -197,10 +195,8 @@ export default function ReporterWrapper({
   );
 }
 
-ReporterWrapper.getLayout = (page: React.ReactElement) => {
-  return (
+ReporterWrapper.getLayout = (page: React.ReactElement) => (
     <Shell backPath="/apps/routing-forms/forms" withoutMain={true}>
       {page}
     </Shell>
   );
-};

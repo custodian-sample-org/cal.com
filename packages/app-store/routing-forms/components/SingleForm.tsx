@@ -327,16 +327,14 @@ function SingleForm({ form, appUrl, Page }: SingleFormComponentProps) {
                     <Controller
                       name="settings.emailOwnerOnSubmission"
                       control={hookForm.control}
-                      render={({ field: { value, onChange } }) => {
-                        return (
+                      render={({ field: { value, onChange } }) => (
                           <SettingsToggle
                             title={t("routing_forms_send_email_owner")}
                             description={t("routing_forms_send_email_owner_description")}
                             checked={value}
                             onCheckedChange={(val) => onChange(val)}
                           />
-                        );
-                      }}
+                        )}
                     />
                   </div>
 
@@ -349,15 +347,13 @@ function SingleForm({ form, appUrl, Page }: SingleFormComponentProps) {
                         {t("modifications_in_fields_warning")}
                       </p>
                       <div className="flex">
-                        {form.routers.map((router) => {
-                          return (
+                        {form.routers.map((router) => (
                             <div key={router.id} className="mr-2">
                               <Link href={`${appUrl}/route-builder/${router.id}`}>
                                 <Badge variant="gray">{router.name}</Badge>
                               </Link>
                             </div>
-                          );
-                        })}
+                          ))}
                       </div>
                     </div>
                   ) : null}
@@ -371,15 +367,13 @@ function SingleForm({ form, appUrl, Page }: SingleFormComponentProps) {
                         {t("form_modifications_warning")}
                       </p>
                       <div className="flex">
-                        {connectedForms.map((router) => {
-                          return (
+                        {connectedForms.map((router) => (
                             <div key={router.id} className="mr-2">
                               <Link href={`${appUrl}/route-builder/${router.id}`}>
                                 <Badge variant="default">{router.name}</Badge>
                               </Link>
                             </div>
-                          );
-                        })}
+                          ))}
                       </div>
                     </div>
                   ) : null}
@@ -523,12 +517,10 @@ export default function SingleFormWrapper({ form: _form, ...props }: SingleFormC
   return <SingleForm form={form} {...props} />;
 }
 
-export const getServerSidePropsForSingleFormView = async function getServerSidePropsForSingleFormView(
-  context: AppGetServerSidePropsContext,
+export const getServerSidePropsForSingleFormView = (context: AppGetServerSidePropsContext,
   prisma: AppPrisma,
   user: AppUser,
-  ssrInit: AppSsrInit
-) {
+  ssrInit: AppSsrInit) => {
   const ssr = await ssrInit(context);
 
   if (!user) {

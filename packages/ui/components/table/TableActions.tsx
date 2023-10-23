@@ -41,8 +41,7 @@ export const DropdownActions = ({
 }: {
   actions: ActionType[];
   actionTrigger?: React.ReactNode;
-}) => {
-  return (
+}) => (
     <Dropdown>
       {!actionTrigger ? (
         <DropdownMenuTrigger asChild>
@@ -70,10 +69,8 @@ export const DropdownActions = ({
       </DropdownMenuPortal>
     </Dropdown>
   );
-};
 
-export const TableActions: FC<Props> = ({ actions }) => {
-  return (
+export const TableActions: FC<Props> = ({ actions }) => (
     <>
       <div className="flex space-x-2 rtl:space-x-reverse">
         {actions.map((action) => {
@@ -99,4 +96,3 @@ export const TableActions: FC<Props> = ({ actions }) => {
       </div>
     </>
   );
-};

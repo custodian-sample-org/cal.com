@@ -10,8 +10,7 @@ type GetOptions = {
   input: TGetInputSchema;
 };
 
-export const getHandler = async ({ ctx: _ctx, input }: GetOptions) => {
-  return await prisma.webhook.findUniqueOrThrow({
+export const getHandler = ({ ctx: _ctx, input }: GetOptions) => await prisma.webhook.findUniqueOrThrow({
     where: {
       id: input.webhookId,
     },
@@ -26,4 +25,3 @@ export const getHandler = async ({ ctx: _ctx, input }: GetOptions) => {
       userId: true,
     },
   });
-};

@@ -4,8 +4,7 @@ import { test } from "@calcom/web/playwright/lib/fixtures";
 
 test("Preview - embed-core should load", async ({ page }) => {
   await page.goto("http://localhost:3000/embed/preview.html");
-  const libraryLoaded = await page.evaluate(() => {
-    return new Promise((resolve) => {
+  const libraryLoaded = await page.evaluate(() => new Promise((resolve) => {
       setInterval(() => {
         if (
           (
@@ -19,7 +18,6 @@ test("Preview - embed-core should load", async ({ page }) => {
           resolve(true);
         }
       }, 1000);
-    });
-  });
+    }));
   expect(libraryLoaded).toBe(true);
 });

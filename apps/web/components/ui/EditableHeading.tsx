@@ -4,7 +4,7 @@ import type { ControllerRenderProps } from "react-hook-form";
 
 import { Edit2 } from "@calcom/ui/components/icon";
 
-const EditableHeading = function EditableHeading({
+const EditableHeading = ({
   value,
   onChange,
   isReady,
@@ -12,7 +12,7 @@ const EditableHeading = function EditableHeading({
 }: {
   isReady?: boolean;
 } & Omit<JSX.IntrinsicElements["input"], "name" | "onChange"> &
-  ControllerRenderProps) {
+  ControllerRenderProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const enableEditing = () => setIsEditing(true);
   return (

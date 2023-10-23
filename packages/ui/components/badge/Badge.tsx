@@ -56,7 +56,7 @@ export type BadgeProps =
   | (BadgeBaseProps & Omit<React.HTMLAttributes<HTMLDivElement>, "onClick"> & { onClick?: never })
   | (BadgeBaseProps & Omit<React.HTMLAttributes<HTMLButtonElement>, "onClick"> & { onClick: () => void });
 
-export const Badge = function Badge(props: BadgeProps) {
+export const Badge = (props: BadgeProps) => {
   const { variant, className, size, startIcon, withDot, children, rounded, ...passThroughProps } = props;
   const isButton = "onClick" in passThroughProps && passThroughProps.onClick !== undefined;
   const StartIcon = startIcon ? (startIcon as SVGComponent) : undefined;

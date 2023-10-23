@@ -8,9 +8,7 @@ import { Edit2, Trash2 } from "@calcom/ui/components/icon";
 
 import DateOverrideInputDialog from "./DateOverrideInputDialog";
 
-const sortByDate = (a: { ranges: TimeRange[]; id: string }, b: { ranges: TimeRange[]; id: string }) => {
-  return a.ranges[0].start > b.ranges[0].start ? 1 : -1;
-};
+const sortByDate = (a: { ranges: TimeRange[]; id: string }, b: { ranges: TimeRange[]; id: string }) => a.ranges[0].start > b.ranges[0].start ? 1 : -1;
 
 const useSettings = () => {
   const { data } = useMeQuery();
@@ -40,8 +38,7 @@ const DateOverrideList = ({
     return <></>;
   }
 
-  const timeSpan = ({ start, end }: TimeRange) => {
-    return (
+  const timeSpan = ({ start, end }: TimeRange) => (
       new Intl.DateTimeFormat(i18n.language, { hour: "numeric", minute: "numeric", hour12 }).format(
         new Date(start.toISOString().slice(0, -1))
       ) +
@@ -50,7 +47,6 @@ const DateOverrideList = ({
         new Date(end.toISOString().slice(0, -1))
       )
     );
-  };
 
   return (
     <ul className="border-subtle rounded border" data-testid="date-overrides-list">

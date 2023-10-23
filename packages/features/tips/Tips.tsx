@@ -143,8 +143,7 @@ export default function Tips() {
       style={{
         gridTemplateColumns: "1fr",
       }}>
-      {list.map((tip) => {
-        return (
+      {list.map((tip) => (
           <div
             className="relative"
             style={{
@@ -170,8 +169,7 @@ export default function Tips() {
               />
             </div>
           </div>
-        );
-      })}
+        ))}
     </div>
   );
 }

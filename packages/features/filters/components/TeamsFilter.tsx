@@ -33,9 +33,7 @@ export const TeamsFilter = () => {
     const teamIds = query.teamIds;
     if (teamIds) {
       const selectedTeamsNames = teams
-        ?.filter((team) => {
-          return teamIds.includes(team.id);
-        })
+        ?.filter((team) => teamIds.includes(team.id))
         ?.map((team) => team.name);
       if (selectedTeamsNames) {
         checkedOptions.push(...selectedTeamsNames);
@@ -104,17 +102,14 @@ export const TeamsFilter = () => {
   );
 };
 
-export const FilterCheckboxFieldsContainer = ({ children }: { children: ReactNode }) => {
-  return <div className="flex flex-col gap-0.5 [&>*:first-child]:mt-1 [&>*:last-child]:mb-1">{children}</div>;
-};
+export const FilterCheckboxFieldsContainer = ({ children }: { children: ReactNode }) => <div className="flex flex-col gap-0.5 [&>*:first-child]:mt-1 [&>*:last-child]:mb-1">{children}</div>;
 
 type Props = InputHTMLAttributes<HTMLInputElement> & {
   label: string;
   icon: ReactNode;
 };
 
-export const FilterCheckboxField = forwardRef<HTMLInputElement, Props>(({ label, icon, ...rest }, ref) => {
-  return (
+export const FilterCheckboxField = forwardRef<HTMLInputElement, Props>(({ label, icon, ...rest }, ref) => (
     <div className="hover:bg-muted flex items-center py-2 pl-3 pr-2.5 hover:cursor-pointer">
       <label className="flex w-full items-center justify-between hover:cursor-pointer">
         <div className="flex items-center">
@@ -135,7 +130,6 @@ export const FilterCheckboxField = forwardRef<HTMLInputElement, Props>(({ label,
         </div>
       </label>
     </div>
-  );
-});
+  ));
 
 FilterCheckboxField.displayName = "FilterCheckboxField";

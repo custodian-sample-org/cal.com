@@ -45,13 +45,11 @@ const RadioAreaGroup = ({
   className,
   onValueChange,
   ...passThroughProps
-}: RadioGroupPrimitive.RadioGroupProps) => {
-  return (
+}: RadioGroupPrimitive.RadioGroupProps) => (
     <RadioGroupPrimitive.Root className={className} onValueChange={onValueChange} {...passThroughProps}>
       {children}
     </RadioGroupPrimitive.Root>
   );
-};
 
 const Item = RadioArea;
 const Group = RadioAreaGroup;

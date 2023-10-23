@@ -13,8 +13,7 @@ export const ResponseEmail = ({
   form: Pick<App_RoutingForms_Form, "id" | "name">;
   response: Response;
   subject: string;
-} & Partial<React.ComponentProps<typeof BaseEmailHtml>>) => {
-  return (
+} & Partial<React.ComponentProps<typeof BaseEmailHtml>>) => (
     <BaseEmailHtml
       callToAction={
         <div
@@ -36,8 +35,7 @@ export const ResponseEmail = ({
       title={form.name}
       subtitle="New Response Received"
       {...props}>
-      {Object.entries(response).map(([fieldId, fieldResponse]) => {
-        return (
+      {Object.entries(response).map(([fieldId, fieldResponse]) => (
           <Info
             withSpacer
             key={fieldId}
@@ -46,8 +44,6 @@ export const ResponseEmail = ({
               fieldResponse.value instanceof Array ? fieldResponse.value.join(",") : fieldResponse.value
             }
           />
-        );
-      })}
+        ))}
     </BaseEmailHtml>
   );
-};

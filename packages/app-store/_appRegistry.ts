@@ -16,9 +16,7 @@ export async function getAppWithMetadata(app: { dirName: string } | { slug: stri
   if ("dirName" in app) {
     appMetadata = appStoreMetadata[app.dirName as keyof typeof appStoreMetadata] as App;
   } else {
-    const foundEntry = Object.entries(appStoreMetadata).find(([, meta]) => {
-      return meta.slug === app.slug;
-    });
+    const foundEntry = Object.entries(appStoreMetadata).find(([, meta]) => meta.slug === app.slug);
     if (!foundEntry) return null;
     appMetadata = foundEntry[1] as App;
   }

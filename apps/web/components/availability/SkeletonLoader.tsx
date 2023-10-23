@@ -39,8 +39,7 @@ function SkeletonItem() {
   );
 }
 
-export const SelectSkeletonLoader = ({ className }: { className?: string }) => {
-  return (
+export const SelectSkeletonLoader = ({ className }: { className?: string }) => (
     <li
       className={classNames(
         "border-subtle group flex w-full items-center justify-between rounded-sm border px-[10px] py-3",
@@ -54,4 +53,3 @@ export const SelectSkeletonLoader = ({ className }: { className?: string }) => {
       </div>
     </li>
   );
-};

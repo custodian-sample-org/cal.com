@@ -14,21 +14,21 @@ function turndown(html: string | TurndownService.Node): string {
 }
 
 turndownService.addRule("shiftEnter", {
-  filter: function (node) {
-    return node.nodeName === "BR" && !!isShiftEnter(node);
-  },
-  replacement: function () {
-    return "<br>";
-  },
+  filter: (node) => {
+  return node.nodeName === "BR" && !!isShiftEnter(node);
+},
+  replacement: () => {
+  return "<br>";
+},
 });
 
 turndownService.addRule("enter", {
-  filter: function (node) {
-    return node.nodeName === "BR" && !isShiftEnter(node);
-  },
-  replacement: function () {
-    return "<p><br></p>";
-  },
+  filter: (node) => {
+  return node.nodeName === "BR" && !isShiftEnter(node);
+},
+  replacement: () => {
+  return "<p><br></p>";
+},
 });
 
 function isShiftEnter(node: HTMLElement) {

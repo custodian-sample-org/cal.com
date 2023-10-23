@@ -24,11 +24,9 @@ export const getStaticProps: GetStaticProps = (ctx) => {
 };
 
 export const getStaticPaths: GetStaticPaths = () => {
-  return {
     paths: [],
     fallback: "blocking",
   };
-};
 
 const WorkflowsPage = Workflow as CalPageWrapper;
 WorkflowsPage.PageWrapper = PageWrapper;

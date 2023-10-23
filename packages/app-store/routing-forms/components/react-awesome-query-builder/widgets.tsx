@@ -151,11 +151,9 @@ const MultiSelectWidget = ({
     return null;
   }
   const selectItems = listValues.map((item) => {
-    return {
       label: item.title,
       value: item.value,
-    };
-  });
+    });
 
   const optionsFromList = selectItems.filter((item) => value?.includes(item.value));
 
@@ -179,11 +177,9 @@ function SelectWidget({ listValues, setValue, value, ...remainingProps }: Select
     return null;
   }
   const selectItems = listValues.map((item) => {
-    return {
       label: item.title,
       value: item.value,
-    };
-  });
+    });
   const optionFromList = selectItems.find((item) => item.value === value);
 
   return (
@@ -309,18 +305,14 @@ function Conjs({ not, setNot, config, conjunctionOptions, setConjunction, disabl
   return showConj ? renderOptions() : null;
 }
 
-const FieldSelect = function FieldSelect(props: FieldProps) {
+const FieldSelect = (props: FieldProps) => {
   const { items, setField, selectedKey } = props;
   const selectItems = items.map((item) => {
-    return {
       ...item,
       value: item.key,
-    };
-  });
+    });
 
-  const defaultValue = selectItems.find((item) => {
-    return item.value === selectedKey;
-  });
+  const defaultValue = selectItems.find((item) => item.value === selectedKey);
 
   return (
     <Select

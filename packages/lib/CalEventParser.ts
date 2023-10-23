@@ -11,15 +11,12 @@ const translator = short();
 
 // The odd indentation in this file is necessary because otherwise the leading tabs will be applied into the event description.
 
-export const getWhat = (calEvent: CalendarEvent, t: TFunction) => {
-  return `
+export const getWhat = (calEvent: CalendarEvent, t: TFunction) => `
 ${t("what")}:
 ${calEvent.type}
   `;
-};
 
-export const getWhen = (calEvent: CalendarEvent, t: TFunction) => {
-  return calEvent.seatsPerTimeSlot
+export const getWhen = (calEvent: CalendarEvent, t: TFunction) => calEvent.seatsPerTimeSlot
     ? `
 ${t("organizer_timezone")}:
 ${calEvent.organizer.timeZone}
@@ -28,7 +25,6 @@ ${calEvent.organizer.timeZone}
 ${t("invitee_timezone")}:
 ${calEvent.attendees[0].timeZone}
   `;
-};
 
 export const getWho = (calEvent: CalendarEvent, t: TFunction) => {
   let attendeesFromCalEvent = [...calEvent.attendees];
@@ -36,12 +32,10 @@ export const getWho = (calEvent: CalendarEvent, t: TFunction) => {
     attendeesFromCalEvent = [];
   }
   const attendees = attendeesFromCalEvent
-    .map((attendee) => {
-      return `
+    .map((attendee) => `
 ${attendee?.name || t("guest")}
 ${attendee.email}
-      `;
-    })
+      `)
     .join("");
 
   const organizer = `
@@ -50,12 +44,10 @@ ${calEvent.organizer.email}
   `;
 
   const teamMembers = calEvent.team?.members
-    ? calEvent.team.members.map((member) => {
-        return `
+    ? calEvent.team.members.map((member) => `
 ${member.name} - ${t("team_member")} 
 ${member.email}
-    `;
-      })
+    `)
     : [];
 
   return `
@@ -100,15 +92,13 @@ export const getAppsStatus = (calEvent: CalendarEvent, t: TFunction) => {
     return "";
   }
   return `\n${t("apps_status")}
-      ${calEvent.appsStatus.map((app) => {
-        return `\n- ${app.appName} ${
+      ${calEvent.appsStatus.map((app) => `\n- ${app.appName} ${
           app.success >= 1 ? `✅ ${app.success > 1 ? `(x${app.success})` : ""}` : ""
         }${
           app.warnings && app.warnings.length >= 1 ? app.warnings.map((warning) => `\n   - ${warning}`) : ""
         } ${app.failures && app.failures >= 1 ? `❌ ${app.failures > 1 ? `(x${app.failures})` : ""}` : ""} ${
           app.errors && app.errors.length >= 1 ? app.errors.map((error) => `\n   - ${error}`) : ""
-        }`;
-      })}
+        }`)}
     `;
 };
 
@@ -150,16 +140,12 @@ export const getUid = (calEvent: CalendarEvent): string => {
   return uid ?? translator.fromUUID(uuidv5(JSON.stringify(calEvent), uuidv5.URL));
 };
 
-const getSeatReferenceId = (calEvent: CalendarEvent): string => {
-  return calEvent.attendeeSeatId ? calEvent.attendeeSeatId : "";
-};
+const getSeatReferenceId = (calEvent: CalendarEvent) => calEvent.attendeeSeatId ? calEvent.attendeeSeatId : "";
 
-export const getManageLink = (calEvent: CalendarEvent, t: TFunction) => {
-  return `
+export const getManageLink = (calEvent: CalendarEvent, t: TFunction) => `
 ${t("need_to_reschedule_or_cancel")}
 ${WEBAPP_URL + "/booking/" + getUid(calEvent) + "?changes=true"}
   `;
-};
 
 export const getCancelLink = (calEvent: CalendarEvent): string => {
   const cancelLink = new URL(WEBAPP_URL + `/booking/${getUid(calEvent)}`);
@@ -215,13 +201,9 @@ ${calEvent.cancellationReason}
  `;
 };
 
-export const isDailyVideoCall = (calEvent: CalendarEvent): boolean => {
-  return calEvent?.videoCallData?.type === "daily_video";
-};
+export const isDailyVideoCall = (calEvent: CalendarEvent) => calEvent?.videoCallData?.type === "daily_video";
 
-export const getPublicVideoCallUrl = (calEvent: CalendarEvent): string => {
-  return WEBAPP_URL + "/video/" + getUid(calEvent);
-};
+export const getPublicVideoCallUrl = (calEvent: CalendarEvent) => WEBAPP_URL + "/video/" + getUid(calEvent);
 
 export const getVideoCallUrlFromCalEvent = (calEvent: CalendarEvent): string => {
   if (calEvent.videoCallData) {
@@ -236,6 +218,4 @@ export const getVideoCallUrlFromCalEvent = (calEvent: CalendarEvent): string => 
   return "";
 };
 
-export const getVideoCallPassword = (calEvent: CalendarEvent): string => {
-  return isDailyVideoCall(calEvent) ? "" : calEvent?.videoCallData?.password ?? "";
-};
+export const getVideoCallPassword = (calEvent: CalendarEvent) => isDailyVideoCall(calEvent) ? "" : calEvent?.videoCallData?.password ?? "";

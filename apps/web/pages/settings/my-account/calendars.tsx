@@ -31,8 +31,7 @@ import { QueryCell } from "@lib/QueryCell";
 
 import PageWrapper from "@components/PageWrapper";
 
-const SkeletonLoader = () => {
-  return (
+const SkeletonLoader = () => (
     <SkeletonContainer>
       <div className="mt-6 mb-8 space-y-6">
         <SkeletonText className="h-8 w-full" />
@@ -44,7 +43,6 @@ const SkeletonLoader = () => {
       </div>
     </SkeletonContainer>
   );
-};
 
 const AddCalendarButton = () => {
   const { t } = useLocale();
@@ -83,8 +81,7 @@ const CalendarsView = () => {
       <QueryCell
         query={query}
         customLoader={<SkeletonLoader />}
-        success={({ data }) => {
-          return data.connectedCalendars.length ? (
+        success={({ data }) => data.connectedCalendars.length ? (
             <div>
               <div className="bg-muted border-subtle mt-4 flex space-x-4 rounded-md p-2 sm:mx-0 sm:p-10 md:border md:p-6 xl:mt-0">
                 <div className=" bg-default border-subtle flex h-9 w-9 items-center justify-center rounded-md border-2 p-[6px]">
@@ -207,10 +204,8 @@ const CalendarsView = () => {
               buttonText={t("add_a_calendar")}
               buttonOnClick={() => router.push("/apps/categories/calendar")}
             />
-          );
-        }}
-        error={() => {
-          return (
+          )}
+        error={() => (
             <Alert
               message={
                 <Trans i18nKey="fetching_calendars_error">
@@ -223,8 +218,7 @@ const CalendarsView = () => {
               }
               severity="error"
             />
-          );
-        }}
+          )}
       />
     </>
   );

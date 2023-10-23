@@ -3,8 +3,7 @@ import { SkeletonText } from "@calcom/ui";
 
 import { CardInsights } from "./Card";
 
-export const LoadingInsight = () => {
-  return (
+export const LoadingInsight = () => (
     <CardInsights>
       <SkeletonText className="w-32" />
       <div className="m-auto flex h-80 flex-col items-center justify-center">
@@ -23,4 +22,3 @@ export const LoadingInsight = () => {
       </div>
     </CardInsights>
   );
-};

@@ -365,11 +365,9 @@ const BookingPage = ({
       };
 
       const responses = eventType.bookingFields.reduce((responses, field) => {
-        return {
           ...responses,
           [field.name]: parsedQuery[field.name],
-        };
-      }, {});
+        }, {});
       defaults.responses = {
         ...responses,
         name: defaultUserValues.name || (!loggedInIsOwner && session?.user?.name) || "",
@@ -392,11 +390,9 @@ const BookingPage = ({
     };
 
     const responses = eventType.bookingFields.reduce((responses, field) => {
-      return {
         ...responses,
         [field.name]: booking.responses[field.name],
-      };
-    }, {});
+      }, {});
     defaults.responses = {
       ...responses,
       name: defaultUserValues.name || (!loggedInIsOwner && session?.user?.name) || "",
@@ -558,9 +554,7 @@ const BookingPage = ({
                       {isClientTimezoneAvailable &&
                         !rescheduleUid &&
                         eventType.recurringEvent?.freq &&
-                        recurringStrings.slice(0, 5).map((timeFormatted, key) => {
-                          return <p key={key}>{timeFormatted}</p>;
-                        })}
+                        recurringStrings.slice(0, 5).map((timeFormatted, key) => <p key={key}>{timeFormatted}</p>)}
                       {!rescheduleUid && eventType.recurringEvent?.freq && recurringStrings.length > 5 && (
                         <div className="flex">
                           <Tooltip

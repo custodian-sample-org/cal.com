@@ -259,15 +259,13 @@ export default abstract class BaseCalendarService implements Calendar {
 
       const eventsToDelete = events.filter((event) => event.uid === uid);
       await Promise.all(
-        eventsToDelete.map((event) => {
-          return deleteCalendarObject({
+        eventsToDelete.map((event) => deleteCalendarObject({
             calendarObject: {
               url: event.url,
               etag: event?.etag,
             },
             headers: this.headers,
-          });
-        })
+          }))
       );
     } catch (reason) {
       this.log.error(reason);

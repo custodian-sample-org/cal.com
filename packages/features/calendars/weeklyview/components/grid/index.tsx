@@ -7,10 +7,8 @@ type Props = {
   zIndex?: number;
 };
 
-export const SchedulerColumns = React.forwardRef<HTMLOListElement, Props>(function SchedulerColumns(
-  { offsetHeight, gridStopsPerDay, children, zIndex },
-  ref
-) {
+export const SchedulerColumns = React.forwardRef<HTMLOListElement, Props>(({ offsetHeight, gridStopsPerDay, children, zIndex },
+  ref) => {
   return (
     <ol
       ref={ref}

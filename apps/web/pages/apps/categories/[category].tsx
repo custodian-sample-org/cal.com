@@ -40,9 +40,7 @@ export default function Apps({ apps }: InferGetStaticPropsType<typeof getStaticP
         }>
         <div className="mb-16">
           <div className="grid-col-1 grid grid-cols-1 gap-3 md:grid-cols-3">
-            {apps.map((app) => {
-              return <AppCard key={app.slug} app={app} />;
-            })}
+            {apps.map((app) => <AppCard key={app.slug} app={app} />)}
           </div>
         </div>
       </Shell>

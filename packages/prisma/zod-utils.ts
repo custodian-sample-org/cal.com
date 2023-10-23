@@ -450,15 +450,9 @@ export function denullishShape<
  * @returns The constructed tuple array from the given object
  * @see https://github.com/3x071c/lsg-remix/blob/e2a9592ba3ec5103556f2cf307c32f08aeaee32d/app/lib/util/entries.ts
  */
-export const entries = <O extends Record<string, unknown>>(
-  obj: O
-): {
-  readonly [K in keyof O]: [K, O[K]];
-}[keyof O][] => {
-  return Object.entries(obj) as {
+export const entries = (obj: O) => Object.entries(obj) as {
     [K in keyof O]: [K, O[K]];
   }[keyof O][];
-};
 
 /**
  * Returns a type with all readonly notations removed (traverses recursively on an object)
@@ -481,13 +475,7 @@ type FromEntries<T> = T extends [infer Keys, unknown][]
  * @returns Object constructed from the given entries
  * @see https://github.com/3x071c/lsg-remix/blob/e2a9592ba3ec5103556f2cf307c32f08aeaee32d/app/lib/util/fromEntries.ts
  */
-export const fromEntries = <
-  E extends [PropertyKey, unknown][] | ReadonlyArray<readonly [PropertyKey, unknown]>
->(
-  entries: E
-): FromEntries<DeepWriteable<E>> => {
-  return Object.fromEntries(entries) as FromEntries<DeepWriteable<E>>;
-};
+export const fromEntries = (entries: E) => Object.fromEntries(entries) as FromEntries<DeepWriteable<E>>;
 
 export const getAccessLinkResponseSchema = z.object({
   download_link: z.string().url(),

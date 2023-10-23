@@ -14,8 +14,7 @@ type Props = {
   minDate?: Date;
 };
 
-const DatePicker = ({ minDate, disabled, date, onDatesChange, className }: Props) => {
-  return (
+const DatePicker = ({ minDate, disabled, date, onDatesChange, className }: Props) => (
     <PrimitiveDatePicker
       className={classNames(
         "focus:ring-primary-500 focus:border-primary-500 border-default rounded-md border p-1 pl-2 shadow-sm sm:text-sm",
@@ -30,6 +29,5 @@ const DatePicker = ({ minDate, disabled, date, onDatesChange, className }: Props
       onChange={onDatesChange}
     />
   );
-};
 
 export default DatePicker;

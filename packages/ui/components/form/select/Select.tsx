@@ -26,12 +26,10 @@ export const Select = <
   ...props
 }: SelectProps<Option, IsMulti, Group>) => {
   const { classNames, ...restProps } = props;
-  const reactSelectProps = React.useMemo(() => {
-    return getReactSelectProps<Option, IsMulti, Group>({
+  const reactSelectProps = React.useMemo(() => getReactSelectProps<Option, IsMulti, Group>({
       components: components || {},
       menuPlacement,
-    });
-  }, [components, menuPlacement]);
+    }), [components, menuPlacement]);
 
   // Annoyingly if we update styles here we have to update timezone select too
   // We cant create a generate function for this as we can't force state changes - onSelect styles dont change for example
@@ -94,12 +92,7 @@ export const Select = <
   );
 };
 
-export const SelectField = function SelectField<
-  Option,
-  IsMulti extends boolean = false,
-  Group extends GroupBase<Option> = GroupBase<Option>
->(
-  props: {
+export const SelectField = (props: {
     required?: boolean;
     name?: string;
     containerClassName?: string;
@@ -107,8 +100,7 @@ export const SelectField = function SelectField<
     labelProps?: React.ComponentProps<typeof Label>;
     className?: string;
     error?: string;
-  } & SelectProps<Option, IsMulti, Group>
-) {
+  } & SelectProps<Option, IsMulti, Group>) => {
   const { t } = useLocale();
   const { label = t(props.name || ""), containerClassName, labelProps, className, ...passThrough } = props;
   const id = useId();
