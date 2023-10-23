@@ -8,8 +8,7 @@ type ListOptions = {
   };
 };
 
-export const listHandler = async ({ ctx }: ListOptions) => {
-  return await prisma.apiKey.findMany({
+export const listHandler = ({ ctx }: ListOptions) => await prisma.apiKey.findMany({
     where: {
       userId: ctx.user.id,
       OR: [
@@ -25,4 +24,3 @@ export const listHandler = async ({ ctx }: ListOptions) => {
     },
     orderBy: { createdAt: "desc" },
   });
-};

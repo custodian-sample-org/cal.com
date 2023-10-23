@@ -18,8 +18,7 @@ export type SingleValueLocationOption = SingleValue<LocationOption>;
 
 export type GroupOptionType = GroupBase<LocationOption>;
 
-const OptionWithIcon = ({ icon, label }: { icon?: string; label: string }) => {
-  return (
+const OptionWithIcon = ({ icon, label }: { icon?: string; label: string }) => (
     <div className="flex items-center gap-3">
       {icon && (
         <img
@@ -32,7 +31,6 @@ const OptionWithIcon = ({ icon, label }: { icon?: string; label: string }) => {
       <span className={classNames("text-sm font-medium")}>{label}</span>
     </div>
   );
-};
 
 export default function LocationSelect(props: Props<LocationOption, false, GroupOptionType>) {
   return (

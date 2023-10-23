@@ -53,9 +53,7 @@ function MembersList(props: MembersListProps) {
       />
       {membersList?.length && team ? (
         <ul className="divide-subtle border-subtle divide-y rounded-md border ">
-          {membersList.map((member) => {
-            return <MemberListItem key={member.id} team={team} member={member} />;
-          })}
+          {membersList.map((member) => <MemberListItem key={member.id} team={team} member={member} />)}
         </ul>
       ) : null}
     </div>

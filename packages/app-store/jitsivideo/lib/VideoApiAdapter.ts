@@ -7,11 +7,8 @@ import type { VideoApiAdapter, VideoCallData } from "@calcom/types/VideoApiAdapt
 import getAppKeysFromSlug from "../../_utils/getAppKeysFromSlug";
 import { metadata } from "../_metadata";
 
-const JitsiVideoApiAdapter = (): VideoApiAdapter => {
-  return {
-    getAvailability: () => {
-      return Promise.resolve([]);
-    },
+const JitsiVideoApiAdapter = () => {
+    getAvailability: () => Promise.resolve([]),
     createMeeting: async (eventData: CalendarEvent): Promise<VideoCallData> => {
       const appKeys = await getAppKeysFromSlug(metadata.slug);
 
@@ -39,15 +36,12 @@ const JitsiVideoApiAdapter = (): VideoApiAdapter => {
     deleteMeeting: async (): Promise<void> => {
       Promise.resolve();
     },
-    updateMeeting: (bookingRef: PartialReference): Promise<VideoCallData> => {
-      return Promise.resolve({
+    updateMeeting: (bookingRef: PartialReference) => Promise.resolve({
         type: "jitsi_video",
         id: bookingRef.meetingId as string,
         password: bookingRef.meetingPassword as string,
         url: bookingRef.meetingUrl as string,
-      });
-    },
+      }),
   };
-};
 
 export default JitsiVideoApiAdapter;

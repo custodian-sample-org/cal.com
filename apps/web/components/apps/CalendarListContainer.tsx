@@ -180,8 +180,7 @@ export function CalendarListContainer(props: { heading?: boolean; fromOnboarding
     <QueryCell
       query={query}
       customLoader={<SkeletonLoader />}
-      success={({ data }) => {
-        return (
+      success={({ data }) => (
           <>
             {!!data.connectedCalendars.length || !!installedCalendars.data?.items.length ? (
               <>
@@ -260,8 +259,7 @@ export function CalendarListContainer(props: { heading?: boolean; fromOnboarding
               />
             )}
           </>
-        );
-      }}
+        )}
     />
   );
 }

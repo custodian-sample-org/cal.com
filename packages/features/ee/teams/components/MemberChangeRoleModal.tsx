@@ -21,8 +21,7 @@ export default function MemberChangeRoleModal(props: {
 }) {
   const { t } = useLocale();
 
-  const options = useMemo(() => {
-    return [
+  const options = useMemo(() => [
       {
         label: t("member"),
         value: MembershipRole.MEMBER,
@@ -35,8 +34,7 @@ export default function MemberChangeRoleModal(props: {
         label: t("owner"),
         value: MembershipRole.OWNER,
       },
-    ].filter(({ value }) => value !== MembershipRole.OWNER || props.currentMember === MembershipRole.OWNER);
-  }, [t, props.currentMember]);
+    ].filter(({ value }) => value !== MembershipRole.OWNER || props.currentMember === MembershipRole.OWNER), [t, props.currentMember]);
 
   const [role, setRole] = useState<MembershipRoleOption>(
     options.find((option) => option.value === props.initialRole) || {

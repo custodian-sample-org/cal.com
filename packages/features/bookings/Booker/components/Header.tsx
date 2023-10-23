@@ -40,11 +40,9 @@ export function Header({
 
   // Only reason we create this component, is because it is used 3 times in this component,
   // and this way we can't forget to update one of the props in all places :)
-  const LayoutToggleWithData = () => {
-    return enabledLayouts.length <= 1 ? null : (
+  const LayoutToggleWithData = () => enabledLayouts.length <= 1 ? null : (
       <LayoutToggle onLayoutToggle={onLayoutToggle} layout={layout} enabledLayouts={enabledLayouts} />
     );
-  };
 
   // In month view we only show the layout toggle.
   if (isMonthView) {
@@ -105,8 +103,7 @@ const LayoutToggle = ({
   enabledLayouts?: BookerLayouts[];
 }) => {
   const { t } = useLocale();
-  const layoutOptions = useMemo(() => {
-    return [
+  const layoutOptions = useMemo(() => [
       {
         value: BookerLayouts.MONTH_VIEW,
         label: <Calendar width="16" height="16" />,
@@ -122,8 +119,7 @@ const LayoutToggle = ({
         label: <Columns width="16" height="16" />,
         tooltip: t("switch_columnview"),
       },
-    ].filter((layout) => enabledLayouts?.includes(layout.value as BookerLayouts));
-  }, [t, enabledLayouts]);
+    ].filter((layout) => enabledLayouts?.includes(layout.value as BookerLayouts)), [t, enabledLayouts]);
 
   return <ToggleGroup onValueChange={onLayoutToggle} defaultValue={layout} options={layoutOptions} />;
 };

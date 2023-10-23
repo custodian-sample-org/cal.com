@@ -20,8 +20,7 @@ import {
 import ThemeLabel from "../../../settings/ThemeLabel";
 import { getLayout } from "../../../settings/layouts/SettingsLayout";
 
-const SkeletonLoader = ({ title, description }: { title: string; description: string }) => {
-  return (
+const SkeletonLoader = ({ title, description }: { title: string; description: string }) => (
     <SkeletonContainer>
       <Meta title={title} description={description} />
       <div className="mt-6 mb-8 space-y-6">
@@ -41,7 +40,6 @@ const SkeletonLoader = ({ title, description }: { title: string; description: st
       </div>
     </SkeletonContainer>
   );
-};
 
 interface TeamAppearanceValues {
   hideBranding: boolean;

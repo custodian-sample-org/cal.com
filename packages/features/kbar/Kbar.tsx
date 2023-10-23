@@ -286,15 +286,13 @@ const DisplayShortcuts = (item: shortcutArrayType) => {
 
   return (
     <span className="space-x-1">
-      {shortcuts?.map((shortcut) => {
-        return (
+      {shortcuts?.map((shortcut) => (
           <kbd
             key={shortcut}
             className="bg-default hover:bg-subtle text-emphasis rounded-sm border px-2 py-1">
             {shortcut}
           </kbd>
-        );
-      })}
+        ))}
     </span>
   );
 };

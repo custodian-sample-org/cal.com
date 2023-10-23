@@ -12,10 +12,7 @@ export type OrganizationEmailVerify = {
   code: string;
 };
 
-export const OrganisationAccountVerifyEmail = (
-  props: OrganizationEmailVerify & Partial<React.ComponentProps<typeof BaseEmailHtml>>
-) => {
-  return (
+export const OrganisationAccountVerifyEmail = (props: OrganizationEmailVerify & Partial<React.ComponentProps<typeof BaseEmailHtml>>) => (
     <BaseEmailHtml subject={props.language("organization_verify_header", { appName: APP_NAME })}>
       <p
         style={{
@@ -62,4 +59,3 @@ export const OrganisationAccountVerifyEmail = (
       </div>
     </BaseEmailHtml>
   );
-};

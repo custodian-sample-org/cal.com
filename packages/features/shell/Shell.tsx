@@ -98,15 +98,11 @@ export const ONBOARDING_NEXT_REDIRECT = {
   },
 } as const;
 
-export const shouldShowOnboarding = (
-  user: Pick<User, "createdDate" | "completedOnboarding" | "organizationId">
-) => {
-  return (
+export const shouldShowOnboarding = (user: Pick<User, "createdDate" | "completedOnboarding" | "organizationId">) => (
     !user.completedOnboarding &&
     !user.organizationId &&
     dayjs(user.createdDate).isAfter(ONBOARDING_INTRODUCED_AT)
   );
-};
 
 function useRedirectToLoginIfUnauthenticated(isPublic = false) {
   const { data: session, status } = useSession();
@@ -566,9 +562,7 @@ const navigation: NavigationItemType[] = [
     name: "Routing Forms",
     href: "/apps/routing-forms/forms",
     icon: FileText,
-    isCurrent: ({ router }) => {
-      return router.asPath.startsWith("/apps/routing-forms/");
-    },
+    isCurrent: ({ router }) => router.asPath.startsWith("/apps/routing-forms/"),
   },
   {
     name: "workflows",
@@ -602,8 +596,7 @@ const { desktopNavigationItems, mobileNavigationBottomItems, mobileNavigationMor
   { desktopNavigationItems: [], mobileNavigationBottomItems: [], mobileNavigationMoreItems: [] }
 );
 
-const Navigation = () => {
-  return (
+const Navigation = () => (
     <nav className="mt-2 flex-1 md:px-2 lg:mt-6 lg:px-0">
       {desktopNavigationItems.map((item) => (
         <NavigationItem key={item.name} item={item} />
@@ -613,7 +606,6 @@ const Navigation = () => {
       </div>
     </nav>
   );
-};
 
 function useShouldDisplayNavigationItem(item: NavigationItemType) {
   const { status } = useSession();
@@ -629,9 +621,7 @@ function useShouldDisplayNavigationItem(item: NavigationItemType) {
   return !requiredCredentialNavigationItems.includes(item.name) || routingForms?.isInstalled;
 }
 
-const defaultIsCurrent: NavigationItemType["isCurrent"] = ({ isChild, item, router }) => {
-  return isChild ? item.href === router.asPath : item.href ? router.asPath.startsWith(item.href) : false;
-};
+const defaultIsCurrent: NavigationItemType["isCurrent"] = ({ isChild, item, router }) => isChild ? item.href === router.asPath : item.href ? router.asPath.startsWith(item.href) : false;
 
 const NavigationItem: React.FC<{
   index?: number;

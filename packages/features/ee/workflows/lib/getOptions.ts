@@ -27,13 +27,9 @@ export function getWorkflowTriggerOptions(t: TFunction) {
 }
 
 export function getWorkflowTimeUnitOptions(t: TFunction) {
-  return TIME_UNIT.map((timeUnit) => {
-    return { label: t(`${timeUnit.toLowerCase()}_timeUnit`), value: timeUnit };
-  });
+  return TIME_UNIT.map((timeUnit) => { label: t(`${timeUnit.toLowerCase()}_timeUnit`), value: timeUnit });
 }
 
 export function getWorkflowTemplateOptions(t: TFunction) {
-  return WORKFLOW_TEMPLATES.map((template) => {
-    return { label: t(`${template.toLowerCase()}`), value: template };
-  });
+  return WORKFLOW_TEMPLATES.map((template) => { label: t(`${template.toLowerCase()}`), value: template });
 }

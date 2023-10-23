@@ -104,18 +104,14 @@ const TeamsVideoApiAdapter = (credential: CredentialPayload): VideoApiAdapter =>
   const auth = o365Auth(credential);
 
   const translateEvent = (event: CalendarEvent) => {
-    return {
       startDateTime: event.startTime,
       endDateTime: event.endTime,
       subject: event.title,
     };
-  };
 
   // Since the meeting link is not tied to an event we only need the create and update functions
   return {
-    getAvailability: () => {
-      return Promise.resolve([]);
-    },
+    getAvailability: () => Promise.resolve([]),
     updateMeeting: async (bookingRef: PartialReference, event: CalendarEvent) => {
       const accessToken = await (await auth).getToken();
 
@@ -137,9 +133,7 @@ const TeamsVideoApiAdapter = (credential: CredentialPayload): VideoApiAdapter =>
         url: resultObject.joinUrl,
       });
     },
-    deleteMeeting: () => {
-      return Promise.resolve([]);
-    },
+    deleteMeeting: () => Promise.resolve([]),
     createMeeting: async (event: CalendarEvent): Promise<VideoCallData> => {
       const accessToken = await (await auth).getToken();
 

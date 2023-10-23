@@ -71,15 +71,13 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     const t = await getTranslation(bookings[0].user?.locale ?? "en", "common");
 
     const updatedBookings = bookings.map((booking) => {
-      return {
         ...booking,
         ...getCalEventResponses({
           bookingFields: booking.eventType?.bookingFields ?? null,
           booking,
         }),
         location: getHumanReadableLocationValue(booking.location || "", t),
-      };
-    });
+      });
 
     res.status(201).json(updatedBookings);
   } catch (error) {

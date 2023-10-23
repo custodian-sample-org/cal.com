@@ -45,9 +45,7 @@ const WorkflowListItem = (props: ItemProps) => {
     onSuccess: async () => {
       let offOn = "";
       if (activeEventTypeIds.includes(eventType.id)) {
-        const newActiveEventTypeIds = activeEventTypeIds.filter((id) => {
-          return id !== eventType.id;
-        });
+        const newActiveEventTypeIds = activeEventTypeIds.filter((id) => id !== eventType.id);
         setActiveEventTypeIds(newActiveEventTypeIds);
         offOn = "off";
       } else {
@@ -130,9 +128,7 @@ const WorkflowListItem = (props: ItemProps) => {
             isActive ? "text-default" : "text-muted"
           )}>
           <span className="mr-1">{t("to")}:</span>
-          {Array.from(sendTo).map((sendToPerson, index) => {
-            return <span key={index}>{`${index ? ", " : ""}${sendToPerson}`}</span>;
-          })}
+          {Array.from(sendTo).map((sendToPerson, index) => <span key={index}>{`${index ? ", " : ""}${sendToPerson}`}</span>)}
         </div>
       </div>
       {!workflow.readOnly && (
@@ -206,9 +202,7 @@ function EventWorkflowsTab(props: Props) {
       const disabledWorkflows = data.workflows.filter(
         (workflow) =>
           !workflows
-            .map((workflow) => {
-              return workflow.id;
-            })
+            .map((workflow) => workflow.id)
             .includes(workflow.id)
       );
       setSortedWorkflows(activeWorkflows.concat(disabledWorkflows));
@@ -247,16 +241,14 @@ function EventWorkflowsTab(props: Props) {
           {data?.workflows && data?.workflows.length > 0 ? (
             <div>
               <div className="space-y-4">
-                {sortedWorkflows.map((workflow) => {
-                  return (
+                {sortedWorkflows.map((workflow) => (
                     <WorkflowListItem
                       key={workflow.id}
                       workflow={workflow}
                       eventType={props.eventType}
                       isChildrenManagedEventType
                     />
-                  );
-                })}
+                  ))}
               </div>
             </div>
           ) : (

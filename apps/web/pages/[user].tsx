@@ -210,8 +210,7 @@ export default function User(props: inferSSRProps<typeof getServerSideProps> & E
 User.isBookingPage = true;
 User.PageWrapper = PageWrapper;
 
-const getEventTypesWithHiddenFromDB = async (userId: number) => {
-  return (
+const getEventTypesWithHiddenFromDB = (userId: number) => (
     await prisma.eventType.findMany({
       where: {
         AND: [
@@ -251,7 +250,6 @@ const getEventTypesWithHiddenFromDB = async (userId: number) => {
     ...eventType,
     metadata: EventTypeMetaDataSchema.parse(eventType.metadata),
   }));
-};
 
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
   const ssr = await ssrInit(context);
@@ -311,9 +309,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
   }
 
   const dynamicNames = isDynamicGroup
-    ? users.map((user) => {
-        return user.name || "";
-      })
+    ? users.map((user) => user.name || "")
     : [];
   const [user] = users; //to be used when dealing with single user, not dynamic group
 
@@ -325,9 +321,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
         weekStart: "Sunday",
         brandColor: "",
         darkBrandColor: "",
-        allowDynamicBooking: !users.some((user) => {
-          return !user.allowDynamicBooking;
-        }),
+        allowDynamicBooking: !users.some((user) => !user.allowDynamicBooking),
       }
     : {
         name: user.name || user.username,
@@ -352,9 +346,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
 
   const isSingleUser = users.length === 1;
   const dynamicUsernames = isDynamicGroup
-    ? users.map((user) => {
-        return user.username || "";
-      })
+    ? users.map((user) => user.username || "")
     : [];
 
   const safeBio = markdownToSafeHTML(user.bio) || "";

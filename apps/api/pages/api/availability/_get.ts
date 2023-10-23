@@ -156,8 +156,7 @@ async function handler(req: NextApiRequest) {
     memberRoles[reqUserId] == MembershipRole.OWNER ||
     isAdmin;
   if (!isUserAdminOrOwner) throw new HttpError({ statusCode: 403, message: "Forbidden" });
-  const availabilities = members.map(async (user) => {
-    return {
+  const availabilities = members.map((user) => {
       userId: user.id,
       availability: await getUserAvailability({
         userId: user.id,
@@ -165,8 +164,7 @@ async function handler(req: NextApiRequest) {
         dateTo,
         eventTypeId,
       }),
-    };
-  });
+    });
   const settled = await Promise.all(availabilities);
   if (!settled)
     throw new HttpError({

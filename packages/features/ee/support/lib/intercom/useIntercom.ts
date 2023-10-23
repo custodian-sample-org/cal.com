@@ -13,11 +13,9 @@ export const isInterComEnabled = z.string().min(1).safeParse(process.env.NEXT_PU
 const useIntercomHook = isInterComEnabled
   ? useIntercomLib
   : () => {
-      return {
         boot: noop,
         show: noop,
       };
-    };
 
 export const useIntercom = () => {
   const hookData = useIntercomHook();

@@ -81,14 +81,12 @@ export function Calendar(props: CalendarComponentProps) {
                   offsetHeight={containerOffset.current?.offsetHeight}
                   gridStopsPerDay={numberOfGridStopsPerDay}>
                   {/*Loop over events per day  */}
-                  {days.map((day, i) => {
-                    return (
+                  {days.map((day, i) => (
                       <li key={day.toISOString()} className="relative" style={{ gridColumnStart: i + 1 }}>
                         <EventList day={day} />
                         {/* <BlockedList day={day} containerRef={container} /> */}
                       </li>
-                    );
-                  })}
+                    ))}
                 </SchedulerColumns>
 
                 {/* Empty Cells */}
@@ -143,8 +141,7 @@ export function Calendar(props: CalendarComponentProps) {
 }
 
 /** @todo Will be removed once we have mobile support */
-const MobileNotSupported = ({ children }: { children: React.ReactNode }) => {
-  return (
+const MobileNotSupported = ({ children }: { children: React.ReactNode }) => (
     <>
       <div className="flex h-full flex-col items-center justify-center sm:hidden">
         <h1 className="text-2xl font-bold">Mobile not supported yet </h1>
@@ -153,4 +150,3 @@ const MobileNotSupported = ({ children }: { children: React.ReactNode }) => {
       <div className="hidden h-full sm:block">{children}</div>
     </>
   );
-};

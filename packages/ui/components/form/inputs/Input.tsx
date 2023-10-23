@@ -14,10 +14,8 @@ import { Label } from "./Label";
 
 type InputProps = JSX.IntrinsicElements["input"] & { isFullWidth?: boolean; isStandaloneField?: boolean };
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
-  { isFullWidth = true, ...props },
-  ref
-) {
+export const Input = forwardRef<HTMLInputElement, InputProps>(({ isFullWidth = true, ...props },
+  ref) => {
   return (
     <input
       {...props}
@@ -82,7 +80,7 @@ const Addon = ({ isFilled, children, className, error }: AddonProps) => (
   </div>
 );
 
-export const InputField = forwardRef<HTMLInputElement, InputFieldProps>(function InputField(props, ref) {
+export const InputField = forwardRef<HTMLInputElement, InputFieldProps>((props, ref) => {
   const id = useId();
   const { t: _t, isLocaleReady, i18n } = useLocale();
   const t = props.t || _t;
@@ -199,14 +197,12 @@ export const InputField = forwardRef<HTMLInputElement, InputFieldProps>(function
   );
 });
 
-export const TextField = forwardRef<HTMLInputElement, InputFieldProps>(function TextField(props, ref) {
+export const TextField = forwardRef<HTMLInputElement, InputFieldProps>((props, ref) => {
   return <InputField ref={ref} {...props} />;
 });
 
-export const PasswordField = forwardRef<HTMLInputElement, InputFieldProps>(function PasswordField(
-  props,
-  ref
-) {
+export const PasswordField = forwardRef<HTMLInputElement, InputFieldProps>((props,
+  ref) => {
   const { t } = useLocale();
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const toggleIsPasswordVisible = useCallback(
@@ -244,7 +240,7 @@ export const PasswordField = forwardRef<HTMLInputElement, InputFieldProps>(funct
   );
 });
 
-export const EmailInput = forwardRef<HTMLInputElement, InputFieldProps>(function EmailInput(props, ref) {
+export const EmailInput = forwardRef<HTMLInputElement, InputFieldProps>((props, ref) => {
   return (
     <Input
       ref={ref}
@@ -258,7 +254,7 @@ export const EmailInput = forwardRef<HTMLInputElement, InputFieldProps>(function
   );
 });
 
-export const EmailField = forwardRef<HTMLInputElement, InputFieldProps>(function EmailField(props, ref) {
+export const EmailField = forwardRef<HTMLInputElement, InputFieldProps>((props, ref) => {
   return (
     <InputField
       ref={ref}
@@ -274,7 +270,7 @@ export const EmailField = forwardRef<HTMLInputElement, InputFieldProps>(function
 
 type TextAreaProps = JSX.IntrinsicElements["textarea"];
 
-export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(function TextAreaInput(props, ref) {
+export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, ref) => {
   return (
     <textarea
       ref={ref}
@@ -295,10 +291,8 @@ type TextAreaFieldProps = {
     labelProps?: React.ComponentProps<typeof Label>;
   };
 
-export const TextAreaField = forwardRef<HTMLTextAreaElement, TextAreaFieldProps>(function TextField(
-  props,
-  ref
-) {
+export const TextAreaField = forwardRef<HTMLTextAreaElement, TextAreaFieldProps>((props,
+  ref) => {
   const id = useId();
   const { t: _t } = useLocale();
   const t = props.t || _t;
@@ -386,7 +380,7 @@ export function InputGroupBox(props: JSX.IntrinsicElements["div"]) {
 export const InputFieldWithSelect = forwardRef<
   HTMLInputElement,
   InputFieldProps & { selectProps: typeof UnstyledSelect }
->(function EmailField(props, ref) {
+>((props, ref) => {
   return (
     <InputField
       ref={ref}
@@ -398,7 +392,7 @@ export const InputFieldWithSelect = forwardRef<
   );
 });
 
-export const NumberInput = forwardRef<HTMLInputElement, InputFieldProps>(function NumberInput(props, ref) {
+export const NumberInput = forwardRef<HTMLInputElement, InputFieldProps>((props, ref) => {
   return (
     <Input
       ref={ref}

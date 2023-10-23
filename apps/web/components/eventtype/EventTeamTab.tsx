@@ -26,11 +26,8 @@ const mapUserToValue = ({ id, name, username, email }: IUserToValue) => ({
   email,
 });
 
-export const mapMemberToChildrenOption = (
-  member: EventTypeSetupProps["teamMembers"][number],
-  slug: string
-) => {
-  return {
+export const mapMemberToChildrenOption = (member: EventTypeSetupProps["teamMembers"][number],
+  slug: string) => {
     slug,
     hidden: false,
     created: false,
@@ -45,7 +42,6 @@ export const mapMemberToChildrenOption = (
     value: `${member.id ?? ""}`,
     label: member.name ?? "",
   };
-};
 
 const sortByLabel = (a: ReturnType<typeof mapUserToValue>, b: ReturnType<typeof mapUserToValue>) => {
   if (a.label < b.label) {
@@ -106,8 +102,7 @@ const CheckedHostField = ({
   value: { isFixed: boolean; userId: number }[];
   onChange?: (options: { isFixed: boolean; userId: number }[]) => void;
   options?: Options<CheckedSelectOption>;
-} & Omit<Partial<ComponentProps<typeof CheckedTeamSelect>>, "onChange" | "value">) => {
-  return (
+} & Omit<Partial<ComponentProps<typeof CheckedTeamSelect>>, "onChange" | "value">) => (
     <div className="bg-muted flex flex-col space-y-5 p-4">
       <div>
         <Label>{labelText}</Label>
@@ -138,7 +133,6 @@ const CheckedHostField = ({
       </div>
     </div>
   );
-};
 
 const RoundRobinHosts = ({
   teamMembers,
@@ -183,8 +177,7 @@ const ChildrenEventTypes = ({
   childrenEventTypeOptions,
 }: {
   childrenEventTypeOptions: ReturnType<typeof mapMemberToChildrenOption>[];
-}) => {
-  return (
+}) => (
     <Controller<FormValues>
       name="children"
       render={({ field: { onChange, value } }) => (
@@ -192,7 +185,6 @@ const ChildrenEventTypes = ({
       )}
     />
   );
-};
 
 const Hosts = ({
   teamMembers,
@@ -292,9 +284,7 @@ export const EventTeamTab = ({
     },
   ];
   const teamMembersOptions = teamMembers.map(mapUserToValue);
-  const childrenEventTypeOptions = teamMembers.map((member) => {
-    return mapMemberToChildrenOption(member, eventType.slug);
-  });
+  const childrenEventTypeOptions = teamMembers.map((member) => mapMemberToChildrenOption(member, eventType.slug));
   const isManagedEventType = eventType.schedulingType === SchedulingType.MANAGED;
   return (
     <div>

@@ -13,7 +13,7 @@ import type { appDataSchema } from "../zod";
 
 type Option = { value: string; label: string };
 
-const EventTypeAppCard: EventTypeAppCardComponent = function EventTypeAppCard({ app, eventType }) {
+const EventTypeAppCard: EventTypeAppCardComponent = ({ app, eventType }) => {
   const { asPath } = useRouter();
   const [getAppData, setAppData] = useAppContextWithSchema<typeof appDataSchema>();
   const price = getAppData("price");
@@ -82,9 +82,7 @@ const EventTypeAppCard: EventTypeAppCardComponent = function EventTypeAppCard({ 
                       ? { ...paymentOptionSelectValue, label: t(paymentOptionSelectValue.label) }
                       : { ...paymentOptions[0], label: t(paymentOptions[0].label) }
                   }
-                  options={paymentOptions.map((option) => {
-                    return { ...option, label: t(option.label) || option.label };
-                  })}
+                  options={paymentOptions.map((option) => { ...option, label: t(option.label) || option.label })}
                   onChange={(input) => {
                     if (input) setAppData("paymentOption", input.value);
                   }}

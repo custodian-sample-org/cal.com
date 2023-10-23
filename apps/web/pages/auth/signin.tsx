@@ -14,13 +14,11 @@ type Provider = {
 function signin({ providers }: { providers: Provider[] }) {
   return (
     <div className="center mt-10 justify-between space-y-5 text-center align-baseline">
-      {Object.values(providers).map((provider) => {
-        return (
+      {Object.values(providers).map((provider) => (
           <div key={provider.name}>
             <Button onClick={() => signIn(provider.id)}>Sign in with {provider.name}</Button>
           </div>
-        );
-      })}
+        ))}
     </div>
   );
 }

@@ -212,11 +212,9 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 };
 
 export const getStaticPaths: GetStaticPaths = () => {
-  return {
     paths: validStatuses.map((status) => ({
       params: { status },
       locale: "en",
     })),
     fallback: "blocking",
   };
-};

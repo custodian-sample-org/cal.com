@@ -12,8 +12,7 @@ const EmailCommonDivider = ({
     React.TdHTMLAttributes<HTMLTableCellElement>,
     HTMLTableCellElement
   >["style"];
-}) => {
-  return (
+}) => (
     <>
       <RawHtml
         html={`<!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:600px;" width="600" bgcolor="#FFFFFF" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->`}
@@ -66,6 +65,5 @@ const EmailCommonDivider = ({
       </div>
     </>
   );
-};
 
 export default EmailCommonDivider;

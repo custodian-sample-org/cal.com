@@ -17,8 +17,7 @@ interface CtaRowProps {
   className?: string;
 }
 
-const CtaRow = ({ title, description, className, children }: CtaRowProps) => {
-  return (
+const CtaRow = ({ title, description, className, children }: CtaRowProps) => (
     <>
       <section className={classNames("text-default flex flex-col sm:flex-row", className)}>
         <div>
@@ -30,7 +29,6 @@ const CtaRow = ({ title, description, className, children }: CtaRowProps) => {
       <hr className="border-subtle" />
     </>
   );
-};
 
 const BillingView = () => {
   const { t } = useLocale();

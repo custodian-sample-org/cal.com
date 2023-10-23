@@ -713,13 +713,11 @@ export const insightsRouter = router({
       });
 
       const result = bookingsFromTeam.map((booking) => {
-        return {
           userId: booking.userId,
           user: userHashMap.get(booking.userId),
           emailMd5: md5(user?.email),
           count: booking._count.id,
-        };
-      });
+        });
 
       return result;
     }),
@@ -804,13 +802,11 @@ export const insightsRouter = router({
       });
 
       const result = bookingsFromTeam.map((booking) => {
-        return {
           userId: booking.userId,
           user: userHashMap.get(booking.userId),
           emailMd5: md5(user?.email),
           count: booking._count.id,
-        };
-      });
+        });
 
       return result;
     }),
@@ -863,9 +859,7 @@ export const insightsRouter = router({
       name: string | null;
       logo: string | null;
       userId?: number;
-    }[] = belongsToTeams.map((membership) => {
-      return { ...membership.team };
-    });
+    }[] = belongsToTeams.map((membership) => { ...membership.team });
     if (userData && userData.id) {
       result.push({
         id: 0,

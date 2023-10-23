@@ -13,11 +13,11 @@ import { getCalApi } from "./src/index";
 
 function App() {
   useEffect(() => {
-    (async function () {
-      const cal = await getCalApi("http://localhost:3000/embed/embed.js");
+    (() => {
+  const cal = await getCalApi("http://localhost:3000/embed/embed.js");
       cal("floatingButton", { calLink: "teampro/abc", calOrigin: "http://localhost:3000" });
       cal("ui", { styles: { branding: { brandColor: "#000000" } }, hideEventTypeDetails: false });
-    })();
+})();
   }, []);
   return null;
 }

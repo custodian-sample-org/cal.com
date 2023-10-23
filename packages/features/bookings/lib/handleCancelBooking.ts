@@ -587,9 +587,7 @@ async function handler(req: CustomRequest) {
       },
     });
 
-    const paymentAppCredential = paymentAppCredentials.find((credential) => {
-      return credential.appId === successPayment.appId;
-    });
+    const paymentAppCredential = paymentAppCredentials.find((credential) => credential.appId === successPayment.appId);
 
     if (!paymentAppCredential) {
       throw new Error("Payment app credentials not found");

@@ -7,9 +7,7 @@ export function getTranslatedText(text: string, language: { locale: string; t: T
   let translatedText = text;
 
   if (language.locale !== "en") {
-    const variables = text.match(/\{(.+?)}/g)?.map((variable) => {
-      return variable.replace("{", "").replace("}", "");
-    });
+    const variables = text.match(/\{(.+?)}/g)?.map((variable) => variable.replace("{", "").replace("}", ""));
 
     variables?.forEach((variable) => {
       const regex = new RegExp(`{${variable}}`, "g"); // .replaceAll is not available here for some reason
@@ -49,9 +47,7 @@ export function translateVariablesToEnglish(text: string, language: { locale: st
   let newText = text;
 
   if (language.locale !== "en") {
-    const variables = text.match(/\{(.+?)}/g)?.map((variable) => {
-      return variable.replace("{", "").replace("}", "");
-    });
+    const variables = text.match(/\{(.+?)}/g)?.map((variable) => variable.replace("{", "").replace("}", ""));
 
     variables?.forEach((variable) => {
       DYNAMIC_TEXT_VARIABLES.forEach((originalVar) => {

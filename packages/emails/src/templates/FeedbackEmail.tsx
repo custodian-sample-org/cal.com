@@ -7,8 +7,7 @@ export interface Feedback {
   comment: string;
 }
 
-export const FeedbackEmail = (props: Feedback & Partial<React.ComponentProps<typeof BaseEmailHtml>>) => {
-  return (
+export const FeedbackEmail = (props: Feedback & Partial<React.ComponentProps<typeof BaseEmailHtml>>) => (
     <BaseEmailHtml subject="Feedback" title="Feedback">
       <Info label="Username" description={props.username} withSpacer />
       <Info label="Email" description={props.email} withSpacer />
@@ -16,4 +15,3 @@ export const FeedbackEmail = (props: Feedback & Partial<React.ComponentProps<typ
       <Info label="Comment" description={props.comment} withSpacer />
     </BaseEmailHtml>
   );
-};

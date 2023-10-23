@@ -882,8 +882,8 @@ async function handler(
   const customInputs = getCustomInputsResponses(reqBody, eventType.customInputs);
   const teamMemberPromises =
     users.length > 1
-      ? users.slice(1).map(async function (user) {
-          return {
+      ? users.slice(1).map((user) => {
+  return {
             email: user.email || "",
             name: user.name || "",
             timeZone: user.timeZone,
@@ -892,7 +892,7 @@ async function handler(
               locale: user.locale ?? "en",
             },
           };
-        })
+})
       : [];
 
   const teamMembers = await Promise.all(teamMemberPromises);
@@ -1166,13 +1166,11 @@ async function handler(
 
         // Moving forward in this block is the owner making changes to the booking. All attendees should be affected
         evt.attendees = originalRescheduledBooking.attendees.map((attendee) => {
-          return {
             name: attendee.name,
             email: attendee.email,
             timeZone: attendee.timeZone,
             language: { translate: tAttendees, locale: attendee.locale ?? "en" },
-          };
-        });
+          });
 
         // If owner reschedules the event we want to update the entire booking
         // Also if owner is rescheduling there should be no bookingSeat
@@ -1393,9 +1391,7 @@ async function handler(
         // Update the original calendar event by removing the attendee that is rescheduling
         if (originalBookingEvt && originalRescheduledBooking) {
           // Event would probably be deleted so we first check than instead of updating references
-          const filteredAttendees = originalRescheduledBooking?.attendees.filter((attendee) => {
-            return attendee.email !== bookerEmail;
-          });
+          const filteredAttendees = originalRescheduledBooking?.attendees.filter((attendee) => attendee.email !== bookerEmail);
           const deletedReference = await lastAttendeeDeleteBooking(
             originalRescheduledBooking,
             filteredAttendees,
@@ -1449,9 +1445,7 @@ async function handler(
         : calendarResult?.updatedEvent?.iCalUID || undefined;
 
       await sendRescheduledSeatEmail(copyEvent, seatAttendee as Person);
-      const filteredAttendees = originalRescheduledBooking?.attendees.filter((attendee) => {
-        return attendee.email !== bookerEmail;
-      });
+      const filteredAttendees = originalRescheduledBooking?.attendees.filter((attendee) => attendee.email !== bookerEmail);
       await lastAttendeeDeleteBooking(originalRescheduledBooking, filteredAttendees, originalBookingEvt);
 
       const foundBooking = await findBookingQuery(newTimeSlotBooking.id);
@@ -1459,9 +1453,7 @@ async function handler(
       resultBooking = { ...foundBooking, seatReferenceUid: bookingSeat?.referenceUid };
     } else {
       // Need to add translation for attendees to pass type checks. Since these values are never written to the db we can just use the new attendee language
-      const bookingAttendees = booking.attendees.map((attendee) => {
-        return { ...attendee, language: { translate: tAttendees, locale: language ?? "en" } };
-      });
+      const bookingAttendees = booking.attendees.map((attendee) => { ...attendee, language: { translate: tAttendees, locale: language ?? "en" } });
 
       evt = { ...evt, attendees: [...bookingAttendees, invitee[0]] };
 
@@ -1559,9 +1551,7 @@ async function handler(
           },
         });
 
-        const eventTypePaymentAppCredential = credentialPaymentAppCategories.find((credential) => {
-          return credential.appId === paymentAppData.appId;
-        });
+        const eventTypePaymentAppCredential = credentialPaymentAppCategories.find((credential) => credential.appId === paymentAppData.appId);
 
         if (!eventTypePaymentAppCredential) {
           throw new HttpError({ statusCode: 400, message: "Missing payment credentials" });
@@ -1659,15 +1649,11 @@ async function handler(
     const isConfirmedByDefault = (!requiresConfirmation && !paymentAppData.price) || userReschedulingIsOwner;
 
     const attendeesData = evt.attendees.map((attendee) => {
-      //if attendee is team member, it should fetch their locale not booker's locale
-      //perhaps make email fetch request to see if his locale is stored, else
-      return {
         name: attendee.name,
         email: attendee.email,
         timeZone: attendee.timeZone,
         locale: attendee.language.locale,
-      };
-    });
+      });
 
     if (evt.team?.members) {
       attendeesData.push(
@@ -2097,9 +2083,7 @@ async function handler(
         },
       },
     });
-    const eventTypePaymentAppCredential = credentialPaymentAppCategories.find((credential) => {
-      return credential.appId === paymentAppData.appId;
-    });
+    const eventTypePaymentAppCredential = credentialPaymentAppCategories.find((credential) => credential.appId === paymentAppData.appId);
 
     if (!eventTypePaymentAppCredential) {
       throw new HttpError({ statusCode: 400, message: "Missing payment credentials" });

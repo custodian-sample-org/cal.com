@@ -157,8 +157,8 @@ export class CalendarEventBuilder implements ICalendarEventBuilder {
 
   private async getTeamMembers() {
     // Users[0] its organizer so we are omitting with slice(1)
-    const teamMemberPromises = this.users.slice(1).map(async function (user) {
-      return {
+    const teamMemberPromises = this.users.slice(1).map((user) => {
+  return {
         id: user.id,
         username: user.username,
         email: user.email || "", // @NOTE: Should we change this "" to teamMemberId?
@@ -170,7 +170,7 @@ export class CalendarEventBuilder implements ICalendarEventBuilder {
         },
         locale: user.locale,
       } as PersonAttendeeCommonFields;
-    });
+});
     return await Promise.all(teamMemberPromises);
   }
 

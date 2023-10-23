@@ -19,7 +19,7 @@ export type HorizontalTabItemProps = {
   avatar?: string;
 };
 
-const HorizontalTabItem = function ({ name, href, linkProps, avatar, ...props }: HorizontalTabItemProps) {
+const HorizontalTabItem = ({ name, href, linkProps, avatar, ...props }: HorizontalTabItemProps) => {
   const { t, isLocaleReady } = useLocale();
   const { asPath } = useRouter();
 

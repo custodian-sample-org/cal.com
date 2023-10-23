@@ -8,8 +8,7 @@ type ListOptions = {
   };
 };
 
-export const listHandler = async ({ ctx }: ListOptions) => {
-  return await prisma.eventType.findMany({
+export const listHandler = ({ ctx }: ListOptions) => await prisma.eventType.findMany({
     where: {
       userId: ctx.user.id,
       team: null,
@@ -25,4 +24,3 @@ export const listHandler = async ({ ctx }: ListOptions) => {
       metadata: true,
     },
   });
-};

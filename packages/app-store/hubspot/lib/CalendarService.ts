@@ -97,13 +97,11 @@ export default class HubspotCalendarService implements Calendar {
       .then((apiResponse) => apiResponse.results);
   };
 
-  private getHubspotMeetingBody = (event: CalendarEvent): string => {
-    return `<b>${event.organizer.language.translate("invitee_timezone")}:</b> ${
+  private getHubspotMeetingBody = (event: CalendarEvent) => `<b>${event.organizer.language.translate("invitee_timezone")}:</b> ${
       event.attendees[0].timeZone
     }<br><br><b>${event.organizer.language.translate("share_additional_notes")}</b><br>${
       event.additionalNotes || "-"
     }`;
-  };
 
   private hubspotCreateMeeting = async (event: CalendarEvent) => {
     const simplePublicObjectInput: SimplePublicObjectInput = {
@@ -152,9 +150,7 @@ export default class HubspotCalendarService implements Calendar {
     return hubspotClient.crm.objects.meetings.basicApi.update(uid, simplePublicObjectInput);
   };
 
-  private hubspotDeleteMeeting = async (uid: string) => {
-    return hubspotClient.crm.objects.meetings.basicApi.archive(uid);
-  };
+  private hubspotDeleteMeeting = (uid: string) => hubspotClient.crm.objects.meetings.basicApi.archive(uid);
 
   private hubspotAuth = async (credential: CredentialPayload) => {
     const appKeys = await getAppKeysFromSlug("hubspot");

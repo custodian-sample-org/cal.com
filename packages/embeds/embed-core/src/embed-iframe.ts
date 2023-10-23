@@ -115,11 +115,9 @@ const setEmbedStyles = (stylesConfig: EmbedStyles) => {
   embedStore.styles = stylesConfig;
   for (const [, setEmbedStyle] of Object.entries(embedStore.reactStylesStateSetters)) {
     setEmbedStyle((styles) => {
-      return {
         ...styles,
         ...stylesConfig,
-      };
-    });
+      });
   }
 };
 
@@ -127,11 +125,9 @@ const setEmbedNonStyles = (stylesConfig: EmbedNonStylesConfig) => {
   embedStore.nonStyles = stylesConfig;
   for (const [, setEmbedStyle] of Object.entries(embedStore.reactStylesStateSetters)) {
     setEmbedStyle((styles) => {
-      return {
         ...styles,
         ...stylesConfig,
-      };
-    });
+      });
   }
 };
 
@@ -193,10 +189,7 @@ export const useEmbedUiConfig = () => {
 export const useEmbedStyles = (elementName: keyof EmbedStyles) => {
   const [, setStyles] = useState<EmbedStyles>({});
 
-  useEffect(() => {
-    return registerNewSetter({ elementName, setState: setStyles, styles: true });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  useEffect(() => registerNewSetter({ elementName, setState: setStyles, styles: true }), []);
   const styles = embedStore.styles || {};
   // Always read the data from global embedStore so that even across components, the same data is used.
   return styles[elementName] || {};
@@ -205,10 +198,7 @@ export const useEmbedStyles = (elementName: keyof EmbedStyles) => {
 export const useEmbedNonStylesConfig = (elementName: keyof EmbedNonStylesConfig) => {
   const [, setNonStyles] = useState({} as EmbedNonStylesConfig);
 
-  useEffect(() => {
-    return registerNewSetter({ elementName, setState: setNonStyles, styles: false });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  useEffect(() => registerNewSetter({ elementName, setState: setNonStyles, styles: false }), []);
 
   // Always read the data from global embedStore so that even across components, the same data is used.
   const nonStyles = embedStore.nonStyles || {};
@@ -284,9 +274,8 @@ function unhideBody() {
 
 // It is a map of methods that can be called by parent using doInIframe({method: "methodName", arg: "argument"})
 const methods = {
-  ui: function style(uiConfig: UiConfig) {
-    // TODO: Create automatic logger for all methods. Useful for debugging.
-    log("Method: ui called", uiConfig);
+  ui: (uiConfig: UiConfig) => {
+  log("Method: ui called", uiConfig);
     const stylesConfig = uiConfig.styles;
 
     if (stylesConfig) {
@@ -324,20 +313,19 @@ const methods = {
 
     setEmbedStyles(stylesConfig || {});
     setEmbedNonStyles(stylesConfig || {});
-  },
+},
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   parentKnowsIframeReady: (_unused: unknown) => {
     log("Method: `parentKnowsIframeReady` called");
-    runAsap(function tryInformingLinkReady() {
-      // TODO: Do it by attaching a listener for change in parentInformedAboutContentHeight
-      if (!embedStore.parentInformedAboutContentHeight) {
+    runAsap(() => {
+  if (!embedStore.parentInformedAboutContentHeight) {
         runAsap(tryInformingLinkReady);
         return;
       }
       // No UI change should happen in sight. Let the parent height adjust and in next cycle show it.
       unhideBody();
       sdkActionManager?.fire("linkReady", {});
-    });
+});
   },
 };
 
@@ -363,8 +351,8 @@ function keepParentInformedAboutDimensionChanges() {
   let knownIframeWidth: number | null = null;
   let isFirstTime = true;
   let isWindowLoadComplete = false;
-  runAsap(function informAboutScroll() {
-    if (document.readyState !== "complete") {
+  runAsap(() => {
+  if (document.readyState !== "complete") {
       // Wait for window to load to correctly calculate the initial scroll height.
       runAsap(informAboutScroll);
       return;
@@ -433,7 +421,7 @@ function keepParentInformedAboutDimensionChanges() {
     // It should stop ideally by reaching a hiddenHeight value of 0.
     // FIXME: If 0 can't be reached we need to just abandon our quest for perfect iframe and let scroll be there. Such case can be logged in the wild and fixed later on.
     runAsap(informAboutScroll);
-  });
+});
 }
 
 if (isBrowser) {

@@ -215,13 +215,11 @@ function BookingListItem(booking: BookingItemProps) {
     bookedActions = bookedActions.filter((action) => action.id !== "cancel");
   }
 
-  const RequestSentMessage = () => {
-    return (
+  const RequestSentMessage = () => (
       <Badge startIcon={Send} size="md" variant="gray" data-testid="request_reschedule_sent">
         {t("reschedule_request_sent")}
       </Badge>
     );
-  };
 
   const startTime = dayjs(booking.startTime)
     .locale(language)
@@ -489,14 +487,12 @@ const RecurringBookingsTooltip = ({ booking, recurringDates }: RecurringBookings
     i18n: { language },
   } = useLocale();
   const now = new Date();
-  const recurringCount = recurringDates.filter((recurringDate) => {
-    return (
+  const recurringCount = recurringDates.filter((recurringDate) => (
       recurringDate >= now &&
       !booking.recurringInfo?.bookings[BookingStatus.CANCELLED]
         .map((date) => date.toDateString())
         .includes(recurringDate.toDateString())
-    );
-  }).length;
+    )).length;
 
   return (
     (booking.recurringInfo &&
@@ -578,13 +574,11 @@ type AttendeeProps = {
   email: string;
 };
 
-const Attendee = ({ email, name }: AttendeeProps) => {
-  return (
+const Attendee = ({ email, name }: AttendeeProps) => (
     <a className="hover:text-blue-500" href={"mailto:" + email} onClick={(e) => e.stopPropagation()}>
       {name || email}
     </a>
   );
-};
 
 const DisplayAttendees = ({
   attendees,

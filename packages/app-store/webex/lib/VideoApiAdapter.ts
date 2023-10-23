@@ -120,11 +120,6 @@ const webexAuth = (credential: CredentialPayload) => {
 const WebexVideoApiAdapter = (credential: CredentialPayload): VideoApiAdapter => {
   //TODO implement translateEvent for recurring events
   const translateEvent = (event: CalendarEvent) => {
-    //To convert the Cal's CalendarEvent type to a webex meeting type
-    /** @link https://developer.webex.com/docs/api/v1/meetings/create-a-meeting */
-    //Required params - title, start, end
-
-    return {
       title: event.title,
       start: dayjs(event.startTime).utc().format(),
       end: dayjs(event.endTime).utc().format(),
@@ -137,7 +132,6 @@ const WebexVideoApiAdapter = (credential: CredentialPayload): VideoApiAdapter =>
       })),
       sendEmail: true,
     };
-  };
 
   const fetchWebexApi = async (endpoint: string, options?: RequestInit) => {
     const auth = webexAuth(credential);

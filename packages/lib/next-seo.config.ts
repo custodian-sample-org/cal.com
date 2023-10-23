@@ -21,9 +21,7 @@ const seoImages = {
   ogImage: SEO_IMG_OGIMG,
 };
 
-export const getSeoImage = (key: keyof typeof seoImages): string => {
-  return seoImages[key];
-};
+export const getSeoImage = (key: keyof typeof seoImages) => seoImages[key];
 
 export const seoConfig: {
   headSeo: Required<Pick<HeadSeoProps, "siteName">>;
@@ -47,6 +45,4 @@ export const seoConfig: {
  * @param path NextJS' useRouter().asPath
  * @returns
  */
-export const buildCanonical = ({ origin, path }: { origin: Location["origin"]; path: Router["asPath"] }) => {
-  return `${origin}${path === "/" ? "" : path}`.split("?")[0];
-};
+export const buildCanonical = ({ origin, path }: { origin: Location["origin"]; path: Router["asPath"] }) => `${origin}${path === "/" ? "" : path}`.split("?")[0];

@@ -45,9 +45,7 @@ test.describe("Typeform App", () => {
 
       await page.click('[data-testid="form-dropdown"]');
       await page.click('[data-testid="copy-redirect-url"]');
-      const text = await page.evaluate(async () => {
-        return navigator.clipboard.readText();
-      });
+      const text = await page.evaluate(() => navigator.clipboard.readText());
       expect(text).toBe(`${CAL_URL}/router?form=${formId}&test={Recalled_Response_For_This_Field}`);
     });
 
@@ -65,9 +63,7 @@ test.describe("Typeform App", () => {
       await page.goto("/apps/routing-forms/forms");
       await page.click('[data-testid="form-dropdown"]');
       await page.click('[data-testid="copy-redirect-url"]');
-      const text = await page.evaluate(async () => {
-        return navigator.clipboard.readText();
-      });
+      const text = await page.evaluate(() => navigator.clipboard.readText());
       expect(text).toBe(`${CAL_URL}/router?form=${formId}&test={Recalled_Response_For_This_Field}`);
     });
   });

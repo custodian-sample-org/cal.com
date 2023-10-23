@@ -246,8 +246,7 @@ export default function WorkflowStepContainer(props: WorkflowStepProps) {
             <Controller
               name="trigger"
               control={form.control}
-              render={() => {
-                return (
+              render={() => (
                   <Select
                     isSearchable={false}
                     className="text-sm"
@@ -278,8 +277,7 @@ export default function WorkflowStepContainer(props: WorkflowStepProps) {
                     defaultValue={selectedTrigger}
                     options={triggerOptions}
                   />
-                );
-              }}
+                )}
             />
             {showTimeSection && (
               <div className="mt-5">
@@ -372,8 +370,7 @@ export default function WorkflowStepContainer(props: WorkflowStepProps) {
                 <Controller
                   name={`steps.${step.stepNumber - 1}.action`}
                   control={form.control}
-                  render={() => {
-                    return (
+                  render={() => (
                       <Select
                         isSearchable={false}
                         className="text-sm"
@@ -462,8 +459,7 @@ export default function WorkflowStepContainer(props: WorkflowStepProps) {
                           needsUpgrade: boolean;
                         }) => option.needsUpgrade}
                       />
-                    );
-                  }}
+                    )}
                 />
               </div>
               {isPhoneNumberNeeded && (
@@ -627,8 +623,7 @@ export default function WorkflowStepContainer(props: WorkflowStepProps) {
                 <Controller
                   name={`steps.${step.stepNumber - 1}.template`}
                   control={form.control}
-                  render={() => {
-                    return (
+                  render={() => (
                       <Select
                         isSearchable={false}
                         className="text-sm"
@@ -671,8 +666,7 @@ export default function WorkflowStepContainer(props: WorkflowStepProps) {
                         defaultValue={selectedTemplate}
                         options={templateOptions}
                       />
-                    );
-                  }}
+                    )}
                 />
               </div>
               <div className="bg-muted mt-2 rounded-md pt-2 md:p-6 md:pt-4">
@@ -720,9 +714,7 @@ export default function WorkflowStepContainer(props: WorkflowStepProps) {
                       </Label>
                     </div>
                     <Editor
-                      getText={() => {
-                        return props.form.getValues(`steps.${step.stepNumber - 1}.reminderBody`) || "";
-                      }}
+                      getText={() => props.form.getValues(`steps.${step.stepNumber - 1}.reminderBody`) || ""}
                       setText={(text: string) => {
                         props.form.setValue(`steps.${step.stepNumber - 1}.reminderBody`, text);
                         props.form.clearErrors();

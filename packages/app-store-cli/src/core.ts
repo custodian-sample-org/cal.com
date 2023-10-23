@@ -4,12 +4,7 @@ import path from "path";
 import { APP_STORE_PATH, TEMPLATES_PATH } from "./constants";
 import execSync from "./utils/execSync";
 
-const slugify = (str: string) => {
-  // A valid dir name
-  // A valid URL path
-  // It is okay to not be a valid variable name. This is so that we can use hyphens which look better then underscores in URL and as directory name
-  return str.replace(/[^a-zA-Z0-9]/g, "-").toLowerCase();
-};
+const slugify = (str: string) => str.replace(/[^a-zA-Z0-9]/g, "-").toLowerCase();
 
 export function getSlugFromAppName(appName: string): string {
   if (!appName) {
@@ -44,7 +39,7 @@ const updatePackageJson = ({
 const workspaceDir = path.resolve(__dirname, "..", "..", "..");
 
 export const BaseAppFork = {
-  create: async function ({
+  create: ({
     category,
     editMode = false,
     description,
@@ -66,8 +61,8 @@ export const BaseAppFork = {
     template: string;
     isTemplate: boolean;
     oldSlug?: string;
-  }) {
-    const appDirPath = getAppDirPath(slug, isTemplate);
+  }) => {
+  const appDirPath = getAppDirPath(slug, isTemplate);
     if (!editMode) {
       await execSync(`mkdir -p ${appDirPath}`);
       await execSync(`cp -r ${TEMPLATES_PATH}/${template}/* ${appDirPath}`);
@@ -122,12 +117,12 @@ export const BaseAppFork = {
     );
     // New monorepo package has been added, so we need to run yarn again
     await execSync("yarn");
-  },
+},
 
-  delete: async function ({ slug, isTemplate }: { slug: string; isTemplate: boolean }) {
-    const appDirPath = getAppDirPath(slug, isTemplate);
+  delete: ({ slug, isTemplate }: { slug: string; isTemplate: boolean }) => {
+  const appDirPath = getAppDirPath(slug, isTemplate);
     await execSync(`rm -rf ${appDirPath}`);
-  },
+},
 };
 
 export const generateAppFiles = async () => {

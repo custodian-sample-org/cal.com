@@ -32,8 +32,7 @@ export const DropdownMenuPortal = DropdownMenuPrimitive.Portal;
 
 type DropdownMenuContentProps = ComponentProps<(typeof DropdownMenuPrimitive)["Content"]>;
 export const DropdownMenuContent = forwardRef<HTMLDivElement, DropdownMenuContentProps>(
-  ({ children, sideOffset = 2, align = "end", ...props }, forwardedRef) => {
-    return (
+  ({ children, sideOffset = 2, align = "end", ...props }, forwardedRef) => (
       <DropdownMenuPrimitive.Content
         align={align}
         {...props}
@@ -45,8 +44,7 @@ export const DropdownMenuContent = forwardRef<HTMLDivElement, DropdownMenuConten
         ref={forwardedRef}>
         {children}
       </DropdownMenuPrimitive.Content>
-    );
-  }
+    )
 );
 DropdownMenuContent.displayName = "DropdownMenuContent";
 
@@ -71,16 +69,14 @@ export const DropdownMenuGroup = DropdownMenuPrimitive.Group;
 
 type DropdownMenuCheckboxItemProps = ComponentProps<(typeof DropdownMenuPrimitive)["CheckboxItem"]>;
 export const DropdownMenuCheckboxItem = forwardRef<HTMLDivElement, DropdownMenuCheckboxItemProps>(
-  ({ children, ...props }, forwardedRef) => {
-    return (
+  ({ children, ...props }, forwardedRef) => (
       <DropdownMenuPrimitive.CheckboxItem {...props} ref={forwardedRef}>
         {children}
         <DropdownMenuPrimitive.ItemIndicator>
           <CheckCircle />
         </DropdownMenuPrimitive.ItemIndicator>
       </DropdownMenuPrimitive.CheckboxItem>
-    );
-  }
+    )
 );
 DropdownMenuCheckboxItem.displayName = "DropdownMenuCheckboxItem";
 
@@ -88,16 +84,14 @@ export const DropdownMenuRadioGroup = DropdownMenuPrimitive.RadioGroup;
 
 type DropdownMenuRadioItemProps = ComponentProps<(typeof DropdownMenuPrimitive)["RadioItem"]>;
 export const DropdownMenuRadioItem = forwardRef<HTMLDivElement, DropdownMenuRadioItemProps>(
-  ({ children, ...props }, forwardedRef) => {
-    return (
+  ({ children, ...props }, forwardedRef) => (
       <DropdownMenuPrimitive.RadioItem {...props} ref={forwardedRef}>
         {children}
         <DropdownMenuPrimitive.ItemIndicator>
           <CheckCircle />
         </DropdownMenuPrimitive.ItemIndicator>
       </DropdownMenuPrimitive.RadioItem>
-    );
-  }
+    )
 );
 DropdownMenuRadioItem.displayName = "DropdownMenuRadioItem";
 
@@ -149,15 +143,13 @@ export const DropdownItem = (props: DropdownItemProps) => {
 
 type DropdownMenuSeparatorProps = ComponentProps<(typeof DropdownMenuPrimitive)["Separator"]>;
 export const DropdownMenuSeparator = forwardRef<HTMLDivElement, DropdownMenuSeparatorProps>(
-  ({ className = "", ...props }, forwardedRef) => {
-    return (
+  ({ className = "", ...props }, forwardedRef) => (
       <DropdownMenuPrimitive.Separator
         className={classNames("bg-emphasis my-1 h-px", className)}
         {...props}
         ref={forwardedRef}
       />
-    );
-  }
+    )
 );
 DropdownMenuSeparator.displayName = "DropdownMenuSeparator";
 

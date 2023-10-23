@@ -57,8 +57,7 @@ export default function Page({ resetPasswordRequest, csrfToken }: Props) {
 
   const debouncedChangePassword = debounce(submitChangePassword, 250);
 
-  const Success = () => {
-    return (
+  const Success = () => (
       <>
         <div className="space-y-6">
           <div>
@@ -72,10 +71,8 @@ export default function Page({ resetPasswordRequest, csrfToken }: Props) {
         </div>
       </>
     );
-  };
 
-  const Expired = () => {
-    return (
+  const Expired = () => (
       <>
         <div className="space-y-6">
           <div>
@@ -93,7 +90,6 @@ export default function Page({ resetPasswordRequest, csrfToken }: Props) {
         </div>
       </>
     );
-  };
 
   const isRequestExpired = useMemo(() => {
     const now = dayjs();

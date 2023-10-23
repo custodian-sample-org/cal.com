@@ -23,8 +23,7 @@ export const BaseEmailHtml = (props: {
   title?: string;
   subtitle?: React.ReactNode | string;
   headerType?: BodyHeadType;
-}) => {
-  return (
+}) => (
     <Html>
       <EmailHead title={props.subject} />
       <body style={{ wordSpacing: "normal", backgroundColor: "#F3F4F6" }}>
@@ -202,4 +201,3 @@ export const BaseEmailHtml = (props: {
       </body>
     </Html>
   );
-};

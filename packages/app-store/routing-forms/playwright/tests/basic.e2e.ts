@@ -156,9 +156,7 @@ test.describe("Routing Forms", () => {
       );
 
       await page.click('button[type="submit"]');
-      await page.waitForURL((url) => {
-        return url.hostname.includes("google.com");
-      });
+      await page.waitForURL((url) => url.hostname.includes("google.com"));
 
       const url = new URL(page.url());
 
@@ -202,14 +200,14 @@ test.describe("Routing Forms", () => {
       // This also delete forms on cascade
       await users.deleteAll();
     });
-    const createUserAndLoginAndInstallApp = async function ({
+    const createUserAndLoginAndInstallApp = ({
       users,
       page,
     }: {
       users: Fixtures["users"];
       page: Page;
-    }) {
-      const user = await users.create(
+    }) => {
+  const user = await users.create(
         { username: "routing-forms" },
         { seedRoutingForms: true, hasTeam: true }
       );
@@ -219,7 +217,7 @@ test.describe("Routing Forms", () => {
       await page.click('[data-testid="install-app-button"]');
       await page.waitForURL((url) => url.pathname === `/apps/routing-forms/forms`);
       return user;
-    };
+};
 
     test("Routing Link - Reporting and CSV Download ", async ({ page, users }) => {
       const user = await createUserAndLoginAndInstallApp({ users, page });
@@ -312,14 +310,10 @@ test.describe("Routing Forms", () => {
       // Router should be publicly accessible
       await users.logout();
       page.goto(`/router?form=${routingForm.id}&Test field=event-routing`);
-      await page.waitForURL((url) => {
-        return url.pathname.endsWith("/pro/30min");
-      });
+      await page.waitForURL((url) => url.pathname.endsWith("/pro/30min"));
 
       page.goto(`/router?form=${routingForm.id}&Test field=external-redirect`);
-      await page.waitForURL((url) => {
-        return url.hostname.includes("google.com");
-      });
+      await page.waitForURL((url) => url.hostname.includes("google.com"));
 
       await page.goto(`/router?form=${routingForm.id}&Test field=custom-page`);
       await expect(page.locator("text=Custom Page Result")).toBeVisible();
@@ -333,9 +327,7 @@ test.describe("Routing Forms", () => {
       const routingForm = user.routingForms[0];
       await gotoRoutingLink({ page, formId: routingForm.id });
       page.click('button[type="submit"]');
-      const firstInputMissingValue = await page.evaluate(() => {
-        return document.querySelectorAll("input")[0].validity.valueMissing;
-      });
+      const firstInputMissingValue = await page.evaluate(() => document.querySelectorAll("input")[0].validity.valueMissing);
       expect(firstInputMissingValue).toBe(true);
       expect(await page.locator('button[type="submit"][disabled]').count()).toBe(0);
     });
@@ -406,16 +398,12 @@ async function fillSeededForm(page: Page, routingFormId: string) {
   await gotoRoutingLink({ page, formId: routingFormId });
   await page.fill('[data-testid="form-field-Test field"]', "event-routing");
   page.click('button[type="submit"]');
-  await page.waitForURL((url) => {
-    return url.pathname.endsWith("/pro/30min");
-  });
+  await page.waitForURL((url) => url.pathname.endsWith("/pro/30min"));
 
   await gotoRoutingLink({ page, formId: routingFormId });
   await page.fill('[data-testid="form-field-Test field"]', "external-redirect");
   page.click('button[type="submit"]');
-  await page.waitForURL((url) => {
-    return url.hostname.includes("google.com");
-  });
+  await page.waitForURL((url) => url.hostname.includes("google.com"));
 
   await gotoRoutingLink({ page, formId: routingFormId });
   await page.fill('[data-testid="form-field-Test field"]', "custom-page");
