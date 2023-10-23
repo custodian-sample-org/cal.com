@@ -36,13 +36,11 @@ async function expectToBeNavigatingToEmbedTypesDialog(
   if (!embedUrl) {
     throw new Error("Couldn't find embedUrl");
   }
-  await page.waitForURL((url) => {
-    return (
+  await page.waitForURL((url) => (
       url.pathname === basePage &&
       url.searchParams.get("dialog") === "embed" &&
       url.searchParams.get("embedUrl") === embedUrl
-    );
-  });
+    ));
 }
 
 async function expectToBeNavigatingToEmbedCodeAndPreviewDialog(
@@ -60,15 +58,13 @@ async function expectToBeNavigatingToEmbedCodeAndPreviewDialog(
   if (!embedUrl) {
     throw new Error("Couldn't find embedUrl");
   }
-  await page.waitForURL((url) => {
-    return (
+  await page.waitForURL((url) => (
       url.pathname === basePage &&
       url.searchParams.get("dialog") === "embed" &&
       url.searchParams.get("embedUrl") === embedUrl &&
       url.searchParams.get("embedType") === embedType &&
       url.searchParams.get("embedTabName") === "embed-code"
-    );
-  });
+    ));
 }
 
 async function expectToContainValidCode(page: Page, { embedType }: { embedType: string }) {

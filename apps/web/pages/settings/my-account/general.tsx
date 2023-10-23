@@ -25,8 +25,7 @@ import { withQuery } from "@lib/QueryCell";
 
 import PageWrapper from "@components/PageWrapper";
 
-const SkeletonLoader = ({ title, description }: { title: string; description: string }) => {
-  return (
+const SkeletonLoader = ({ title, description }: { title: string; description: string }) => (
     <SkeletonContainer>
       <Meta title={title} description={description} />
       <div className="mt-6 mb-8 space-y-6">
@@ -39,7 +38,6 @@ const SkeletonLoader = ({ title, description }: { title: string; description: st
       </div>
     </SkeletonContainer>
   );
-};
 
 interface GeneralViewProps {
   localeProp: string;
@@ -87,12 +85,10 @@ const GeneralView = ({ localeProp, user }: GeneralViewProps) => {
     },
   });
 
-  const localeOptions = useMemo(() => {
-    return (router.locales || []).map((locale) => ({
+  const localeOptions = useMemo(() => (router.locales || []).map((locale) => ({
       value: locale,
       label: new Intl.DisplayNames(locale, { type: "language" }).of(locale) || "",
-    }));
-  }, [router.locales]);
+    })), [router.locales]);
 
   const timeFormatOptions = [
     { value: 12, label: t("12_hour") },

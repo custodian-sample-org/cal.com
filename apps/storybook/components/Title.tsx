@@ -8,8 +8,7 @@ export const Title = ({
   suffix?: string;
   subtitle?: string;
   offset?: boolean;
-}) => {
-  return (
+}) => (
     <div className={`story-title ${offset && "offset"}`}>
       <h1>
         {title}
@@ -18,4 +17,3 @@ export const Title = ({
       {subtitle && <p>{subtitle}</p>}
     </div>
   );
-};

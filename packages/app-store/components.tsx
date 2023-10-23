@@ -116,8 +116,7 @@ export const AppDependencyComponent = ({
         dependencyData && dependencyData.some((dependency) => !dependency.installed) ? "bg-info" : "bg-subtle"
       )}>
       {dependencyData &&
-        dependencyData.map((dependency) => {
-          return dependency.installed ? (
+        dependencyData.map((dependency) => dependency.installed ? (
             <div className="items-start space-x-2.5">
               <div className="flex items-start">
                 <div>
@@ -168,8 +167,7 @@ export const AppDependencyComponent = ({
                 </div>
               </div>
             </div>
-          );
-        })}
+          ))}
     </div>
   );
 };

@@ -44,9 +44,7 @@ async function leastRecentlyBookedUser<T extends Pick<User, "id">>({
     {}
   );
 
-  const leastRecentlyBookedUser = availableUsers.sort((a, b) => {
-    return userIdAndAtCreatedPair[a.id] > userIdAndAtCreatedPair[b.id] ? 1 : -1;
-  })[0];
+  const leastRecentlyBookedUser = availableUsers.sort((a, b) => userIdAndAtCreatedPair[a.id] > userIdAndAtCreatedPair[b.id] ? 1 : -1)[0];
 
   return leastRecentlyBookedUser;
 }

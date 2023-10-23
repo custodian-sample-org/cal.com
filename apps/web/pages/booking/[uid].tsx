@@ -948,9 +948,7 @@ const handleSeatsEventTypeOnBooking = async (
     });
 
     if (seatAttendee) {
-      const attendee = bookingInfo?.attendees?.find((a) => {
-        return a.email === seatAttendee.attendee?.email;
-      });
+      const attendee = bookingInfo?.attendees?.find((a) => a.email === seatAttendee.attendee?.email);
       bookingInfo["attendees"] = attendee ? [attendee] : [];
     } else {
       bookingInfo["attendees"] = [];

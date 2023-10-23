@@ -90,9 +90,7 @@ testBothBookers.describe("Booking with Seats", (bookerVariant) => {
     // to change the test as little as possible.
     // eslint-disable-next-line playwright/no-conditional-in-test
     if (bookerVariant === "old-booker") {
-      await page.waitForURL((url) => {
-        return url.pathname.endsWith("/book");
-      });
+      await page.waitForURL((url) => url.pathname.endsWith("/book"));
     }
 
     const bookingUrl = page.url();

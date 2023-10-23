@@ -39,8 +39,7 @@ export const editLocationHandler = async ({ ctx, input }: EditLocationOptions) =
 
     const tOrganizer = await getTranslation(organizer.locale ?? "en", "common");
 
-    const attendeesListPromises = booking.attendees.map(async (attendee) => {
-      return {
+    const attendeesListPromises = booking.attendees.map((attendee) => {
         name: attendee.name,
         email: attendee.email,
         timeZone: attendee.timeZone,
@@ -48,8 +47,7 @@ export const editLocationHandler = async ({ ctx, input }: EditLocationOptions) =
           translate: await getTranslation(attendee.locale ?? "en", "common"),
           locale: attendee.locale ?? "en",
         },
-      };
-    });
+      });
 
     const attendeesList = await Promise.all(attendeesListPromises);
 

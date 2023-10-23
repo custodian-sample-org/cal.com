@@ -6,8 +6,7 @@ type Props = InputHTMLAttributes<HTMLInputElement> & {
   label?: ReactNode;
 };
 
-const MinutesField = forwardRef<HTMLInputElement, Props>(({ label, ...rest }, ref) => {
-  return (
+const MinutesField = forwardRef<HTMLInputElement, Props>(({ label, ...rest }, ref) => (
     <div className="block sm:flex">
       {!!label && (
         <div className="min-w-48 mb-4 sm:mb-0">
@@ -35,8 +34,7 @@ const MinutesField = forwardRef<HTMLInputElement, Props>(({ label, ...rest }, re
         </div>
       </div>
     </div>
-  );
-});
+  ));
 
 MinutesField.displayName = "MinutesField";
 

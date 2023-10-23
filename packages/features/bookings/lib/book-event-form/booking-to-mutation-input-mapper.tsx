@@ -28,8 +28,7 @@ export const mapBookingToMutationInput = ({
   rescheduleUid,
   username,
   metadata,
-}: BookingOptions): BookingCreateBody => {
-  return {
+}: BookingOptions) => {
     ...values,
     user: username,
     start: dayjs(date).format(),
@@ -47,7 +46,6 @@ export const mapBookingToMutationInput = ({
     // hasHashedBookingLink,
     // hashedLink,
   };
-};
 
 // This method is here to ensure that the types are correct (recurring count is required),
 // as well as generate a unique ID for the recurring bookings and turn one single booking

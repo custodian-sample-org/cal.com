@@ -20,9 +20,7 @@ import type { CreateUpdateResult, PartialBooking, PartialReference } from "@calc
 import { createEvent, updateEvent } from "./CalendarManager";
 import { createMeeting, updateMeeting } from "./videoClient";
 
-export const isDedicatedIntegration = (location: string): boolean => {
-  return location !== MeetLocationType && location.includes("integrations:");
-};
+export const isDedicatedIntegration = (location: string) => location !== MeetLocationType && location.includes("integrations:");
 
 export const getLocationRequestFromIntegration = (location: string) => {
   const eventLocationType = getEventLocationTypeFromApp(location);
@@ -124,11 +122,7 @@ export default class EventManager {
 
     // Since the result can be a new calendar event or video event, we have to create a type guard
     // https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates
-    const isCalendarResult = (
-      result: (typeof results)[number]
-    ): result is EventResult<NewCalendarEventType> => {
-      return result.type.includes("_calendar");
-    };
+    const isCalendarResult = (result: (typeof results)[number]) => result.type.includes("_calendar");
 
     const referencesToCreate = results.map((result) => {
       let createdEventObj: createdEventSchema | null = null;
@@ -179,7 +173,6 @@ export default class EventManager {
     }
 
     const referencesToCreate = results.map((result) => {
-      return {
         type: result.type,
         uid: result.createdEvent?.id?.toString() ?? "",
         meetingId: result.createdEvent?.id?.toString(),
@@ -187,8 +180,7 @@ export default class EventManager {
         meetingUrl: result.createdEvent?.url,
         externalCalendarId: evt.destinationCalendar?.externalId,
         credentialId: evt.destinationCalendar?.credentialId,
-      };
-    });
+      });
 
     return {
       results,
@@ -382,9 +374,7 @@ export default class EventManager {
     let videoCredential = this.videoCredentials
       // Whenever a new video connection is added, latest credentials are added with the highest ID.
       // Because you can't rely on having them in the highest first order here, ensure this by sorting in DESC order
-      .sort((a, b) => {
-        return b.id - a.id;
-      })
+      .sort((a, b) => b.id - a.id)
       .find((credential: CredentialPayload) => credential.type.includes(integrationName));
 
     /**

@@ -14,9 +14,7 @@ export function createNextApiHandler(router: AnyRouter, isPublic = false) {
     /**
      * @link https://trpc.io/docs/context
      */
-    createContext: ({ req, res }) => {
-      return createTrpcContext({ req, res });
-    },
+    createContext: ({ req, res }) => createTrpcContext({ req, res }),
     /**
      * @link https://trpc.io/docs/error-handling
      */

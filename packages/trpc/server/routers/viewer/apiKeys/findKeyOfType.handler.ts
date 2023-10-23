@@ -10,8 +10,7 @@ type FindKeyOfTypeOptions = {
   input: TFindKeyOfTypeInputSchema;
 };
 
-export const findKeyOfTypeHandler = async ({ ctx, input }: FindKeyOfTypeOptions) => {
-  return await prisma.apiKey.findFirst({
+export const findKeyOfTypeHandler = ({ ctx, input }: FindKeyOfTypeOptions) => await prisma.apiKey.findFirst({
     where: {
       AND: [
         {
@@ -23,4 +22,3 @@ export const findKeyOfTypeHandler = async ({ ctx, input }: FindKeyOfTypeOptions)
       ],
     },
   });
-};

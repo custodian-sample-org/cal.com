@@ -6,6 +6,4 @@ type SessionOptions = {
   };
 };
 
-export const sessionHandler = async ({ ctx }: SessionOptions) => {
-  return ctx.session;
-};
+export const sessionHandler = ({ ctx }: SessionOptions) => ctx.session;

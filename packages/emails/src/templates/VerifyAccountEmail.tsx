@@ -13,10 +13,7 @@ export type EmailVerifyLink = {
   verificationEmailLink: string;
 };
 
-export const VerifyAccountEmail = (
-  props: EmailVerifyLink & Partial<React.ComponentProps<typeof BaseEmailHtml>>
-) => {
-  return (
+export const VerifyAccountEmail = (props: EmailVerifyLink & Partial<React.ComponentProps<typeof BaseEmailHtml>>) => (
     <BaseEmailHtml subject={props.language("verify_email_subject", { appName: APP_NAME })}>
       <p
         style={{
@@ -57,4 +54,3 @@ export const VerifyAccountEmail = (
       </div>
     </BaseEmailHtml>
   );
-};

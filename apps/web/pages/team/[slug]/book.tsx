@@ -115,7 +115,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     bookingFields: eventTypeBookingFields.parse(eventTypeRaw.bookingFields || []),
   };
   const eventTypeObject = [eventType].map((e) => {
-    return {
       ...e,
       metadata: EventTypeMetaDataSchema.parse(e.metadata || {}),
       bookingFields: getBookingFieldsWithSystemFields(eventType),
@@ -131,8 +130,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
         slug: u.username,
       })),
       descriptionAsSafeHTML: markdownToSafeHTML(eventType.description),
-    };
-  })[0];
+    })[0];
 
   let booking: GetBookingType | null = null;
   const { rescheduleUid, bookingUid } = querySchema.parse(context.query);

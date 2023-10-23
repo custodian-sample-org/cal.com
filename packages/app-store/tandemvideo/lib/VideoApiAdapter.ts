@@ -88,12 +88,9 @@ const tandemAuth = async (credential: CredentialPayload) => {
 const TandemVideoApiAdapter = (credential: CredentialPayload): VideoApiAdapter => {
   const auth = tandemAuth(credential);
 
-  const _parseDate = (date: string) => {
-    return Date.parse(date) / 1000;
-  };
+  const _parseDate = (date: string) => Date.parse(date) / 1000;
 
-  const _translateEvent = (event: CalendarEvent, param: string): string => {
-    return JSON.stringify({
+  const _translateEvent = (event: CalendarEvent, param: string) => JSON.stringify({
       [param]: {
         title: event.title,
         starts_at: _parseDate(event.startTime),
@@ -103,22 +100,17 @@ const TandemVideoApiAdapter = (credential: CredentialPayload): VideoApiAdapter =
         type: 3,
       },
     });
-  };
 
   const _translateResult = (result: ITandemCreateMeetingResponse) => {
-    return {
       type: "tandem_video",
       id: result.data.id as string,
       password: "",
       url: result.data.event_link,
     };
-  };
 
   return {
     /** Tandem doesn't need to return busy times, so we return empty */
-    getAvailability: () => {
-      return Promise.resolve([]);
-    },
+    getAvailability: () => Promise.resolve([]),
     createMeeting: async (event: CalendarEvent): Promise<VideoCallData> => {
       const accessToken = await (await auth).getToken();
 

@@ -43,14 +43,7 @@ const ENDPOINTS = [
 export type Endpoint = (typeof ENDPOINTS)[number];
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const resolveEndpoint = (links: any) => {
-  // TODO: Update our trpc routes so they are more clear.
-  // This function parses paths like the following and maps them
-  // to the correct API endpoints.
-  // - viewer.me - 2 segment paths like this are for logged in requests
-  // - viewer.public.i18n - 3 segments paths can be public or authed
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return (ctx: any) => {
+const resolveEndpoint = (links: any) => (ctx: any) => {
     const parts = ctx.op.path.split(".");
     let endpoint;
     let path = "";
@@ -63,7 +56,6 @@ const resolveEndpoint = (links: any) => {
     }
     return links[endpoint]({ ...ctx, op: { ...ctx.op, path } });
   };
-};
 
 /**
  * A set of strongly-typed React hooks from your `AppRouter` type signature with `createTRPCReact`.

@@ -33,9 +33,7 @@ testBothBookers.describe("free user", (bookerVariant) => {
     // eslint-disable-next-line playwright/no-conditional-in-test
     if (bookerVariant !== "new-booker") {
       // Navigate to book page
-      await page.waitForURL((url) => {
-        return url.pathname.endsWith("/book");
-      });
+      await page.waitForURL((url) => url.pathname.endsWith("/book"));
     }
 
     // save booking url
@@ -90,9 +88,7 @@ testBothBookers.describe("pro user", () => {
     await selectSecondAvailableTimeSlotNextMonth(page);
     // --- fill form
     await page.locator('[data-testid="confirm-reschedule-button"]').click();
-    await page.waitForURL((url) => {
-      return url.pathname.startsWith("/booking");
-    });
+    await page.waitForURL((url) => url.pathname.startsWith("/booking"));
   });
 
   test("Can cancel the recently created booking and rebook the same timeslot", async ({
@@ -110,9 +106,7 @@ testBothBookers.describe("pro user", () => {
 
     await page.goto("/bookings/upcoming");
     await page.locator('[data-testid="cancel"]').click();
-    await page.waitForURL((url) => {
-      return url.pathname.startsWith("/booking/");
-    });
+    await page.waitForURL((url) => url.pathname.startsWith("/booking/"));
     await page.locator('[data-testid="confirm_cancel"]').click();
 
     const cancelledHeadline = page.locator('[data-testid="cancelled-headline"]');

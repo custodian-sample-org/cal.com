@@ -316,18 +316,14 @@ async function getDynamicGroupPageProps(context: GetServerSidePropsContext) {
     recurringEvent: parseRecurringEvent(eventType.recurringEvent),
     locations: privacyFilteredLocations(locations),
     users: users.map((user) => {
-      return {
         name: user.name,
         username: user.username,
         hideBranding: user.hideBranding,
         timeZone: user.timeZone,
-      };
-    }),
+      }),
   });
 
-  const dynamicNames = users.map((user) => {
-    return user.name || "";
-  });
+  const dynamicNames = users.map((user) => user.name || "");
 
   const profile = {
     name: getGroupName(dynamicNames),
@@ -337,9 +333,7 @@ async function getDynamicGroupPageProps(context: GetServerSidePropsContext) {
     weekStart: "Sunday",
     brandColor: "",
     darkBrandColor: "",
-    allowDynamicBooking: !users.some((user) => {
-      return !user.allowDynamicBooking;
-    }),
+    allowDynamicBooking: !users.some((user) => !user.allowDynamicBooking),
   };
 
   return {

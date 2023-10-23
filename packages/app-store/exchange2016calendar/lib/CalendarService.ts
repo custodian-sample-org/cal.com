@@ -168,8 +168,8 @@ export default class ExchangeCalendarService implements Calendar {
             calendarFolderId,
             new CalendarView(DateTime.Parse(dateFrom), DateTime.Parse(dateTo))
           )
-          .then(function (params) {
-            const ret: EventBusyDate[] = [];
+          .then((params) => {
+  const ret: EventBusyDate[] = [];
 
             for (let k = 0; k < params.Items.length; k++) {
               if (params.Items[k].LegacyFreeBusyStatus != LegacyFreeBusyStatus.Free) {
@@ -181,7 +181,7 @@ export default class ExchangeCalendarService implements Calendar {
               }
             }
             return ret;
-          });
+});
         finaleRet.push(...localReturn);
       }
 

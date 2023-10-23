@@ -32,12 +32,10 @@ export type WebhookDataType = CalendarEvent &
 
 function getZapierPayload(data: CalendarEvent & EventTypeInfo & { status?: string }): string {
   const attendees = data.attendees.map((attendee) => {
-    return {
       name: attendee.name,
       email: attendee.email,
       timeZone: attendee.timeZone,
-    };
-  });
+    });
 
   const t = data.organizer.language.translate;
   const location = getHumanReadableLocationValue(data.location || "", t);

@@ -118,8 +118,7 @@ const DeleteUserDialog = ({
   user: number | null;
   onConfirm: () => void;
   onClose: () => void;
-}) => {
-  return (
+}) => (
     // eslint-disable-next-line @typescript-eslint/no-empty-function -- noop
     <Dialog name="delete-user" open={!!user} onOpenChange={(open) => (open ? () => {} : onClose())}>
       <ConfirmationDialogContent
@@ -132,6 +131,5 @@ const DeleteUserDialog = ({
       </ConfirmationDialogContent>
     </Dialog>
   );
-};
 
 export const UsersTable = withLicenseRequired(UsersTableBare);

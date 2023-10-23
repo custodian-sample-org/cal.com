@@ -29,8 +29,7 @@ import { AlertCircle, MoreHorizontal, Trash, Video, Plus } from "@calcom/ui/comp
 import AppListCard from "@components/AppListCard";
 import PageWrapper from "@components/PageWrapper";
 
-const SkeletonLoader = ({ title, description }: { title: string; description: string }) => {
-  return (
+const SkeletonLoader = ({ title, description }: { title: string; description: string }) => (
     <SkeletonContainer>
       <Meta title={title} description={description} />
       <div className="divide-subtle mt-6 mb-8 space-y-6">
@@ -39,7 +38,6 @@ const SkeletonLoader = ({ title, description }: { title: string; description: st
       </div>
     </SkeletonContainer>
   );
-};
 
 const AddConferencingButton = () => {
   const { t } = useLocale();

@@ -32,8 +32,7 @@ const OptionalTooltipWrapper = ({
   return <>{children}</>;
 };
 
-export const ToggleGroup = ({ options, onValueChange, isFullWidth, ...props }: ToggleGroupProps) => {
-  return (
+export const ToggleGroup = ({ options, onValueChange, isFullWidth, ...props }: ToggleGroupProps) => (
     <>
       <RadixToggleGroup.Root
         type="single"
@@ -66,4 +65,3 @@ export const ToggleGroup = ({ options, onValueChange, isFullWidth, ...props }: T
       </RadixToggleGroup.Root>
     </>
   );
-};

@@ -15,10 +15,8 @@ type CustomNextApiRequest = NextApiRequest & Request;
 type CustomNextApiResponse = NextApiResponse & Response;
 vi.mock("@calcom/features/webhooks/lib/sendPayload");
 vi.mock("@calcom/lib/server/i18n", () => {
-  return {
     getTranslation: (key: string) => key,
-  };
-});
+  });
 
 describe("POST /api/bookings", () => {
   describe("Errors", () => {

@@ -18,13 +18,11 @@ const CreateNewTeamPage = () => {
     </>
   );
 };
-const LayoutWrapper = (page: React.ReactElement) => {
-  return (
+const LayoutWrapper = (page: React.ReactElement) => (
     <WizardLayout currentStep={1} maxSteps={2}>
       {page}
     </WizardLayout>
   );
-};
 
 CreateNewTeamPage.getLayout = LayoutWrapper;
 CreateNewTeamPage.PageWrapper = PageWrapper;

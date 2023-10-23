@@ -39,9 +39,7 @@ const WithStep = ({
   step: SetupStep;
   current: SetupStep;
   children: JSX.Element;
-}) => {
-  return step === current ? children : null;
-};
+}) => step === current ? children : null;
 
 interface EnableTwoFactorValues {
   totpCode: string;

@@ -40,9 +40,7 @@ const UserProfile = () => {
         try {
           if (eventTypes?.length === 0) {
             await Promise.all(
-              DEFAULT_EVENT_TYPES.map(async (event) => {
-                return createEventType.mutate(event);
-              })
+              DEFAULT_EVENT_TYPES.map((event) => createEventType.mutate(event))
             );
           }
         } catch (error) {

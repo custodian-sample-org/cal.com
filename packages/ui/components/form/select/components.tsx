@@ -6,15 +6,10 @@ import { classNames } from "@calcom/lib";
 import { UpgradeTeamsBadge } from "../../badge";
 import { Check } from "../../icon";
 
-export const InputComponent = <
-  Option,
-  IsMulti extends boolean = false,
-  Group extends GroupBase<Option> = GroupBase<Option>
->({
+export const InputComponent = ({
   inputClassName,
   ...props
-}: InputProps<Option, IsMulti, Group>) => {
-  return (
+}: InputProps<Option, IsMulti, Group>) => (
     <reactSelectComponents.Input
       // disables our default form focus hightlight on the react-select input element
       inputClassName={classNames(
@@ -24,7 +19,6 @@ export const InputComponent = <
       {...props}
     />
   );
-};
 
 type ExtendedOption = {
   value: string | number;
@@ -32,14 +26,9 @@ type ExtendedOption = {
   needsUpgrade?: boolean;
 };
 
-export const OptionComponent = <
-  Option,
-  IsMulti extends boolean = false,
-  Group extends GroupBase<Option> = GroupBase<Option>
->({
+export const OptionComponent = ({
   ...props
-}: OptionProps<Option, IsMulti, Group>) => {
-  return (
+}: OptionProps<Option, IsMulti, Group>) => (
     // This gets styled in the select classNames prop now - handles overrides with styles vs className here doesnt
     <reactSelectComponents.Option {...props}>
       <div className="flex">
@@ -51,7 +40,6 @@ export const OptionComponent = <
       </div>
     </reactSelectComponents.Option>
   );
-};
 
 // We need to override this component if we need a icon - we can't simpily override styles
 type IconLeadingProps = {
@@ -59,11 +47,9 @@ type IconLeadingProps = {
   children?: React.ReactNode;
 } & React.ComponentProps<typeof reactSelectComponents.Control>;
 
-export const IconLeading = ({ icon, children, ...props }: IconLeadingProps) => {
-  return (
+export const IconLeading = ({ icon, children, ...props }: IconLeadingProps) => (
     <reactSelectComponents.Control {...props}>
       {icon}
       {children}
     </reactSelectComponents.Control>
   );
-};

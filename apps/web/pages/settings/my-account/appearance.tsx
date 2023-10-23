@@ -28,8 +28,7 @@ import {
 
 import PageWrapper from "@components/PageWrapper";
 
-const SkeletonLoader = ({ title, description }: { title: string; description: string }) => {
-  return (
+const SkeletonLoader = ({ title, description }: { title: string; description: string }) => (
     <SkeletonContainer>
       <Meta title={title} description={description} />
       <div className="mt-6 mb-8 space-y-6">
@@ -49,7 +48,6 @@ const SkeletonLoader = ({ title, description }: { title: string; description: st
       </div>
     </SkeletonContainer>
   );
-};
 
 const AppearanceView = () => {
   const { t } = useLocale();

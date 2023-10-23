@@ -275,8 +275,7 @@ function Field({
               name={`${hookFieldNamespace}.required`}
               control={hookForm.control}
               defaultValue={routerField?.required}
-              render={({ field: { value, onChange } }) => {
-                return (
+              render={({ field: { value, onChange } }) => (
                   <BooleanToggleGroupField
                     variant="small"
                     disabled={!!router}
@@ -284,8 +283,7 @@ function Field({
                     value={value}
                     onValueChange={onChange}
                   />
-                );
-              }}
+                )}
             />
           </div>
         </div>
@@ -337,8 +335,7 @@ const FormEdit = ({
     <div className="flex flex-col-reverse lg:flex-row">
       <div className="w-full ltr:mr-2 rtl:ml-2">
         <div ref={animationRef} className="flex w-full flex-col rounded-md">
-          {hookFormFields.map((field, key) => {
-            return (
+          {hookFormFields.map((field, key) => (
               <Field
                 appUrl={appUrl}
                 fieldIndex={key}
@@ -367,8 +364,7 @@ const FormEdit = ({
                 }}
                 key={key}
               />
-            );
-          })}
+            ))}
         </div>
         {hookFormFields.length ? (
           <div className={classNames("flex")}>
@@ -413,10 +409,8 @@ export default function FormEditPage({
   );
 }
 
-FormEditPage.getLayout = (page: React.ReactElement) => {
-  return (
+FormEditPage.getLayout = (page: React.ReactElement) => (
     <Shell backPath="/apps/routing-forms/forms" withoutMain={true}>
       {page}
     </Shell>
   );
-};

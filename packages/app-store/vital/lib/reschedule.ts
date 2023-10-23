@@ -78,20 +78,14 @@ const Reschedule = async (bookingUid: string, cancellationReason: string) => {
     const [mainAttendee] = bookingToReschedule.attendees;
     // @NOTE: Should we assume attendees language?
     const tAttendees = await getTranslation(mainAttendee.locale ?? "en", "common");
-    const usersToPeopleType = (
-      users: PersonAttendeeCommonFields[],
-      selectedLanguage: TFunction
-    ): Person[] => {
-      return users?.map((user) => {
-        return {
+    const usersToPeopleType = (users: PersonAttendeeCommonFields[],
+      selectedLanguage: TFunction) => users?.map((user) => {
           email: user.email || "",
           name: user.name || "",
           username: user?.username || "",
           language: { translate: selectedLanguage, locale: user.locale || "en" },
           timeZone: user?.timeZone,
-        };
-      });
-    };
+        });
     const userOwnerTranslation = await getTranslation(userOwner.locale ?? "en", "common");
     const [userOwnerAsPeopleType] = usersToPeopleType([userOwner], userOwnerTranslation);
     const builder = new CalendarEventBuilder();

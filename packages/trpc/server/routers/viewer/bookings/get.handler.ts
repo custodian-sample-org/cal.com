@@ -115,9 +115,7 @@ export const getHandler = async ({ ctx, input }: GetOptions) => {
 
   const filtersCombined: Prisma.BookingWhereInput[] =
     input.filters &&
-    Object.keys(input.filters).map((key) => {
-      return bookingWhereInputFilters[key];
-    });
+    Object.keys(input.filters).map((key) => bookingWhereInputFilters[key]);
 
   const passedBookingsStatusFilter = bookingListingFilters[bookingListingByStatus];
   const orderBy = bookingListingOrderby[bookingListingByStatus];
@@ -284,7 +282,6 @@ export const getHandler = async ({ ctx, input }: GetOptions) => {
   );
 
   const bookings = bookingsQuery.map((booking) => {
-    return {
       ...booking,
       eventType: {
         ...booking.eventType,
@@ -295,8 +292,7 @@ export const getHandler = async ({ ctx, input }: GetOptions) => {
       },
       startTime: booking.startTime.toISOString(),
       endTime: booking.endTime.toISOString(),
-    };
-  });
+    });
 
   const bookingsFetched = bookings.length;
   let nextCursor: typeof skip | null = skip;

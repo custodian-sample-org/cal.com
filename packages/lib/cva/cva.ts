@@ -10,9 +10,7 @@ export const applyStyleToMultipleVariants = (variants: Variants) => {
   const allKeysThatAreArrays = Object.keys(variants).filter((key) => Array.isArray(variants[key]));
   const allKeysThatAreNotArrays = Object.keys(variants).filter((key) => !Array.isArray(variants[key]));
   // Creates an object of all static options, ready to be merged in later with the array values.
-  const nonArrayOptions = allKeysThatAreNotArrays.reduce((acc, key) => {
-    return { ...acc, [key]: variants[key] };
-  }, {});
+  const nonArrayOptions = allKeysThatAreNotArrays.reduce((acc, key) => { ...acc, [key]: variants[key] }, {});
 
   // Creates an array of all possible combinations of the array values.
   // Eg if the variants object is { color: ["blue", "red"], size: ["small", "medium"] }
@@ -28,9 +26,7 @@ export const applyStyleToMultipleVariants = (variants: Variants) => {
   );
 
   return cartesianProductOfAllArrays.map((variant) => {
-    const variantObject = variant.reduce((acc, value, index) => {
-      return { ...acc, [allKeysThatAreArrays[index]]: value };
-    }, {});
+    const variantObject = variant.reduce((acc, value, index) => { ...acc, [allKeysThatAreArrays[index]]: value }, {});
 
     return {
       ...nonArrayOptions,

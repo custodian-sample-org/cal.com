@@ -48,9 +48,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const q = queue({ results: [] });
     if (todayBookings.length > 0) {
       todayBookings.forEach((booking) =>
-        q.push(() => {
-          return Reschedule(booking.uid, "");
-        })
+        q.push(() => Reschedule(booking.uid, ""))
       );
     }
     await q.start();

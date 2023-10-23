@@ -5,9 +5,7 @@ import {
   PREMIUM_MONTHLY_PLAN_PRICE,
 } from "./constants";
 
-export const getPremiumMonthlyPlanPriceId = (): string => {
-  return PREMIUM_MONTHLY_PLAN_PRICE;
-};
+export const getPremiumMonthlyPlanPriceId = () => PREMIUM_MONTHLY_PLAN_PRICE;
 
 export function getPremiumPlanProductId(): string {
   return PREMIUM_PLAN_PRODUCT_ID;

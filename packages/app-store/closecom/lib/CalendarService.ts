@@ -87,9 +87,7 @@ export default class CloseComCalendarService implements Calendar {
     return this.closeCom.activity.custom.update(uid, customActivityTypeInstance);
   };
 
-  closeComDeleteCustomActivity = async (uid: string) => {
-    return this.closeCom.activity.custom.delete(uid);
-  };
+  closeComDeleteCustomActivity = (uid: string) => this.closeCom.activity.custom.delete(uid);
 
   async createEvent(event: CalendarEvent): Promise<NewCalendarEventType> {
     const customActivityTypeInstanceData = await getCustomActivityTypeInstanceData(

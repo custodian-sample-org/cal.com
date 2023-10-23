@@ -183,11 +183,9 @@ export const formMutationHandler = async ({ ctx, input }: FormMutationHandlerOpt
         const fieldsFromRouter = parsedRouterFields
           ?.filter((f) => !f.deleted)
           .map((f) => {
-            return {
               ...f,
               routerId: route.id,
-            };
-          });
+            });
 
         if (fieldsFromRouter) {
           fields = fields.concat(fieldsFromRouter);
@@ -316,13 +314,11 @@ export const formMutationHandler = async ({ ctx, input }: FormMutationHandlerOpt
           // Deleted fields in the form shouldn't be added to the new form
           ?.filter((f) => !f.deleted)
           .map((f) => {
-            return {
               id: f.id,
               routerId: sourceForm.id,
               label: "",
               type: "",
-            };
-          }) || [];
+            }) || [];
     } else {
       // Duplicate just routes and fields
       // We don't want name, description and responses to be copied
